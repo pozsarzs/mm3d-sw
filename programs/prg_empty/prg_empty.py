@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # +----------------------------------------------------------------------------+
-# | MM3D v0.11 * Growing house controlling and remote monitoring system        |
+# | MM3D v0.2 * Growing house controlling and remote monitoring system         |
 # | Copyright (C) 2018-2019 Pozsar Zsolt <pozsar.zsolt@.szerafingomba.hu>      |
 # | prg_empty.py                                                               |
 # | User's program                                                             |
@@ -28,7 +28,7 @@ def autooffport1():
   #
   return aop1
 
-def control(temperature,humidity,inputs):
+def control(temperature,humidity,inputs,wrongvalues):
   in1=int(inputs[0])
   in2=int(inputs[1])
   in3=int(inputs[2])

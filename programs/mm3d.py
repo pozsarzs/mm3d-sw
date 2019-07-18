@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # +----------------------------------------------------------------------------+
-# | MM3D v0.11 * Growing house controlling and remote monitoring system        |
+# | MM3D v0.2 * Growing house controlling and remote monitoring system         |
 # | Copyright (C) 2018-2019 Pozsar Zsolt <pozsar.zsolt@.szerafingomba.hu>      |
 # | mm3d.py                                                                    |
 # | Main program                                                               |
@@ -29,6 +29,21 @@ import prg_current as CR
 def loadconfiguration(conffile):
   global logfile
   global lockfile
+  global prt_act
+  global prt_err1
+  global prt_err2
+  global prt_err3
+  global prt_err4
+  global prt_in1
+  global prt_in2
+  global prt_in3
+  global prt_in4
+  global prt_sens
+  global prt_out1
+  global prt_out2
+  global prt_out3
+  global prt_out4
+  global sensor
   try:
     with open(conffile) as f:
       sample_config = f.read()
@@ -36,6 +51,27 @@ def loadconfiguration(conffile):
     config.readfp(io.BytesIO(sample_config))
     logfile=config.get('directories', 'dir_log')+'mm3d.log'
     lockfile=config.get('directories', 'dir_lck')+'mm3d.lck'
+    prt_act=int(config.get('ports','prt_act'))
+    prt_err1=int(config.get('ports','prt_err1'))
+    prt_err2=int(config.get('ports','prt_err2'))
+    prt_err3=int(config.get('ports','prt_err3'))
+    prt_err4=int(config.get('ports','prt_err4'))
+    prt_in1=int(config.get('ports','prt_in1'))
+    prt_in2=int(config.get('ports','prt_in2'))
+    prt_in3=int(config.get('ports','prt_in3'))
+    prt_in4=int(config.get('ports','prt_in4'))
+    prt_sens=int(config.get('ports','prt_sens'))
+    prt_out1=int(config.get('ports','prt_out1'))
+    prt_out2=int(config.get('ports','prt_out2'))
+    prt_out3=int(config.get('ports','prt_out3'))
+    prt_out4=int(config.get('ports','prt_out4'))
+    sensor_type=config.get('sensors','sensor_type')
+    if sensor_type=='AM2302':
+      sensor=Adafruit_DHT.AM2302
+    if sensor_type=='DHT11':
+      sensor=Adafruit_DHT.DHT11
+    if sensor_type=='DHT22':
+      sensor=Adafruit_DHT.DHT22
   except:
     print("ERROR: Cannot open configuration file!");
 
@@ -74,25 +110,25 @@ def writelog(temperature,humidity,inputs,outputs):
 def initports():
   GPIO.setwarnings(False)
   GPIO.setmode(GPIO.BCM)
-  GPIO.setup(2,GPIO.IN)                         # input #1
-  GPIO.setup(3,GPIO.IN)                         # input #2
-  GPIO.setup(4,GPIO.IN)                         # input #3
-  GPIO.setup(9,GPIO.OUT,initial=GPIO.HIGH)      # output #4
-  GPIO.setup(10,GPIO.OUT,initial=GPIO.HIGH)     # output #3
-  GPIO.setup(14,GPIO.OUT,initial=GPIO.HIGH)     # error light #1
-  GPIO.setup(15,GPIO.OUT,initial=GPIO.HIGH)     # error light #2
-  GPIO.setup(17,GPIO.IN)                        # input #4
-  GPIO.setup(18,GPIO.OUT,initial=GPIO.HIGH)     # error light #3
-  GPIO.setup(22,GPIO.OUT,initial=GPIO.HIGH)     # output #2
-  GPIO.setup(23,GPIO.OUT,initial=GPIO.HIGH)     # error light #4
-  GPIO.setup(24,GPIO.OUT,initial=0)             # ACT LED
-  GPIO.setup(27,GPIO.OUT,initial=GPIO.HIGH)     # output #1
+  GPIO.setup(prt_act,GPIO.OUT,initial=0)
+  GPIO.setup(prt_err1,GPIO.OUT,initial=GPIO.HIGH)
+  GPIO.setup(prt_err2,GPIO.OUT,initial=GPIO.HIGH)
+  GPIO.setup(prt_err3,GPIO.OUT,initial=GPIO.HIGH)
+  GPIO.setup(prt_err4,GPIO.OUT,initial=GPIO.HIGH)
+  GPIO.setup(prt_in1,GPIO.IN)
+  GPIO.setup(prt_in2,GPIO.IN)
+  GPIO.setup(prt_in3,GPIO.IN)
+  GPIO.setup(prt_in4,GPIO.IN)
+  GPIO.setup(prt_out1,GPIO.OUT,initial=GPIO.HIGH)
+  GPIO.setup(prt_out2,GPIO.OUT,initial=GPIO.HIGH)
+  GPIO.setup(prt_out3,GPIO.OUT,initial=GPIO.HIGH)
+  GPIO.setup(prt_out4,GPIO.OUT,initial=GPIO.HIGH)
 
 # blink ACT LED
 def blinkactled():
-  GPIO.output(24,1)
+  GPIO.output(prt_act,1)
   time.sleep(0.5)
-  GPIO.output(24,0)
+  GPIO.output(prt_act,0)
   time.sleep(0.5)
 
 # main program
@@ -106,35 +142,38 @@ prevoutputs=""
 with daemon.DaemonContext() as context:
   try:
     while True:
-      sensor=Adafruit_DHT.DHT22
-      pin=11
-      shum,stemp=Adafruit_DHT.read_retry(sensor,pin)
+      # read input data from sensor
+      shum,stemp=Adafruit_DHT.read_retry(sensor,prt_sens)
       humidity=int(shum)
       temperature=int(stemp)
       blinkactled()
+      if humidity<100:
+        wrongvalues=0
+      else:
+        wrongvalues=1
       # read input data from GPIO
-      inputs=str(int(not GPIO.input(2)))
-      inputs=inputs + str(int(not GPIO.input(3)))
-      inputs=inputs + str(int(not GPIO.input(4)))
-      inputs=inputs + str(int(not GPIO.input(17)))
+      inputs=str(int(not GPIO.input(prt_in1)))
+      inputs=inputs + str(int(not GPIO.input(prt_in2)))
+      inputs=inputs + str(int(not GPIO.input(prt_in3)))
+      inputs=inputs + str(int(not GPIO.input(prt_in4)))
       blinkactled()
       # run user's function
-      outputs=CR.control(temperature,humidity,inputs)
+      outputs=CR.control(temperature,humidity,inputs,wrongvalues)
       aop1=CR.autooffport1()
       blinkactled()
       # write output data to GPIO
-      GPIO.output(14,not int(outputs[4]))
-      GPIO.output(15,not int(outputs[5]))
-      GPIO.output(18,not int(outputs[6]))
-      GPIO.output(23,not int(outputs[7]))
-      GPIO.output(27,not int(outputs[0]))
-      GPIO.output(22,not int(outputs[1]))
-      GPIO.output(10,not int(outputs[2]))
-      GPIO.output(9,not int(outputs[3]))
+      GPIO.output(prt_err1,not int(outputs[4]))
+      GPIO.output(prt_err2,not int(outputs[5]))
+      GPIO.output(prt_err3,not int(outputs[6]))
+      GPIO.output(prt_err4,not int(outputs[7]))
+      GPIO.output(prt_out1,not int(outputs[0]))
+      GPIO.output(prt_out2,not int(outputs[1]))
+      GPIO.output(prt_out3,not int(outputs[2]))
+      GPIO.output(prt_out4,not int(outputs[3]))
       if aop1 != "0":
         for i in range(int(aop1)):
           blinkactled()
-        GPIO.output(27,1)
+        GPIO.output(prt_err3,1)
       blinkactled()
       # write logfile if changed
       enablewritelog=0

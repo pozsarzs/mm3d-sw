@@ -1,6 +1,6 @@
 #!/bin/bash
 # +----------------------------------------------------------------------------+
-# | MM3D v0.11 * Growing house controlling and remote monitoring system        |
+# | MM3D v0.2 * Growing house controlling and remote monitoring system         |
 # | Copyright (C) 2018-2019 Pozsár Zsolt <pozsar.zsolt@.szerafingomba.hu>      |
 # | install                                                                    |
 # | Installer script                                                           |
@@ -23,6 +23,7 @@ copy()
 SWN="MM3D"
 SWV=`cat documents/VERSION`
 INSTDIR=/usr/local
+LANGUAGES="cs de fr hr hu pl ro ru sk sl sr uk"
 PRGDIR="mm3d"
 SUBDIRS="bin \
          etc \
@@ -31,7 +32,6 @@ SUBDIRS="bin \
          share/doc \
          share/doc/$PRGDIR \
          share/locale \
-         share/locale/hu \
          share/$PRGDIR \
          share/man \
          share/man/man1 \
@@ -78,23 +78,35 @@ do
   sudo mkdir --parents $INSTDIR/$D 2> /dev/null
   echo "  $INSTDIR/$D"
 done
+for X in $LANGUAGES; do
+  if [ -e "messages/mm3d_$X.msg" ];
+  then
+    sudo mkdir --parents /usr/local/share/locale/$X 2> /dev/null
+    echo "  $INSTDIR/$X"
+  fi;
+done
 echo "- copying files:"
 copy "documents/*" "$INSTDIR/share/doc/$PRGDIR/"
 copy "manuals/*" "$INSTDIR/share/man/man1/"
-copy "messages/mm3d_hu.msg" "/usr/local/share/locale/hu/mm3d.msg"
-copy "programs/cfg_example*" "/home/mm3d/cfg_example/"
+for X in $LANGUAGES; do
+  if [ -e "messages/mm3d_$X.msg" ];
+  then
+    copy "messages/mm3d_$X.msg" "/usr/local/share/locale/$X/mm3d.msg"
+  fi;
+done
+copy "programs/prg_empty/prg_*.py" "/home/mm3d/programs/"
+copy "programs/prg_example/cfg_example*" "/home/mm3d/cfg_example/"
+copy "programs/prg_example/prg_*.py" "/home/mm3d/programs/"
 copy "programs/mm3d*.py" "$INSTDIR/bin/"
-copy "programs/prg_*.py" "/home/mm3d/programs/"
 copy "scripts/*" "$INSTDIR/bin/"
 copy "settings/cron.d/*" "/etc/cron.d/"
-copy "settings/*.ini" "$INSTDIR/etc/$PRGDIR/"
+copy "settings/mm3d.ini" "$INSTDIR/etc/$PRGDIR/"
 copy "settings/init.d/*" "/etc/init.d/"
 copy "webpage/cgi-bin/*.cgi" "/usr/lib/cgi-bin/"
 copy "webpage/*.css" "/var/www/html/"
 copy "webpage/*.html" "$INSTDIR/share/$PRGDIR/"
 copy "webpage/pics/*.ico" "/var/www/html/pics/"
 copy "webpage/pics/*.png" "/var/www/html/pics/"
-sudo ln -s $INSTDIR/etc/$PRGDIR/example.ini $INSTDIR/etc/$PRGDIR/mm3d.ini
 sudo ln -s /home/mm3d/programs/prg_example.py /home/mm3d/programs/prg_current.py
 sudo chown -R mm3d:mm3d /home/mm3d/
 echo "- set init.d:"

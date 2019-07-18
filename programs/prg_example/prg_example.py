@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # +----------------------------------------------------------------------------+
-# | MM3D v0.1 * Growing house controlling and remote monitoring system         |
-# | Copyright (C) 2018 Pozsar Zsolt <pozsar.zsolt@.szerafingomba.hu>           |
+# | MM3D v0.2 * Growing house controlling and remote monitoring system         |
+# | Copyright (C) 2018-2019 Pozsar Zsolt <pozsar.zsolt@.szerafingomba.hu>      |
 # | prg_example.py                                                             |
 # | User's program                                                             |
 # +----------------------------------------------------------------------------+
@@ -28,7 +28,7 @@ def autooffport1():
   #
   return aop1
 
-def control(temperature,humidity,inputs):
+def control(temperature,humidity,inputs,wrongvalues):
   in1=int(inputs[0])
   in2=int(inputs[1])
   in3=int(inputs[2])
@@ -53,7 +53,7 @@ def control(temperature,humidity,inputs):
   # in4:  (unused)
   # err1: bad relative humidity
   # err2: bad water pressure
-  # err3: (unused)
+  # err3: bad measured data
   # err4: bad temperature
   # out1: humidifying
   # out2: lighting
@@ -66,37 +66,46 @@ def control(temperature,humidity,inputs):
   else:
     err2=1
 
+  enabled_hour=14
+  enabled_interval=1
+
   # check growing mode:
   if in3==1:
     # growing hyphae
     humidity_min=65
     humidity_max=70
     temperature_min=17
-    temperature_max=23
+    temperature_max=25
     light_on=0
     light_off=0
     vent_on=0
     vent_off=0
   else:
     # growing mushroom
-    humidity_min=75
+    humidity_min=70
     humidity_max=85
     temperature_min=7
-    temperature_max=18
+    temperature_max=25
     light_on=14
     light_off=22
     vent_on=0
-    vent_off=15
+    vent_off=30
 
   # humidifying
-  if (humidity<humidity_min) or (humidity>humidity_max):
-    err1=1
-  else:
-    err1=0
-  if (humidity<humidity_min) and (err2==0):
-    out1=1
-  else:
-    out1=0
+  if wrongvalues == 0:
+    if (humidity<humidity_min) or (humidity>humidity_max):
+      err1=1
+    else:
+      err1=0
+    if (humidity<humidity_min) and (err2==0):
+      h=int(time.strftime("%H"))
+      m=int(time.strftime("%M"))
+      if (h==enabled_hour) and (m<=enabled_interval):
+        out1=1
+      else:
+        out1=0
+    else:
+      out1=0
 
   # lighting
   h=int(time.strftime("%H"))
@@ -113,17 +122,18 @@ def control(temperature,humidity,inputs):
     out3=0
 
   # heating
-  if (temperature<temperature_min) or (temperature>temperature_max):
-    err4=1
-  else:
-    err4=0
-  if (temperature<temperature_min):
-    out4=1
-  else:
-    out4=0
+  if wrongvalues == 0:
+    if (temperature<temperature_min) or (temperature>temperature_max):
+      err4=1
+    else:
+      err4=0
+    if (temperature<temperature_min):
+      out4=1
+    else:
+      out4=0
 
-  # unused error lights and outputs
-  err3=0
+  # other error light
+  err3=wrongvalues
 
   # ------------------------- do not edit after this row -----------------------
   #

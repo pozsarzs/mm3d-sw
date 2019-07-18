@@ -1,6 +1,6 @@
 #!/bin/bash
 # +----------------------------------------------------------------------------+
-# | MM3D v0.11 * Growing house controlling and remote monitoring system        |
+# | MM3D v0.2 * Growing house controlling and remote monitoring system         |
 # | Copyright (C) 2018-2019 Pozsár Zsolt <pozsar.zsolt@.szerafingomba.hu>      |
 # | cfg_example.sh                                                             |
 # | User's program configurator                                                |
@@ -23,6 +23,9 @@ MENU5="Time when light on [0-23 h]"
 MENU6="Time when light off [0-23 h]"
 MENU7="Time when ventilation on [0-59 m]"
 MENU8="Time when ventilation off [0-59 m]"
+MENU9="Back to main menu"
+MENU10="Start (hour)"
+MENU11="Interval (minute)"
 
 INIFILE=./cfg_example.ini
 PRGDIR=../programs
@@ -75,6 +78,8 @@ loadconfig()
   MTMIN=0
   MVOFF=0
   MVON=0
+  HTH=0
+  HTIV=0
   # loaded values
   if [ -f $INIFILE ]
   then
@@ -94,12 +99,19 @@ loadconfig()
     MTMIN=$(ini_parser "mushroom" "temperature_min" $INIFILE)
     MVOFF=$(ini_parser "mushroom" "vent_off" $INIFILE)
     MVON=$(ini_parser "mushroom" "vent_on" $INIFILE)
+    HTH=$(ini_parser "humidification" "enabled_hour" $INIFILE)
+    HTIV=$(ini_parser "humidification" "enabled_interval" $INIFILE)
   fi
 }
 
 saveconfig()
 {
-  echo '; cfg_example.ini' > $INIFILE
+  echo '; +----------------------------------------------------------------------------+' > $INIFILE
+  echo '; | MM3D v0.2 * Growing house controlling and remote monitoring system         |' >> $INIFILE
+  echo '; | Copyright (C) 2018-2019 Pozsár Zsolt <pozsar.zsolt@.szerafingomba.hu>      |' >> $INIFILE
+  echo '; | cfg_example.ini                                                            |' >> $INIFILE
+  echo '; | configuration file                                                         |' >> $INIFILE
+  echo '; +----------------------------------------------------------------------------+' >> $INIFILE
   echo '' >> $INIFILE
   echo '[hyphae]' >> $INIFILE
   echo "humidity_min=$HHMIN" >> $INIFILE
@@ -120,6 +132,10 @@ saveconfig()
   echo "light_off=$MLOFF" >> $INIFILE
   echo "vent_on=$MVON" >> $INIFILE
   echo "vent_off=$MVOFF" >> $INIFILE
+  echo '' >> $INIFILE
+  echo '[humidification]' >> $INIFILE
+  echo "enabled_hour=$HTH" >> $INIFILE
+  echo "enabled_interval=$HTIV" >> $INIFILE
 }
 
 saveoutfile()
@@ -129,8 +145,8 @@ saveoutfile()
   cat << EOF > $PYFILE
 #!/usr/bin/python
 # +----------------------------------------------------------------------------+
-# | MM3D v0.1 * Growing house controlling and remote monitoring system         |
-# | Copyright (C) 2018 Pozsar Zsolt <pozsar.zsolt@.szerafingomba.hu>           |
+# | MM3D v0.2 * Growing house controlling and remote monitoring system         |
+# | Copyright (C) 2018-2019 Pozsar Zsolt <pozsar.zsolt@.szerafingomba.hu>      |
 # | prg_example.py                                                             |
 # | User's program                                                             |
 # +----------------------------------------------------------------------------+
@@ -157,7 +173,7 @@ def autooffport1():
   #
   return aop1
 
-def control(temperature,humidity,inputs):
+def control(temperature,humidity,inputs,wrongvalues):
   in1=int(inputs[0])
   in2=int(inputs[1])
   in3=int(inputs[2])
@@ -182,7 +198,7 @@ def control(temperature,humidity,inputs):
   # in4:  (unused)
   # err1: bad relative humidity
   # err2: bad water pressure
-  # err3: (unused)
+  # err3: bad measured data
   # err4: bad temperature
   # out1: humidifying
   # out2: lighting
@@ -196,6 +212,9 @@ def control(temperature,humidity,inputs):
     err2=1
 
 EOF
+  echo "  enabled_hour=$HTH" >> $PYFILE
+  echo "  enabled_interval=$HTIV" >> $PYFILE
+  echo '' >> $PYFILE
   echo '  # check growing mode:' >> $PYFILE
   echo '  if in3==1:' >> $PYFILE
   echo '    # growing hyphae' >> $PYFILE
@@ -220,14 +239,20 @@ EOF
   cat << EOF >> $PYFILE
 
   # humidifying
-  if (humidity<humidity_min) or (humidity>humidity_max):
-    err1=1
-  else:
-    err1=0
-  if (humidity<humidity_min) and (err2==0):
-    out1=1
-  else:
-    out1=0
+  if wrongvalues == 0:
+    if (humidity<humidity_min) or (humidity>humidity_max):
+      err1=1
+    else:
+      err1=0
+    if (humidity<humidity_min) and (err2==0):
+      h=int(time.strftime("%H"))
+      m=int(time.strftime("%M"))
+      if (h==enabled_hour) and (m<=enabled_interval):
+        out1=1
+      else:
+        out1=0
+    else:
+      out1=0
 
   # lighting
   h=int(time.strftime("%H"))
@@ -244,17 +269,18 @@ EOF
     out3=0
 
   # heating
-  if (temperature<temperature_min) or (temperature>temperature_max):
-    err4=1
-  else:
-    err4=0
-  if (temperature<temperature_min):
-    out4=1
-  else:
-    out4=0
+  if wrongvalues == 0:
+    if (temperature<temperature_min) or (temperature>temperature_max):
+      err4=1
+    else:
+      err4=0
+    if (temperature<temperature_min):
+      out4=1
+    else:
+      out4=0
 
-  # unused error lights and outputs
-  err3=0
+  # other error light
+  err3=wrongvalues
 
   # ------------------------- do not edit after this row -----------------------
   #
@@ -309,7 +335,9 @@ inputbox()
       7) HVON=$RESULT;;
       8) HVOFF=$RESULT;;
     esac
-  else
+    fi
+  if [ $1 -eq 2 ]
+  then
     case $2 in
       1) dialog --backtitle "$BACKTITLE" --title "$TITLE" --rangebox "$MENU1" 3 50 0 100 "$MHMIN" 2> /tmp/$$_3.tmp;;
       2) dialog --backtitle "$BACKTITLE" --title "$TITLE" --rangebox "$MENU2" 3 50 0 100 "$MHMAX" 2> /tmp/$$_3.tmp;;
@@ -333,6 +361,20 @@ inputbox()
       8) MVOFF=$RESULT;;
     esac
   fi
+  if [ $1 -eq 3 ]
+  then
+    case $2 in
+      1) dialog --backtitle "$BACKTITLE" --title "$TITLE" --rangebox "$MENU10" 3 50 0 23 "$HTH" 2> /tmp/$$_3.tmp;;
+      2) dialog --backtitle "$BACKTITLE" --title "$TITLE" --rangebox "$MENU11" 3 50 0 15 "$HTIV" 2> /tmp/$$_3.tmp;;
+    esac
+    if [ $? -ne 0 ]; then return; fi
+    RESULT=`cat /tmp/$$_3.tmp | sed s/' '//`
+    case $2 in
+      1) HTH=$RESULT;;
+      2) HTIV=$RESULT;;
+    esac
+  fi
+
   sleep 2
 }
 
@@ -351,7 +393,7 @@ do
          6 "$MENU6" \
          7 "$MENU7" \
          8 "$MENU8" \
-         9 "Back to main menu" 2> /tmp/$$_2.tmp
+         9 "$MENU9" 2> /tmp/$$_2.tmp
   if [ $? -eq 0 ]
   then
     case `cat /tmp/$$_2.tmp` in
@@ -386,7 +428,7 @@ do
          6 "$MENU6" \
          7 "$MENU7" \
          8 "$MENU8" \
-         9 "Back to main menu" 2> /tmp/$$_2.tmp
+         9 "$MENU9" 2> /tmp/$$_2.tmp
   if [ $? -eq 0 ]
   then
     case `cat /tmp/$$_2.tmp` in
@@ -399,6 +441,29 @@ do
       7)  inputbox 2 7;;
       8)  inputbox 2 8;;
       9)  return;;
+  esac
+  else
+    return
+  fi
+done
+}
+
+humtime()
+{
+while true
+do
+  dialog --backtitle "$BACKTITLE" \
+         --title "$TITLE" \
+         --menu "Allowed humidification time" 10 33 3 \
+         1 "$MENU10" \
+         2 "$MENU11" \
+         3 "$MENU9" 2> /tmp/$$_2.tmp
+  if [ $? -eq 0 ]
+  then
+    case `cat /tmp/$$_2.tmp` in
+      1)  inputbox 3 1;;
+      2)  inputbox 3 2;;
+      3)  return;;
   esac
   else
     return
@@ -429,18 +494,20 @@ while true
 do
   dialog --backtitle "$BACKTITLE" \
          --title "$TITLE" \
-         --menu "Main menu" 11 30 4 \
+         --menu "Main menu" 12 38 5 \
          1 "Growing hyphae" \
          2 "Growing mushroom" \
-         3 "Save program" \
-         4 "Save and exit" 2> /tmp/$$_1.tmp
+         3 "Allowed humidification time" \
+         4 "Save program" \
+         5 "Save and exit" 2> /tmp/$$_1.tmp
   if [ $? -eq 0 ]
   then
     case `cat /tmp/$$_1.tmp` in
       1)  hyphaeparams;;
       2)  mushroomparams;;
-      3)  saveoutfile;;
-      4)  exitandrestartservice;;
+      3)  humtime;;
+      4)  saveoutfile;;
+      5)  exitandrestartservice;;
     esac
     else
       deltemp

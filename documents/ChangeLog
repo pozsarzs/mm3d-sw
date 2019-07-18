@@ -1,0 +1,46 @@
+2019-06-26  Pozsár Zsolt  <pozsar.zsolt@szerafingomba.hu>
+
+	*  0.2: new version.
+	*  cfg_example.ini: more content
+	*  cfg_example.sh: new version
+	*  footer_cs.html: new file
+	*  footer_de.html: new file
+	*  footer_fr.html: new file
+	*  footer_hr.html: new file
+	*  footer_pl.html: new file
+	*  footer_ro.html: new file
+	*  footer_ru.html: new file
+	*  footer_sk.html: new file
+	*  footer_sl.html: new file
+	*  footer_sr.html: new file
+	*  footer_uk.html: new file
+	*  header_cs.html: new file
+	*  header_de.html: new file
+	*  header_fr.html: new file
+	*  header_hr.html: new file
+	*  header_pl.html: new file
+	*  header_ro.html: new file
+	*  header_ru.html: new file
+	*  header_sk.html: new file
+	*  header_sl.html: new file
+	*  header_sr.html: new file
+	*  header_uk.html: new file
+	*  install: new version
+	*  mm3d_cs.msg: new message file
+	*  mm3d_de.msg: new message file
+	*  mm3d_fr.msg: new message file
+	*  mm3d_hr.msg: new message file
+	*  mm3d-hwtest.py: new version, uses ini file
+	*  mm3d.ini: new sections and more content
+	*  mm3d_pl.msg: new message file
+	*  mm3d.py: new version
+	*  mm3d_ro.msg: new message file
+	*  mm3d_ru.msg: new message file
+	*  mm3d_sk.msg: new message file
+	*  mm3d_sl.msg: new message file
+	*  mm3d_sr.msg: new message file
+	*  mm3d_uk.msg: new message file
+	*  mm3d-updatestartpage: new version
+	*  prg_empty.py: new version
+	*  prg_example.py: new version
+	*  uninstall: new version
