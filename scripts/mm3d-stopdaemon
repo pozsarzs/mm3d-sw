@@ -2,8 +2,8 @@
 # +----------------------------------------------------------------------------+
 # | MM3D v0.11 * Growing house controlling and remote monitoring system        |
 # | Copyright (C) 2018-2019 Pozsár Zsolt <pozsar.zsolt@.szerafingomba.hu>      |
-# | mm3d-editcurrentprog                                                       |
-# | Edit current program file                                                  |
+# | mm3d-stopdaemon                                                            |
+# | Edit configuration file                                                    |
 # +----------------------------------------------------------------------------+
 #
 #   This program is free software: you can redistribute it and/or modify it
@@ -13,12 +13,4 @@
 # ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
 # FOR A PARTICULAR PURPOSE.
 
-PRGFILE="/home/mm3d/programs/prg_current.py"
-if [ ! -e $PRGFILE ]
-then
-  echo "ERROR: Cannot open current program file!"
-exit 1
-fi
-
-editor $PRGFILE
-exit 0
+sudo /etc/init.d/mm3d.sh stop

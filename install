@@ -1,7 +1,7 @@
 #!/bin/bash
 # +----------------------------------------------------------------------------+
-# | MM3D v0.1 * Growing house controlling and remote monitoring system         |
-# | Copyright (C) 2018 Pozsár Zsolt <pozsar.zsolt@.szerafingomba.hu>           |
+# | MM3D v0.11 * Growing house controlling and remote monitoring system        |
+# | Copyright (C) 2018-2019 Pozsár Zsolt <pozsar.zsolt@.szerafingomba.hu>      |
 # | install                                                                    |
 # | Installer script                                                           |
 # +----------------------------------------------------------------------------+
@@ -33,6 +33,8 @@ SUBDIRS="bin \
          share/locale \
          share/locale/hu \
          share/$PRGDIR \
+         share/man \
+         share/man/man1 \
          ../../var \
          ../../var/local \
          ../../var/local/lock \
@@ -46,7 +48,7 @@ README=$INSTDIR/share/doc/$PRGDIR/README
 clear
 echo "--------------------------------------------------------------------------------"
 echo "$SWN $SWV installer script"
-echo "Copyright (C) 2018 Pozsár Zsolt <pozsar.zsolt@szerafingomba.hu>"
+echo "Copyright (C) 2018-2019 Pozsár Zsolt <pozsar.zsolt@szerafingomba.hu>"
 echo "--------------------------------------------------------------------------------"
 echo "  This program is free software: you can redistribute it and/or modify it
 under the terms of the European Union Public License 1.1 version.
@@ -78,9 +80,11 @@ do
 done
 echo "- copying files:"
 copy "documents/*" "$INSTDIR/share/doc/$PRGDIR/"
-copy "messages/mm3d_hu.msg" "/usr/local/share/locale/hu/"
+copy "manuals/*" "$INSTDIR/share/man/man1/"
+copy "messages/mm3d_hu.msg" "/usr/local/share/locale/hu/mm3d.msg"
+copy "programs/cfg_example*" "/home/mm3d/cfg_example/"
 copy "programs/mm3d*.py" "$INSTDIR/bin/"
-copy "programs/prg_*.py" "/home/mm3d/programs"
+copy "programs/prg_*.py" "/home/mm3d/programs/"
 copy "scripts/*" "$INSTDIR/bin/"
 copy "settings/cron.d/*" "/etc/cron.d/"
 copy "settings/*.ini" "$INSTDIR/etc/$PRGDIR/"
@@ -92,6 +96,7 @@ copy "webpage/pics/*.ico" "/var/www/html/pics/"
 copy "webpage/pics/*.png" "/var/www/html/pics/"
 sudo ln -s $INSTDIR/etc/$PRGDIR/example.ini $INSTDIR/etc/$PRGDIR/mm3d.ini
 sudo ln -s /home/mm3d/programs/prg_example.py /home/mm3d/programs/prg_current.py
+sudo chown -R mm3d:mm3d /home/mm3d/
 echo "- set init.d:"
 sudo /etc/init.d/mm3d.sh stop
 copy settings/init.d/mm3d.sh /etc/init.d/

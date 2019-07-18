@@ -69,28 +69,24 @@ def control(temperature,humidity,inputs):
   # check growing mode:
   if in3==1:
     # growing hyphae
-    humidity_min=60
+    humidity_min=65
     humidity_max=70
     temperature_min=17
     temperature_max=23
     light_on=0
     light_off=0
-    vent_on1=0
-    vent_off1=0
-    vent_on2=0
-    vent_off2=0
+    vent_on=0
+    vent_off=0
   else:
     # growing mushroom
-    humidity_min=70
-    humidity_max=80
+    humidity_min=75
+    humidity_max=85
     temperature_min=7
-    temperature_max=15
-    light_on=7
-    light_off=16
-    vent_on1=0
-    vent_off1=15
-    vent_on2=30
-    vent_off2=45
+    temperature_max=18
+    light_on=14
+    light_off=22
+    vent_on=0
+    vent_off=15
 
   # humidifying
   if (humidity<humidity_min) or (humidity>humidity_max):
@@ -111,11 +107,7 @@ def control(temperature,humidity,inputs):
 
   # ventilation
   m=int(time.strftime("%M"))
-  if (m>vent_on1) and (m<vent_off1):
-    out3=1
-  else:
-    out3=0
-  if (m>vent_on2) and (m<vent_off2):
+  if (m>vent_on) and (m<vent_off):
     out3=1
   else:
     out3=0

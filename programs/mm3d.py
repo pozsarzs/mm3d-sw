@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # +----------------------------------------------------------------------------+
-# | MM3D v0.1 * Growing house controlling and remote monitoring system         |
-# | Copyright (C) 2018 Pozsar Zsolt <pozsar.zsolt@.szerafingomba.hu>           |
+# | MM3D v0.11 * Growing house controlling and remote monitoring system        |
+# | Copyright (C) 2018-2019 Pozsar Zsolt <pozsar.zsolt@.szerafingomba.hu>      |
 # | mm3d.py                                                                    |
 # | Main program                                                               |
 # +----------------------------------------------------------------------------+

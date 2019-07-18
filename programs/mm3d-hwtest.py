@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # +----------------------------------------------------------------------------+
-# | MM3D v0.1 * Growing house controlling and remote monitoring system         |
-# | Copyright (C) 2018 Pozsar Zsolt <pozsar.zsolt@.szerafingomba.hu>           |
+# | MM3D v0.11 * Growing house controlling and remote monitoring system        |
+# | Copyright (C) 2018-2019 Pozsar Zsolt <pozsar.zsolt@.szerafingomba.hu>      |
 # | mm3d-hwtest.py                                                             |
 # | Hardware test program                                                      |
 # +----------------------------------------------------------------------------+
@@ -23,8 +23,8 @@ def blink_act():
     GPIO.output(24,0)
     time.sleep(0.5)
 
-print "\nMM3D hardware test * (C)2018 Pozsar Zsolt"
-print "-----------------------------------------"
+print "\nMM3D hardware test * (C)2018-2019 Pozsar Zsolt"
+print "------------------------------------------------"
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(2,GPIO.IN,pull_up_down=GPIO.PUD_OFF)    # IN #1

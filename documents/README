@@ -19,7 +19,7 @@ II. Requirements
 
 III. Installation and settings
 ------------------------------
-  Installer package is mm3d-software-0.1-noarch.tar.gz
+  Installer package is mm3d-sw-0.11-noarch.tar.gz
   See INSTALL for detailed information.
 
 IV. Download and contact
@@ -28,7 +28,7 @@ IV. Download and contact
                                      http://www.pozsarzs.hu
   Contact:                           Pozsar Zsolt (self-employed)
   E-mail:                            pozsar.zsolt@szerafingomba.hu
-  Phone and fax:                     +36 56/470-272
+  Phone:                             +36 56/470-272
   Mobilphone:                        +36 30/359-8783
   Postal address:                    Pozsar Zsolt
                                      Kurazsi Fo ut 1., HU-5430 Tiszafoldvar
@@ -39,7 +39,7 @@ IV. Download and contact
 
 V. Important information
 -------------------------
-  MM3D Copyright (C) 2018 Pozsár Zsolt <pozsar.zsolt@szerafingomba.hu>
+  MM3D Copyright (C) 2018-2019 Pozsár Zsolt <pozsar.zsolt@szerafingomba.hu>
 
   This program is free software: you can redistribute it and/or modify it
 under the terms of the European Union Public License 1.1 version.
