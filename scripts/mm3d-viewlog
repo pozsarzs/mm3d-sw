@@ -1,0 +1,51 @@
+#!/bin/bash
+# +----------------------------------------------------------------------------+
+# | MM3D v0.1 * Growing house controlling and remote monitoring system         |
+# | Copyright (C) 2018 Pozsár Zsolt <pozsar.zsolt@.szerafingomba.hu>           |
+# | mm3d-viewlog                                                               |
+# | View log file                                                              |
+# +----------------------------------------------------------------------------+
+#
+#   This program is free software: you can redistribute it and/or modify it
+# under the terms of the European Union Public License 1.1 version.
+#
+#   This program is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+# FOR A PARTICULAR PURPOSE.
+
+loadconfiguration()
+{
+  CFGFILE="/usr/local/etc/mm3d/mm3d.ini"
+  if [ ! -f $CFGFILE ]
+    then
+      echo "ERROR: Cannot open configuration file!"
+      exit 1
+  fi
+  DIR_LOG=`cat $CFGFILE | grep dir_log= | sed 's/dir_log=//'`
+}
+
+viewlogfile()
+{
+  echo "Content of MM3D log file:"
+  echo "+------------+-------+------+------+---------+---------+---------+"
+  echo "|    Date    | Time  | Temp |  RH  | Inputs  | Outputs | Errors  |"
+  echo "+------------+-------+------+------+---------+---------+---------+"
+  DATAFILE="$DIR_LOG/mm3d.log"
+  OLDIFS=$IFS
+  IFS=,
+  [ ! -f $DATAFILE ] && { echo "Log file (mm3d.log) is not exist!"; exit 2; }
+  while read C1 C2 C3 C4 C5 C6 C7 C8 C9 C10 C11 C12 C13 C14 C15 C16
+  do
+    if [ ${#C3} -eq "1" ]; then C3=" $C3"; fi
+    if [ ${#C4} -eq "1" ]; then C4="  $C4"; fi
+    if [ ${#C4} -eq "2" ]; then C4=" $C4"; fi
+      echo "| $C1 | $C2 | $C3°C | $C4% | $C5 $C6 $C7 $C8 | $C9 $C10 $C11 $C12 | $C13 $C14 $C15 $C16 |"
+  done < $DATAFILE
+  echo "+------------+-------+------+------+---------+---------+---------+"
+  IFS=$OLDIFS
+}
+
+# Main function
+loadconfiguration
+viewlogfile
+exit 0

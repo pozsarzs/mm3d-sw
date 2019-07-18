@@ -1,0 +1,167 @@
+#!/bin/bash
+# +----------------------------------------------------------------------------+
+# | MM3D v0.1 * Growing house controlling and remote monitoring system         |
+# | Copyright (C) 2018 Pozsár Zsolt <pozsar.zsolt@.szerafingomba.hu>           |
+# | mm3d-updatestartpage                                                       |
+# | update startpage                                                           |
+# +----------------------------------------------------------------------------+
+#
+#   This program is free software: you can redistribute it and/or modify it
+# under the terms of the European Union Public License 1.1 version.
+#
+#   This program is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+# FOR A PARTICULAR PURPOSE.
+
+loadconfiguration()
+{
+  CFGFILE="/usr/local/etc/mm3d/mm3d.ini"
+  if [ ! -f $CFGFILE ]
+    then
+      echo "ERROR: Cannot open configuration file!"
+      exit 1
+  fi
+  LNG=`cat $CFGFILE | grep lng= | sed 's/lng=//'`
+  DIR_HTM=`cat $CFGFILE | grep dir_htm= | sed 's/dir_htm=//'`
+  DIR_MSG=`cat $CFGFILE | grep dir_msg= | sed 's/dir_msg=//'`
+  DIR_SHR=`cat $CFGFILE | grep dir_shr= | sed 's/dir_shr=//'`
+  NAM_ERR1=`cat $CFGFILE | grep nam_err1= | sed 's/nam_err1=//'`
+  NAM_ERR2=`cat $CFGFILE | grep nam_err2= | sed 's/nam_err2=//'`
+  NAM_ERR3=`cat $CFGFILE | grep nam_err3= | sed 's/nam_err3=//'`
+  NAM_ERR4=`cat $CFGFILE | grep nam_err4= | sed 's/nam_err4=//'`
+  NAM_IN1=`cat $CFGFILE | grep nam_in1= | sed 's/nam_in1=//'`
+  NAM_IN2=`cat $CFGFILE | grep nam_in2= | sed 's/nam_in2=//'`
+  NAM_IN3=`cat $CFGFILE | grep nam_in3= | sed 's/nam_in3=//'`
+  NAM_IN4=`cat $CFGFILE | grep nam_in4= | sed 's/nam_in4=//'`
+  NAM_OUT1=`cat $CFGFILE | grep nam_out1= | sed 's/nam_out1=//'`
+  NAM_OUT2=`cat $CFGFILE | grep nam_out2= | sed 's/nam_out2=//'`
+  NAM_OUT3=`cat $CFGFILE | grep nam_out3= | sed 's/nam_out3=//'`
+  NAM_OUT4=`cat $CFGFILE | grep nam_out4= | sed 's/nam_out4=//'`
+  USR_DT1=`cat $CFGFILE | grep usr_dt1= | sed 's/usr_dt1=//'`
+  USR_DT2=`cat $CFGFILE | grep usr_dt2= | sed 's/usr_dt2=//'`
+  USR_DT3=`cat $CFGFILE | grep usr_dt3= | sed 's/usr_dt3=//'`
+  USR_NAM=`cat $CFGFILE | grep usr_nam= | sed 's/usr_nam=//'`
+}
+
+loadmessages()
+{
+  MSG01="MM3D controlling and monitoring system"
+  MSG02="User's data"
+  MSG03="User"
+  MSG04="Name of site"
+  MSG05="Growing house"
+  MSG06="Names"
+  MSG07="Input"
+  MSG08="Output"
+  MSG09="Error light"
+  MSG10="Go to data"
+  MSG11="Address of site"
+
+  MSGFILE="$DIR_MSG/$LNG/mm3d.msg"
+  if [ -f $MSGFILE ]
+  then
+    MSG01=`cat $MSGFILE | grep msg01 | sed 's/msg01=//'`
+    MSG02=`cat $MSGFILE | grep msg02 | sed 's/msg02=//'`
+    MSG03=`cat $MSGFILE | grep msg03 | sed 's/msg03=//'`
+    MSG04=`cat $MSGFILE | grep msg04 | sed 's/msg04=//'`
+    MSG05=`cat $MSGFILE | grep msg05 | sed 's/msg05=//'`
+    MSG06=`cat $MSGFILE | grep msg06 | sed 's/msg06=//'`
+    MSG07=`cat $MSGFILE | grep msg07 | sed 's/msg07=//'`
+    MSG08=`cat $MSGFILE | grep msg08 | sed 's/msg08=//'`
+    MSG09=`cat $MSGFILE | grep msg09 | sed 's/msg09=//'`
+    MSG10=`cat $MSGFILE | grep msg10 | sed 's/msg10=//'`
+    MSG11=`cat $MSGFILE | grep msg11 | sed 's/msg11=//'`
+  fi
+}
+
+makehomepage()
+{
+  if [ -f $DIR_SHR/header_$LNG.html ]
+  then
+    cat $DIR_SHR/header_$LNG.html > $DIR_HTM/index.html
+  else
+    cat $DIR_SHR/header_en.html > $DIR_HTM/index.html
+  fi
+
+  cat >> $DIR_HTM/index.html << EOF
+    <table border=0 cellspacing=0 cellpadding=6 width="100%">
+      <tbody>
+        <tr>
+          <td colspan="2" class="header" align="center"><b class="title0">$MSG01</b></td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+    <br>
+    <b class="title1">$MSG02</b><br>
+    <br>
+    <table border="0" cellpadding="3" cellspacing="0">
+      <tbody>
+        <tr>
+          <td><b>$MSG03:</b></td><td>$USR_NAM</td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td><b>$MSG04:</b></td><td>$USR_DT1</td>
+        </tr>
+        <tr>
+          <td><b>$MSG11:</b></td><td>$USR_DT2</td>
+        </tr>
+        <tr>
+          <td><b>$MSG05:</b></td><td>$USR_DT3</td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+    <hr>
+    <br>
+    <b class="title1">$MSG06</b><br>
+    <br>
+    <table border="0" cellpadding="3" cellspacing="0">
+      <tbody>
+        <tr>
+          <td><b>$MSG07 #1:</b></td><td>$NAM_IN1</td> <td>&nbsp;&nbsp;&nbsp;</td>
+          <td><b>$MSG08 #1:</b></td><td>$NAM_OUT1</td><td>&nbsp;&nbsp;&nbsp;</td>
+          <td><b>$MSG09 #1:</b></td><td>$NAM_ERR1</td>
+        </tr>
+        <tr>
+          <td><b>$MSG07 #2:</b></td><td>$NAM_IN2</td> <td>&nbsp;&nbsp;&nbsp;</td>
+          <td><b>$MSG08 #2:</b></td><td>$NAM_OUT2</td><td>&nbsp;&nbsp;&nbsp;</td>
+          <td><b>$MSG09 #2:</b></td><td>$NAM_ERR2</td>
+        </tr>
+        <tr>
+          <td><b>$MSG07 #3:</b></td><td>$NAM_IN3</td> <td>&nbsp;&nbsp;&nbsp;</td>
+          <td><b>$MSG08 #3:</b></td><td>$NAM_OUT3</td><td>&nbsp;&nbsp;&nbsp;</td>
+          <td><b>$MSG09 #3:</b></td><td>$NAM_ERR3</td>
+        </tr>
+        <tr>
+          <td><b>$MSG07 #4:</b></td><td>$NAM_IN4</td> <td>&nbsp;&nbsp;&nbsp;</td>
+          <td><b>$MSG08 #4:</b></td><td>$NAM_OUT4</td><td>&nbsp;&nbsp;&nbsp;</td>
+          <td><b>$MSG09 #4:</b></td><td>$NAM_ERR4</td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+    <hr>
+    <br>
+    <center>
+      <form action="cgi-bin/getpage.cgi" method="get">
+        <input value="$MSG10" type="submit">
+      </form>
+    </center>
+EOF
+  if [ -f $DIR_SHR/footer_$LNG.html ]
+  then
+    cat $DIR_SHR/footer_$LNG.html >> $DIR_HTM/index.html
+  else
+    cat $DIR_SHR/footer_en.html >> $DIR_HTM/index.html
+  fi
+}
+
+# Main function
+loadconfiguration
+loadmessages
+makehomepage
+exit 0

@@ -1,0 +1,7 @@
+# /etc/cron.d/mm3d: crontab entries for MM3D
+
+SHELL=/bin/sh
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+
+0 1 * * *					root	mm3d-updatestartpage >/dev/null 2>&1
+0 2 * * *					root	mm3d-maintainlog >/dev/null 2>&1

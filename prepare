@@ -1,0 +1,46 @@
+#!/bin/bash
+# +----------------------------------------------------------------------------+
+# | MM3D v0.1 * Growing house controlling and remote monitoring system         |
+# | Copyright (C) 2018 Pozsár Zsolt <pozsar.zsolt@.szerafingomba.hu>           |
+# | prepare                                                                    |
+# | Prepare OS                                                                 |
+# +----------------------------------------------------------------------------+
+#
+#   This program is free software: you can redistribute it and/or modify it
+# under the terms of the European Union Public License 1.1 version.
+#
+#   This program is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+# FOR A PARTICULAR PURPOSE.
+
+SWN="MM3D"
+SWV=`cat documents/VERSION`
+
+clear
+echo "$SWN $SWV prepare OS"
+echo "Copyright (C) 2018 Pozsar Zsolt <pozsar.zsolt@szerafingomba.hu>"
+echo "---------------------------------------------------------------"
+echo "Installing required components..."
+sudo apt-get install apache2 \
+                     build-essential \
+                     git \
+                     libswitch-perl \
+                     python-daemon \
+                     python-dev \
+                     python-openssl \
+                     python-rpi.gpio
+mkdir --parents $HOME/download
+cd $HOME/download
+git clone https://github.com/adafruit/Adafruit_Python_DHT.git
+cd Adafruit_Python_DHT
+sudo python setup.py install
+echo -e "\nCreating a new user..."
+sudo adduser mm3d
+sudo mkdir --parents /home/mm3d/programs
+sudo chown -R mm3d:mm3d /home/mm3d/programs
+echo -e "\nSetting Apache2..."
+sudo ln --symbolic /etc/apache2/mods-available/cgid.load /etc/apache2/mods-enabled/
+sudo ln --symbolic /etc/apache2/mods-available/cgid.conf /etc/apache2/mods-enabled/
+sudo ln --symbolic /etc/apache2/conf-available/serve-cgi-bin.conf /etc/apache2/conf-enabled/
+sudo /etc/init.d/apache2 restart
+echo -e "\nDone."

@@ -1,0 +1,8 @@
+body, p, td, th, a, b { font-family: verdana, arial, helvetica, sans-serif; font-size:13px }
+body.normal { background-color: #fff }
+a.header { color: white; text-decoration: none}
+b.header { color: white }
+b.title0 { color: white; font-size:26px }
+b.title1 { color: #666699; font-size:18px }
+b.warning { color: red }
+td.header { background-color: #666699 }

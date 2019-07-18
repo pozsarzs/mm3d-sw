@@ -1,0 +1,59 @@
+#!/bin/bash
+# +----------------------------------------------------------------------------+
+# | MM3D v0.1 * Growing house controlling and remote monitoring system         |
+# | Copyright (C) 2018 Pozsár Zsolt <pozsar.zsolt@.szerafingomba.hu>           |
+# | mm3d-maintainlog                                                           |
+# | Maintain log file                                                          |
+# +----------------------------------------------------------------------------+
+#
+#   This program is free software: you can redistribute it and/or modify it
+# under the terms of the European Union Public License 1.1 version.
+#
+#   This program is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+# FOR A PARTICULAR PURPOSE.
+
+loadconfiguration()
+{
+  CFGFILE="/usr/local/etc/mm3d/mm3d.ini"
+  if [ ! -f $CFGFILE ]
+    then
+      echo "ERROR: Cannot open configuration file!"
+      exit 1
+  fi
+  LNG=`cat $CFGFILE | grep lng= | sed 's/lng=//'`
+  DAY_LOG=`cat $CFGFILE | grep day_log= | sed 's/day_log=//'`
+  DIR_LOG=`cat $CFGFILE | grep dir_log= | sed 's/dir_log=//'`
+  DIR_LCK=`cat $CFGFILE | grep dir_lck= | sed 's/dir_lck=//'`
+  DAY_L=$(($DAY_LOG+1))
+}
+
+maintainlogfile()
+{
+  BCKPFILE="$DIR_LOG/mm3d.bak"
+  DATAFILE="$DIR_LOG/mm3d.log"
+
+  rm --force $BCKPFILE.gz
+  mv $DATAFILE $BCKPFILE
+  touch $DATAFILE
+  NOW=`date +%s`
+  OLDIFS=$IFS
+  IFS=,
+  [ ! -f $BCKPFILE ] && { echo "Log file (mm3d.bak) is not exist!"; exit 2; }
+  while read C1 C2 C3 C4 C5 C6 C7 C8 C9 C10 C11 C12 C13 C14 C15 C16
+  do
+    XDATE=`date -d $C1 +%s`
+    MAXXDATE=$(($XDATE+$((86400*$DAY_L))))
+    if ! [ $NOW -gt $MAXXDATE ]
+    then
+      echo "$C1,$C2,$C3,$C4,$C5,$C6,$C7,$C8,$C9,$C10,$C11,$C12,$C13,$C14,$C15,$C16" >> $DATAFILE
+    fi
+  done < $BCKPFILE
+  IFS=$OLDIFS
+  gzip -9 $BCKPFILE
+}
+
+# Main function
+loadconfiguration
+maintainlogfile
+exit 0

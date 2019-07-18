@@ -1,0 +1,111 @@
+#!/bin/bash
+# +----------------------------------------------------------------------------+
+# | MM3D v0.1 * Growing house controlling and remote monitoring system         |
+# | Copyright (C) 2018 Pozsár Zsolt <pozsar.zsolt@.szerafingomba.hu>           |
+# | install                                                                    |
+# | Installer script                                                           |
+# +----------------------------------------------------------------------------+
+#
+#   This program is free software: you can redistribute it and/or modify it
+# under the terms of the European Union Public License 1.1 version.
+#
+#   This program is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+# FOR A PARTICULAR PURPOSE.
+
+copy()
+{
+  sudo cp $1 $2
+  echo "  $1 -> $2"
+}
+
+# constans
+SWN="MM3D"
+SWV=`cat documents/VERSION`
+INSTDIR=/usr/local
+PRGDIR="mm3d"
+SUBDIRS="bin \
+         etc \
+         etc/$PRGDIR \
+         share \
+         share/doc \
+         share/doc/$PRGDIR \
+         share/locale \
+         share/locale/hu \
+         share/$PRGDIR \
+         ../../var \
+         ../../var/local \
+         ../../var/local/lock \
+         ../../var/local/log \
+         ../../var/www/ \
+         ../../var/www/html \
+         ../../var/www/html/pics"
+README=$INSTDIR/share/doc/$PRGDIR/README
+
+# installer
+clear
+echo "--------------------------------------------------------------------------------"
+echo "$SWN $SWV installer script"
+echo "Copyright (C) 2018 Pozsár Zsolt <pozsar.zsolt@szerafingomba.hu>"
+echo "--------------------------------------------------------------------------------"
+echo "  This program is free software: you can redistribute it and/or modify it
+under the terms of the European Union Public License 1.1 version.
+
+  This program is distributed in the hope that it will be useful, but WITHOUT
+ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE."
+echo "--------------------------------------------------------------------------------"
+sleep 3
+
+if ! [ -x "$(command -v apache2)" ]; then
+  echo 'ERROR: Run prepare script firstly!';
+  exit;
+fi
+
+if [ ! -d /home/mm3d/programs ]
+then
+  echo "ERROR: Run prepare script firstly!"
+exit 1
+fi
+
+echo -e "\nInstalling..."
+echo "- creating directories:"
+sudo mkdir --parents $INSTDIR 2> /dev/null
+for D in $SUBDIRS
+do
+  sudo mkdir --parents $INSTDIR/$D 2> /dev/null
+  echo "  $INSTDIR/$D"
+done
+echo "- copying files:"
+copy "documents/*" "$INSTDIR/share/doc/$PRGDIR/"
+copy "messages/mm3d_hu.msg" "/usr/local/share/locale/hu/"
+copy "programs/mm3d*.py" "$INSTDIR/bin/"
+copy "programs/prg_*.py" "/home/mm3d/programs"
+copy "scripts/*" "$INSTDIR/bin/"
+copy "settings/cron.d/*" "/etc/cron.d/"
+copy "settings/*.ini" "$INSTDIR/etc/$PRGDIR/"
+copy "settings/init.d/*" "/etc/init.d/"
+copy "webpage/cgi-bin/*.cgi" "/usr/lib/cgi-bin/"
+copy "webpage/*.css" "/var/www/html/"
+copy "webpage/*.html" "$INSTDIR/share/$PRGDIR/"
+copy "webpage/pics/*.ico" "/var/www/html/pics/"
+copy "webpage/pics/*.png" "/var/www/html/pics/"
+sudo ln -s $INSTDIR/etc/$PRGDIR/example.ini $INSTDIR/etc/$PRGDIR/mm3d.ini
+sudo ln -s /home/mm3d/programs/prg_example.py /home/mm3d/programs/prg_current.py
+echo "- set init.d:"
+sudo /etc/init.d/mm3d.sh stop
+copy settings/init.d/mm3d.sh /etc/init.d/
+sudo ln -s /etc/init.d/mm3d.sh /etc/rc0.d/K01mm3d.sh
+sudo ln -s /etc/init.d/mm3d.sh /etc/rc2.d/S01mm3d.sh
+sudo ln -s /etc/init.d/mm3d.sh /etc/rc3.d/S01mm3d.sh
+sudo ln -s /etc/init.d/mm3d.sh /etc/rc4.d/S01mm3d.sh
+sudo ln -s /etc/init.d/mm3d.sh /etc/rc5.d/S01mm3d.sh
+sudo ln -s /etc/init.d/mm3d.sh /etc/rc6.d/K01mm3d.sh
+sudo systemctl daemon-reload
+sudo /etc/init.d/mm3d.sh start
+echo "- set cron.d:"
+copy settings/cron.d/mm3d /etc/cron.d/
+sudo /etc/init.d/cron restart
+echo "- create default startpage:"
+sudo /usr/local/bin/mm3d-updatestartpage
+echo "Done."
