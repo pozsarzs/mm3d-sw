@@ -1,3 +1,9 @@
+2019-xx-xx  Pozsár Zsolt  <pozsar.zsolt@szerafingomba.hu>
+
+	*  0.3: new version.
+	*  mm3d.py: fix a little bug, include debug logging
+	*  mm3d.ini: include enable/disable debug logging
+
 2019-06-26  Pozsár Zsolt  <pozsar.zsolt@szerafingomba.hu>
 
 	*  0.2: new version.
