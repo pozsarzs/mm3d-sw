@@ -1,0 +1,51 @@
+#!/bin/bash
+# +----------------------------------------------------------------------------+
+# | MM3D v0.3 * Growing house controlling and remote monitoring system         |
+# | Copyright (C) 2018-2019 Pozsár Zsolt <pozsar.zsolt@.szerafingomba.hu>      |
+# | mm3d-override                                                              |
+# | Override output status                                                     |
+# +----------------------------------------------------------------------------+
+#
+#   This program is free software: you can redistribute it and/or modify it
+# under the terms of the European Union Public License 1.1 version.
+#
+#   This program is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+# FOR A PARTICULAR PURPOSE.
+
+loadconfiguration()
+{
+  CFGFILE="/usr/local/etc/mm3d/mm3d.ini"
+  if [ ! -f $CFGFILE ]
+    then
+      echo "ERROR: Cannot open configuration file!"
+      exit 1
+  fi
+  DIR_VAR=`cat $CFGFILE | grep dir_htm= | sed 's/dir_var=//'`
+  NAM_OUT1=`cat $CFGFILE | grep nam_out1= | sed 's/nam_out1=//'`
+  NAM_OUT2=`cat $CFGFILE | grep nam_out2= | sed 's/nam_out2=//'`
+  NAM_OUT3=`cat $CFGFILE | grep nam_out3= | sed 's/nam_out3=//'`
+  NAM_OUT4=`cat $CFGFILE | grep nam_out4= | sed 's/nam_out4=//'`
+}
+
+writetofile()
+{
+  echo $DIR_VAR"out1"
+}
+
+usage()
+{
+  echo "Usage:"
+  echo "    $0 out1|out2|out3|out4 neutral|on|off"
+  echo ""
+}
+
+# main function
+if [ $# -eq 2 ];
+then
+  loadconfiguration
+  writetofile $1 $2
+  exit 0
+fi
+usage
+exit 2
