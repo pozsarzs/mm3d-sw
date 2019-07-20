@@ -37,6 +37,7 @@ SUBDIRS="bin \
          share/man/man1 \
          ../../var \
          ../../var/local \
+         ../../var/local/lib/mm3d \
          ../../var/local/lock \
          ../../var/local/log \
          ../../var/www/ \
@@ -85,6 +86,7 @@ for X in $LANGUAGES; do
     echo "  $INSTDIR/$X"
   fi;
 done
+sudo chmod 777 /var/local/lib/mm3d
 echo "- copying files:"
 copy "documents/*" "$INSTDIR/share/doc/$PRGDIR/"
 copy "manuals/*" "$INSTDIR/share/man/man1/"
