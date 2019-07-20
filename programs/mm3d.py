@@ -45,6 +45,7 @@ def writetodebuglog(level,text)
 def loadconfiguration(conffile):
   global dbg_log
   global dir_log
+  global dir_var
   global logfile
   global lockfile
   global prt_act
@@ -71,6 +72,7 @@ def loadconfiguration(conffile):
     dbg_log='0'
     dbg_log=config.get('others', 'dbg_log')+'mm3d.log'
     dir_log=config.get('directories', 'dir_log')
+    dir_var=config.get('directories', 'dir_var')
     logfile=dir_log+'mm3d.log'
     lockfile=config.get('directories', 'dir_lck')+'mm3d.lck'
     prt_act=int(config.get('ports','prt_act'))
@@ -150,6 +152,10 @@ def initports():
   GPIO.setup(prt_out3,GPIO.OUT,initial=GPIO.HIGH)
   GPIO.setup(prt_out4,GPIO.OUT,initial=GPIO.HIGH)
 
+# check external control files
+def extcont(channel,status)
+  writetodebuglog(i,"")
+
 # blink ACT LED
 def blinkactled():
   GPIO.output(prt_act,1)
@@ -193,6 +199,9 @@ with daemon.DaemonContext() as context:
       outputs=CR.control(temperature,humidity,inputs,wrongvalues)
       aop1=CR.autooffport1()
       blinkactled()
+      # external control
+      for x in range(0, 4):
+        outputs[x]=extcont(x+1,outputs[x])
       # write output data to GPIO
       writetodebuglog(i,"Write output ports.")
       GPIO.output(prt_err1,not int(outputs[4]))
@@ -203,6 +212,7 @@ with daemon.DaemonContext() as context:
       GPIO.output(prt_out2,not int(outputs[1]))
       GPIO.output(prt_out3,not int(outputs[2]))
       GPIO.output(prt_out4,not int(outputs[3]))
+      # auto-off first port
       if aop1 != "0":
         for i in range(int(aop1)):
           blinkactled()
