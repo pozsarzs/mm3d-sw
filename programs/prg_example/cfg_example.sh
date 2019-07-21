@@ -1,6 +1,6 @@
 #!/bin/bash
 # +----------------------------------------------------------------------------+
-# | MM3D v0.2 * Growing house controlling and remote monitoring system         |
+# | MM3D v0.3 * Growing house controlling and remote monitoring system         |
 # | Copyright (C) 2018-2019 Pozsár Zsolt <pozsar.zsolt@.szerafingomba.hu>      |
 # | cfg_example.sh                                                             |
 # | User's program configurator                                                |
@@ -107,7 +107,7 @@ loadconfig()
 saveconfig()
 {
   echo '; +----------------------------------------------------------------------------+' > $INIFILE
-  echo '; | MM3D v0.2 * Growing house controlling and remote monitoring system         |' >> $INIFILE
+  echo '; | MM3D v0.3 * Growing house controlling and remote monitoring system         |' >> $INIFILE
   echo '; | Copyright (C) 2018-2019 Pozsár Zsolt <pozsar.zsolt@.szerafingomba.hu>      |' >> $INIFILE
   echo '; | cfg_example.ini                                                            |' >> $INIFILE
   echo '; | configuration file                                                         |' >> $INIFILE

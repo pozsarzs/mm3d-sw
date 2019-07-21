@@ -1,5 +1,5 @@
 # +----------------------------------------------------------------------------+
-# | MM3D v0.2 * Growing house controlling and remote monitoring system         |
+# | MM3D v0.3 * Growing house controlling and remote monitoring system         |
 # | Copyright (C) 2018-2019 Pozsár Zsolt <pozsar.zsolt@.szerafingomba.hu>      |
 # | mm3d_hr.msg                                                                |
 # | message file                                                               |
