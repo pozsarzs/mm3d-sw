@@ -1,6 +1,6 @@
 #!/bin/bash
 # +----------------------------------------------------------------------------+
-# | MM3D v0.2 * Growing house controlling and remote monitoring system         |
+# | MM3D v0.3 * Growing house controlling and remote monitoring system         |
 # | Copyright (C) 2018-2019 Pozsár Zsolt <pozsar.zsolt@.szerafingomba.hu>      |
 # | uninstall                                                                  |
 # | Uninstaller script                                                         |
@@ -46,6 +46,7 @@ erase "$INSTDIR/share/doc/$PRGDIR/*"
 erase "$INSTDIR/share/$PRGDIR/*"
 erase "$INSTDIR/share/man/man1/mm3d*"
 erase "$INSTDIR/share/locale/*/mm3d.msg"
+erase "/var/local/lib/$PRGDIR/*"
 sudo /etc/init.d/mm3d.sh stop
 erase "/etc/init.d/$PRGDIR.sh"
 erase "/etc/rc0.d/K01mm3d.sh"
@@ -66,4 +67,5 @@ echo "- removing directories:"
 erasedir $INSTDIR/share/doc/$PRGDIR/
 erasedir $INSTDIR/share/$PRGDIR/
 erasedir $INSTDIR/etc/$PRGDIR/
+erasedir /var/local/lib/$PRGDIR/
 echo "Done."

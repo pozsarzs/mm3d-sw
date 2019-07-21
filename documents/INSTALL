@@ -9,10 +9,10 @@ Installation
   pi@raspberry$ sudo apt-get update
   pi@raspberry$ sudo apt-get upgrade
   pi@raspberry$ sudo apt-get install mc wget
-  pi@raspberry$ wget --directory-prefix=$HOME/download http://www.szerafingomba.hu/equipments/mm3d/mm3d-sw-0.2-noarch.tar.gz
+  pi@raspberry$ wget --directory-prefix=$HOME/download http://www.szerafingomba.hu/equipments/mm3d/mm3d-sw-0.3-noarch.tar.gz
   pi@raspberry$ cd $HOME/download
-  pi@raspberry$ tar -xzf mm3d-sw-0.2-noarch.tar.gz
-  pi@raspberry$ cd mm3d-sw-0.2
+  pi@raspberry$ tar -xzf mm3d-sw-0.3-noarch.tar.gz
+  pi@raspberry$ cd mm3d-sw-0.3
   pi@raspberry$ ./prepare
   pi@raspberry$ ./install
 
@@ -36,5 +36,5 @@ Edit example user's controller program
   
 Remove
 ------
-  pi@raspberry$ cd mm3d-sw-0.2
+  pi@raspberry$ cd mm3d-sw-0.3
   pi@raspberry$ ./uninstall

@@ -1,11 +1,13 @@
-2019-xx-xx  Pozsár Zsolt  <pozsar.zsolt@szerafingomba.hu>
+2019-07-20  Pozsár Zsolt  <pozsar.zsolt@szerafingomba.hu>
 
 	*  0.3: new version.
+	*  *.1.gz: new version
+	*  install: new version
+	*  mm3d.ini: more new options
+	*  mm3d-override.1.gz: new file
+	*  mm3d-override: new file
 	*  mm3d.py: fix a little bug, include debug logging and external
 	            override output status
-	*  mm3d.ini: more new options
-	*  mm3d-override: new file
-	*  mm3d-override.1.gz: new file
 
 2019-06-26  Pozsár Zsolt  <pozsar.zsolt@szerafingomba.hu>
 
