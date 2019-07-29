@@ -20,35 +20,33 @@ copy()
 }
 
 # constans
-SWN="MM3D"
+SWN1="MM3D"
+SWN2="mm3d"
 SWV=`cat documents/VERSION`
-INSTDIR=/usr/local
+INSTDIR=local
 LANGUAGES="cs de fr hr hu pl ro ru sk sl sr uk"
-PRGDIR="mm3d"
-SUBDIRS="bin \
-         etc \
-         etc/$PRGDIR \
-         share \
-         share/doc \
-         share/doc/$PRGDIR \
-         share/locale \
-         share/$PRGDIR \
-         share/man \
-         share/man/man1 \
-         ../../var \
-         ../../var/local \
-         ../../var/local/lib/mm3d \
-         ../../var/local/lock \
-         ../../var/local/log \
-         ../../var/www/ \
-         ../../var/www/html \
-         ../../var/www/html/pics"
-README=$INSTDIR/share/doc/$PRGDIR/README
+SUBDIRS="/usr/$INSTDIR/bin \
+         /usr/$INSTDIR/etc \
+         /usr/$INSTDIR/etc/$SWN2 \
+         /usr/$INSTDIR/share \
+         /usr/$INSTDIR/share/doc \
+         /usr/$INSTDIR/share/doc/$SWN2 \
+         /usr/$INSTDIR/share/locale \
+         /usr/$INSTDIR/share/$SWN2 \
+         /usr/$INSTDIR/share/man \
+         /usr/$INSTDIR/share/man/man1 \
+         /var/$INSTDIR/lib/$SWN2 \
+         /var/$INSTDIR/lock \
+         /var/$INSTDIR/log \
+         /var/www/ \
+         /var/www/html \
+         /var/www/html/pics"
+README=/usr/$INSTDIR/share/doc/$SWN2/README
 
 # installer
 clear
 echo "--------------------------------------------------------------------------------"
-echo "$SWN $SWV installer script"
+echo "$SWN1 $SWV installer script"
 echo "Copyright (C) 2018-2019 Pozsár Zsolt <pozsar.zsolt@szerafingomba.hu>"
 echo "--------------------------------------------------------------------------------"
 echo "  This program is free software: you can redistribute it and/or modify it
@@ -65,7 +63,7 @@ if ! [ -x "$(command -v apache2)" ]; then
   exit;
 fi
 
-if [ ! -d /home/mm3d/programs ]
+if [ ! -d /home/$SWN2/programs ]
 then
   echo "ERROR: Run prepare script firstly!"
 exit 1
@@ -73,58 +71,58 @@ fi
 
 echo -e "\nInstalling..."
 echo "- creating directories:"
-sudo mkdir --parents $INSTDIR 2> /dev/null
+sudo mkdir --parents /usr/$INSTDIR 2> /dev/null
 for D in $SUBDIRS
 do
-  sudo mkdir --parents $INSTDIR/$D 2> /dev/null
-  echo "  $INSTDIR/$D"
+  sudo mkdir --parents $D 2> /dev/null
+  echo "  $D"
 done
 for X in $LANGUAGES; do
-  if [ -e "messages/mm3d_$X.msg" ];
+  if [ -e "messages/$SWN2_$X.msg" ];
   then
-    sudo mkdir --parents /usr/local/share/locale/$X 2> /dev/null
-    echo "  $INSTDIR/$X"
+    sudo mkdir --parents /usr/$INSTDIR/share/locale/$X 2> /dev/null
+    echo "  /usr/$INSTDIR/share/locale/$X"
   fi;
 done
-sudo chmod 777 /var/local/lib/mm3d
+sudo chmod 777 /var/$INSTDIR/lib/$SWN2
 echo "- copying files:"
-copy "documents/*" "$INSTDIR/share/doc/$PRGDIR/"
-copy "manuals/*" "$INSTDIR/share/man/man1/"
+copy "documents/*" "/usr/$INSTDIR/share/doc/$SWN2/"
+copy "manuals/*" "/usr/$INSTDIR/share/man/man1/"
 for X in $LANGUAGES; do
-  if [ -e "messages/mm3d_$X.msg" ];
+  if [ -e "messages/$SWN2_$X.msg" ];
   then
-    copy "messages/mm3d_$X.msg" "/usr/local/share/locale/$X/mm3d.msg"
+    copy "messages/$SWN2_$X.msg" "/usr/$INSTDIR/share/locale/$X/$SWN2.msg"
   fi;
 done
-copy "programs/prg_empty/prg_*.py" "/home/mm3d/programs/"
-copy "programs/prg_example/cfg_example*" "/home/mm3d/cfg_example/"
-copy "programs/prg_example/prg_*.py" "/home/mm3d/programs/"
-copy "programs/mm3d*.py" "$INSTDIR/bin/"
-copy "scripts/*" "$INSTDIR/bin/"
+copy "programs/prg_empty/prg_*.py" "/home/$SWN2/programs/"
+copy "programs/prg_example/cfg_example*" "/home/$SWN2/cfg_example/"
+copy "programs/prg_example/prg_*.py" "/home/$SWN2/programs/"
+copy "programs/$SWN2*.py" "/usr/$INSTDIR/bin/"
+copy "scripts/*" "/usr/$INSTDIR/bin/"
 copy "settings/cron.d/*" "/etc/cron.d/"
-copy "settings/mm3d.ini" "$INSTDIR/etc/$PRGDIR/"
+copy "settings/$SWN2.ini" "/usr/$INSTDIR/etc/$SWN2/"
 copy "settings/init.d/*" "/etc/init.d/"
 copy "webpage/cgi-bin/*.cgi" "/usr/lib/cgi-bin/"
 copy "webpage/*.css" "/var/www/html/"
-copy "webpage/*.html" "$INSTDIR/share/$PRGDIR/"
+copy "webpage/*.html" "/usr/$INSTDIR/share/$SWN2/"
 copy "webpage/pics/*.ico" "/var/www/html/pics/"
 copy "webpage/pics/*.png" "/var/www/html/pics/"
-sudo ln -s /home/mm3d/programs/prg_example.py /home/mm3d/programs/prg_current.py
-sudo chown -R mm3d:mm3d /home/mm3d/
+sudo ln -s /home/$SWN2/programs/prg_example.py /home/$SWN2/programs/prg_current.py
+sudo chown -R $SWN2:$SWN2 /home/$SWN2/
 echo "- set init.d:"
-sudo /etc/init.d/mm3d.sh stop
-copy settings/init.d/mm3d.sh /etc/init.d/
-sudo ln -s /etc/init.d/mm3d.sh /etc/rc0.d/K01mm3d.sh
-sudo ln -s /etc/init.d/mm3d.sh /etc/rc2.d/S01mm3d.sh
-sudo ln -s /etc/init.d/mm3d.sh /etc/rc3.d/S01mm3d.sh
-sudo ln -s /etc/init.d/mm3d.sh /etc/rc4.d/S01mm3d.sh
-sudo ln -s /etc/init.d/mm3d.sh /etc/rc5.d/S01mm3d.sh
-sudo ln -s /etc/init.d/mm3d.sh /etc/rc6.d/K01mm3d.sh
+sudo /etc/init.d/$SWN2.sh stop
+copy settings/init.d/$SWN2.sh /etc/init.d/
+sudo ln -s /etc/init.d/$SWN2.sh /etc/rc0.d/K01$SWN2.sh
+sudo ln -s /etc/init.d/$SWN2.sh /etc/rc2.d/S01$SWN2.sh
+sudo ln -s /etc/init.d/$SWN2.sh /etc/rc3.d/S01$SWN2.sh
+sudo ln -s /etc/init.d/$SWN2.sh /etc/rc4.d/S01$SWN2.sh
+sudo ln -s /etc/init.d/$SWN2.sh /etc/rc5.d/S01$SWN2.sh
+sudo ln -s /etc/init.d/$SWN2.sh /etc/rc6.d/K01$SWN2.sh
 sudo systemctl daemon-reload
-sudo /etc/init.d/mm3d.sh start
+sudo /etc/init.d/$SWN2.sh start
 echo "- set cron.d:"
-copy settings/cron.d/mm3d /etc/cron.d/
+copy settings/cron.d/$SWN2 /etc/cron.d/
 sudo /etc/init.d/cron restart
 echo "- create default startpage:"
-sudo /usr/local/bin/mm3d-updatestartpage
+sudo /usr/$INSTDIR/bin/$SWN2-updatestartpage
 echo "Done."

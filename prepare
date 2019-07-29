@@ -13,12 +13,13 @@
 # ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
 # FOR A PARTICULAR PURPOSE.
 
-SWN="MM3D"
+SWN1="MM3D"
+SWN2="mm3d"
 SWV=`cat documents/VERSION`
 
 clear
 echo "--------------------------------------------------------------------------------"
-echo "$SWN $SWV prepare OS"
+echo "$SWN1 $SWV prepare OS"
 echo "Copyright (C) 2018-2019 Pozsar Zsolt <pozsar.zsolt@szerafingomba.hu>"
 echo "--------------------------------------------------------------------------------"
 echo "Installing required components..."
@@ -37,12 +38,12 @@ git clone https://github.com/adafruit/Adafruit_Python_DHT.git
 cd Adafruit_Python_DHT
 sudo python setup.py install
 echo -e "\nCreating a new user..."
-sudo adduser mm3d
-sudo mkdir --parents /home/mm3d/programs
-sudo chown -R mm3d:mm3d /home/mm3d/programs
-sudo mkdir --parents /home/mm3d/cfg_example
-sudo chown -R mm3d:mm3d /home/mm3d/cfg_example
-sudo echo 'mm3d ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/010_mm3d-nopasswd
+sudo adduser $SWN2
+sudo mkdir --parents /home/$SWN2/programs
+sudo chown -R $SWN2:$SWN2 /home/$SWN2/programs
+sudo mkdir --parents /home/$SWN2/cfg_example
+sudo chown -R $SWN2:$SWN2 /home/$SWN2/cfg_example
+sudo echo "$SWN2 ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/010_$SWN2-nopasswd
 echo -e "\nSetting Apache2..."
 sudo ln --symbolic /etc/apache2/mods-available/cgid.load /etc/apache2/mods-enabled/
 sudo ln --symbolic /etc/apache2/mods-available/cgid.conf /etc/apache2/mods-enabled/

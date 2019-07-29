@@ -15,7 +15,7 @@
 
 erase()
 {
-  sudo rm --force $1
+  sudo rm --force $1 2> /dev/null
   echo "  $1"
 }
 
@@ -25,47 +25,50 @@ erasedir()
   echo "  $1"
 }
 
-# constans
-SWN="MM3D"
+# constants
+SWN1="MM3D"
+SWN2="mm3d"
 SWV=`cat documents/VERSION`
-INSTDIR=/usr/local
-PRGDIR="mm3d"
+INSTDIR=local
 
 # uninstaller
 clear
 echo "--------------------------------------------------------------------------------"
-echo "$SWN $SWV uninstaller script"
+echo "$SWN1 $SWV uninstaller script"
 echo "Copyright (C) 2018-2019 Pozsar Zsolt <pozsar.zsolt@szerafingomba.hu>"
 echo "--------------------------------------------------------------------------------"
 sleep 1
 echo "Uninstalling..."
+echo "- stopping daemon:"
+sudo /etc/init.d/$SWN2.sh stop
+echo "- removing from cron:"
+erase "/etc/cron.d/$SWN2"
+/etc/init.d/cron restart
 echo "- removing files:"
-erase "$INSTDIR/bin/$PRGDIR*"
-erase "$INSTDIR/etc/$PRGDIR/mm3d.ini"
-erase "$INSTDIR/share/doc/$PRGDIR/*"
-erase "$INSTDIR/share/$PRGDIR/*"
-erase "$INSTDIR/share/man/man1/mm3d*"
-erase "$INSTDIR/share/locale/*/mm3d.msg"
-erase "/var/local/lib/$PRGDIR/*"
-sudo /etc/init.d/mm3d.sh stop
-erase "/etc/init.d/$PRGDIR.sh"
-erase "/etc/rc0.d/K01mm3d.sh"
-erase "/etc/rc2.d/S01mm3d.sh"
-erase "/etc/rc3.d/S01mm3d.sh"
-erase "/etc/rc4.d/S01mm3d.sh"
-erase "/etc/rc5.d/S01mm3d.sh"
-erase "/etc/rc6.d/K01mm3d.sh"
-sudo systemctl daemon-reload
+erase "/etc/init.d/$SWN2.sh"
+erase "/etc/rc0.d/K01$SWN2.sh"
+erase "/etc/rc2.d/S01$SWN2.sh"
+erase "/etc/rc3.d/S01$SWN2.sh"
+erase "/etc/rc4.d/S01$SWN2.sh"
+erase "/etc/rc5.d/S01$SWN2.sh"
+erase "/etc/rc6.d/K01$SWN2.sh"
+erase "/usr/$INSTDIR/bin/$SWN2*"
+erase "/usr/$INSTDIR/etc/$SWN2/$SWN2.ini"
+erase "/usr/$INSTDIR/share/doc/$SWN2/*"
+erase "/usr/$INSTDIR/share/locale/*/$SWN2.msg"
+erase "/usr/$INSTDIR/share/man/man1/$SWN2*"
+erase "/usr/$INSTDIR/share/$SWN2/*"
 erase "/usr/lib/cgi-bin/getpage.cgi"
+erase "/var/$INSTDIR/lib/$SWN2/*"
+erase "/var/$INSTDIR/log/$SWN2*"
 erase "/var/www/html/*.csv"
 erase "/var/www/html/*.html"
 erase "/var/www/html/pics/*.ico"
 erase "/var/www/html/pics/*.png"
-erase /etc/cron.d/$PRGDIR
-/etc/init.d/cron restart
+sudo systemctl daemon-reload
 echo "- removing directories:"
-erasedir $INSTDIR/share/doc/$PRGDIR/
-erasedir $INSTDIR/share/$PRGDIR/
-erasedir $INSTDIR/etc/$PRGDIR/
-erasedir /var/local/lib/$PRGDIR/
+erasedir "/usr/$INSTDIR/share/doc/$SWN2/"
+erasedir "/usr/$INSTDIR/share/$SWN2/"
+erasedir "/usr/$INSTDIR/etc/$SWN2/"
+erasedir "/var/$INSTDIR/lib/$SWN2/"
 echo "Done."
