@@ -1,24 +1,21 @@
-2019-07-20  Pozsár Zsolt  <pozsar.zsolt@szerafingomba.hu>
-	*  0.3: new version.
+2019-08-01 Pozsár Zsolt <pozsar.zsolt@szerafingomba.hu>
+	*  0.3: new version: added a new utility script with manual page
+	        (override outputs), added verbose debug log function to
+	        daemon, added sensor type and GPIO port numbers to
+	        configuration file.
 	*  install: modified
 	*  prepare: modified
 	*  uninstall: modified
+	*  manuals/*.1.gz: modified
+	*  manuals/mm3d-override.1.gz: new file
+	*  programs/mm3d.py: modified
+	*  scripts/mm3d-override: new file
+	*  settings/mm3d.ini: modified
 
-
-
-
-
-	*  *.1.gz: new version
-	*  mm3d-override.1.gz: new file
-	*  install: modified
-	*  prepare: modified
-	*  mm3d.ini: more new options
-	*  mm3d-override: new file
-	*  mm3d.py: fix a little bug, include debug logging and external
-	            override output status
-
-2019-06-26  Pozsár Zsolt  <pozsar.zsolt@szerafingomba.hu>
-	*  0.2: new version.
+2019-06-26 Pozsár Zsolt <pozsar.zsolt@szerafingomba.hu>
+	*  0.2: new version: added new message files and webpages (11 new
+	        languages, modified daemon, hardware test program and
+	        configuration file.
 	*  install: modified
 	*  uninstall: modified
 	*  messages/mm3d_cs.msg: new file
@@ -63,8 +60,11 @@
 	*  webpage/header_sr.html: new file
 	*  webpage/header_uk.html: new file
 
-2019-02-03  Pozsár Zsolt  <pozsar.zsolt@szerafingomba.hu>
-	*  0.11: new version.
+2019-02-03 Pozsár Zsolt <pozsar.zsolt@szerafingomba.hu>
+	*  0.11: new version: fixed bugs in daemon, added manual pages,
+	         new utility scripts, users's program configurator (dialog),
+	         CGI script for client programs, new 'sign light' pictures
+	         for webpage.
 	*  install: modified
 	*  prepare: modified
 	*  uninstall: modified
