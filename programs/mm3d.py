@@ -63,7 +63,7 @@ def loadconfiguration(conffile):
   global prt_out3
   global prt_out4
   global sensor
-  writetodebuglog(i,"Load configuration.")
+  writetodebuglog(i,"Loading configuration.")
   try:
     with open(conffile) as f:
       sample_config = f.read()
@@ -96,6 +96,7 @@ def loadconfiguration(conffile):
       sensor=Adafruit_DHT.DHT11
     if sensor_type=='DHT22':
       sensor=Adafruit_DHT.DHT22
+  writetodebuglog(i,"Configuration is loaded.")
   except:
     writetodebuglog(e,"Cannot open " + conffile + "!")
 
@@ -105,9 +106,9 @@ def lckfile(mode):
     if mode > 0:
       lcf=open(lockfile,'w')
       lcf.close()
-      writetodebuglog(i,"Create lockfile.")
+      writetodebuglog(i,"Creating lockfile.")
     else:
-      writetodebuglog(i,"Remove lockfile.")
+      writetodebuglog(i,"Removing lockfile.")
       os.remove(lockfile)
   except:
     writetodebuglog(w,"Cannot create/remove" + lockfile + "!")
@@ -154,7 +155,7 @@ def initports():
 
 # check external control files
 def extcont(channel,status)
-  writetodebuglog(i,"")
+  writetodebuglog(i,"Checking override files.")
 
 # blink ACT LED
 def blinkactled():
@@ -176,7 +177,7 @@ with daemon.DaemonContext() as context:
   try:
     while True:
       # read input data from sensor
-      writetodebuglog(i,"Start meausuring T/RH.")
+      writetodebuglog(i,"Meausuring T/RH.")
       shum,stemp=Adafruit_DHT.read_retry(sensor,prt_sens)
       writetodebuglog(i,"Measure is done.")
       humidity=int(shum)
@@ -188,22 +189,22 @@ with daemon.DaemonContext() as context:
         writetodebuglog(w,"Measured values are bad!")
         wrongvalues=1
       # read input data from GPIO
-      writetodebuglog(i,"Read input ports.")
+      writetodebuglog(i,"Reading input ports.")
       inputs=str(int(not GPIO.input(prt_in1)))
       inputs=inputs + str(int(not GPIO.input(prt_in2)))
       inputs=inputs + str(int(not GPIO.input(prt_in3)))
       inputs=inputs + str(int(not GPIO.input(prt_in4)))
       blinkactled()
       # run user's function
-      writetodebuglog(i,"Run function of user.")
+      writetodebuglog(i,"Running function of user.")
       outputs=CR.control(temperature,humidity,inputs,wrongvalues)
       aop1=CR.autooffport1()
       blinkactled()
       # external control
-      for x in range(0, 4):
-        outputs[x]=extcont(x+1,outputs[x])
+#      for x in range(0, 4):
+#        outputs[x]=extcont(x+1,outputs[x])
       # write output data to GPIO
-      writetodebuglog(i,"Write output ports.")
+      writetodebuglog(i,"Writing output ports.")
       GPIO.output(prt_err1,not int(outputs[4]))
       GPIO.output(prt_err2,not int(outputs[5]))
       GPIO.output(prt_err3,not int(outputs[6]))
@@ -217,7 +218,7 @@ with daemon.DaemonContext() as context:
         for i in range(int(aop1)):
           blinkactled()
         GPIO.output(prt_out1,1)
-        writetodebuglog(i,"Auto off first output port.")
+        writetodebuglog(i,"Auto off enabled at first output port.")
       blinkactled()
       # write logfile if changed
       enablewritelog=0
@@ -232,7 +233,7 @@ with daemon.DaemonContext() as context:
       if first==1:
         enablewritelog=1
       if enablewritelog==1:
-        writetodebuglog(i,"Write data to log file.")
+        writetodebuglog(i,"Writing data to log file.")
         first=0
         writelog(temperature,humidity,inputs,outputs)
         prevtemperature=temperature
@@ -241,6 +242,7 @@ with daemon.DaemonContext() as context:
         prevoutputs=outputs
       blinkactled()
       # wait 10s
+      writetodebuglog(i,"Waiting 10 s.")
       time.sleep(10)
   except KeyboardInterrupt:
     GPIO.cleanup
