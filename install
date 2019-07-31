@@ -78,7 +78,7 @@ do
   echo "  $D"
 done
 for X in $LANGUAGES; do
-  if [ -e "messages/$SWN2_$X.msg" ];
+  if [ -e "messages/"$SWN2"_"$X".msg" ];
   then
     sudo mkdir --parents /usr/$INSTDIR/share/locale/$X 2> /dev/null
     echo "  /usr/$INSTDIR/share/locale/$X"
@@ -89,9 +89,9 @@ echo "- copying files:"
 copy "documents/*" "/usr/$INSTDIR/share/doc/$SWN2/"
 copy "manuals/*" "/usr/$INSTDIR/share/man/man1/"
 for X in $LANGUAGES; do
-  if [ -e "messages/$SWN2_$X.msg" ];
+  if [ -e "messages/"$SWN2"_"$X".msg" ];
   then
-    copy "messages/$SWN2_$X.msg" "/usr/$INSTDIR/share/locale/$X/$SWN2.msg"
+    copy "messages/"$SWN2"_"$X".msg" "/usr/$INSTDIR/share/locale/$X/$SWN2.msg"
   fi;
 done
 copy "programs/prg_empty/prg_*.py" "/home/$SWN2/programs/"

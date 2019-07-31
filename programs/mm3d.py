@@ -16,7 +16,6 @@
 import ConfigParser
 import daemon
 import io
-import logging
 import os
 import sys
 import time
@@ -27,19 +26,22 @@ sys.path.append ('/home/mm3d/programs/')
 import prg_current as CR
 
 # write a line to logfile
-def writetodebuglog(level,text)
-  if dbg_log=1:
-    logging.basicConfig(level = logging.INFO, filename = dir_log+time.strftime("debug-%Y%m%d.log"), format = '%(asctime)s %(levelname)-10s %(processName)s  %(name)s %(message)s')
-    if level=c:
-      logging.critical(text)
-    if level=d:
-      logging.debug(text)
-    if level=e:
-      logging.error(text)
-    if level=i:
-      logging.info(text)
-    if level=w:
-      logging.warning(text)
+def writetodebuglog(level,text):
+  if dbg_log == "1":
+    if level == "i":
+      lv="INFO   "
+    if level == "w":
+      lv="WARNING"
+    if level == "e":
+      lv="ERROR  "
+    debugfile = dir_log+time.strftime("debug-%Y%m%d.log")
+    dt=(strftime("%Y-%m-%d %H:%M:%S", gmtime()))
+    try:
+      with open(debugfile, "a") as d:
+        d.write(dt+'  '+lv+' '+text+'\n')
+        d.close()
+    except:
+      print()
 
 # load configuration
 def loadconfiguration(conffile):
@@ -63,14 +65,13 @@ def loadconfiguration(conffile):
   global prt_out3
   global prt_out4
   global sensor
-  writetodebuglog(i,"Loading configuration.")
   try:
     with open(conffile) as f:
       sample_config = f.read()
     config = ConfigParser.RawConfigParser(allow_no_value=True)
     config.readfp(io.BytesIO(sample_config))
     dbg_log='0'
-    dbg_log=config.get('others', 'dbg_log')+'mm3d.log'
+    dbg_log=config.get('others', 'dbg_log')
     dir_log=config.get('directories', 'dir_log')
     dir_var=config.get('directories', 'dir_var')
     logfile=dir_log+'mm3d.log'
@@ -96,9 +97,10 @@ def loadconfiguration(conffile):
       sensor=Adafruit_DHT.DHT11
     if sensor_type=='DHT22':
       sensor=Adafruit_DHT.DHT22
-  writetodebuglog(i,"Configuration is loaded.")
+    writetodebuglog("i","Starting program as daemon.")
+    writetodebuglog("i","Configuration is loaded.")
   except:
-    writetodebuglog(e,"Cannot open " + conffile + "!")
+    writetodebuglog("e","Cannot open " + conffile + "!")
 
 # create and remove lock file
 def lckfile(mode):
@@ -106,16 +108,16 @@ def lckfile(mode):
     if mode > 0:
       lcf=open(lockfile,'w')
       lcf.close()
-      writetodebuglog(i,"Creating lockfile.")
+      writetodebuglog("i","Creating lockfile.")
     else:
-      writetodebuglog(i,"Removing lockfile.")
+      writetodebuglog("i","Removing lockfile.")
       os.remove(lockfile)
   except:
-    writetodebuglog(w,"Cannot create/remove" + lockfile + "!")
+    writetodebuglog("w","Cannot create/remove" + lockfile + "!")
 
 # write data to log with timestamp
 def writelog(temperature,humidity,inputs,outputs):
-  writetodebuglog(i,"Write data to log.")
+  writetodebuglog("i","Writing data to log.")
   dt=(strftime("%Y-%m-%d,%H:%M", gmtime()))
   lckfile(1)
   try:
@@ -131,12 +133,12 @@ def writelog(temperature,humidity,inputs,outputs):
       f.writelines(lines)
       f.close()
   except:
-    writetodebuglog(e,"Cannot write " + logfile + "!")
+    writetodebuglog("e","Cannot write " + logfile + "!")
   lckfile(0)
 
 # initializing ports
 def initports():
-  writetodebuglog(i,"Initializing GPIO ports.")
+  writetodebuglog("i","Initializing GPIO ports.")
   GPIO.setwarnings(False)
   GPIO.setmode(GPIO.BCM)
   GPIO.setup(prt_act,GPIO.OUT,initial=0)
@@ -154,8 +156,8 @@ def initports():
   GPIO.setup(prt_out4,GPIO.OUT,initial=GPIO.HIGH)
 
 # check external control files
-def extcont(channel,status)
-  writetodebuglog(i,"Checking override files.")
+def extcont(channel,status):
+  writetodebuglog("i","Checking override files.")
 
 # blink ACT LED
 def blinkactled():
@@ -165,7 +167,6 @@ def blinkactled():
   time.sleep(0.5)
 
 # main program
-writetodebuglog(i,"Start program as daemon.")
 loadconfiguration('/usr/local/etc/mm3d/mm3d.ini')
 initports()
 first=1
@@ -177,26 +178,26 @@ with daemon.DaemonContext() as context:
   try:
     while True:
       # read input data from sensor
-      writetodebuglog(i,"Meausuring T/RH.")
+      writetodebuglog("i","Meausuring T/RH.")
       shum,stemp=Adafruit_DHT.read_retry(sensor,prt_sens)
-      writetodebuglog(i,"Measure is done.")
+      writetodebuglog("i","Measure is done.")
       humidity=int(shum)
       temperature=int(stemp)
       blinkactled()
       if humidity<100:
         wrongvalues=0
       else:
-        writetodebuglog(w,"Measured values are bad!")
+        writetodebuglog("w","Measured values are bad!")
         wrongvalues=1
       # read input data from GPIO
-      writetodebuglog(i,"Reading input ports.")
+      writetodebuglog("i","Reading input ports.")
       inputs=str(int(not GPIO.input(prt_in1)))
       inputs=inputs + str(int(not GPIO.input(prt_in2)))
       inputs=inputs + str(int(not GPIO.input(prt_in3)))
       inputs=inputs + str(int(not GPIO.input(prt_in4)))
       blinkactled()
       # run user's function
-      writetodebuglog(i,"Running function of user.")
+      writetodebuglog("i","Running function of user.")
       outputs=CR.control(temperature,humidity,inputs,wrongvalues)
       aop1=CR.autooffport1()
       blinkactled()
@@ -204,7 +205,7 @@ with daemon.DaemonContext() as context:
 #      for x in range(0, 4):
 #        outputs[x]=extcont(x+1,outputs[x])
       # write output data to GPIO
-      writetodebuglog(i,"Writing output ports.")
+      writetodebuglog("i","Writing output ports.")
       GPIO.output(prt_err1,not int(outputs[4]))
       GPIO.output(prt_err2,not int(outputs[5]))
       GPIO.output(prt_err3,not int(outputs[6]))
@@ -218,7 +219,7 @@ with daemon.DaemonContext() as context:
         for i in range(int(aop1)):
           blinkactled()
         GPIO.output(prt_out1,1)
-        writetodebuglog(i,"Auto off enabled at first output port.")
+        writetodebuglog("i","Auto off enabled at first output port.")
       blinkactled()
       # write logfile if changed
       enablewritelog=0
@@ -233,7 +234,6 @@ with daemon.DaemonContext() as context:
       if first==1:
         enablewritelog=1
       if enablewritelog==1:
-        writetodebuglog(i,"Writing data to log file.")
         first=0
         writelog(temperature,humidity,inputs,outputs)
         prevtemperature=temperature
@@ -242,7 +242,7 @@ with daemon.DaemonContext() as context:
         prevoutputs=outputs
       blinkactled()
       # wait 10s
-      writetodebuglog(i,"Waiting 10 s.")
+      writetodebuglog("i","Waiting 10 s.")
       time.sleep(10)
   except KeyboardInterrupt:
     GPIO.cleanup
