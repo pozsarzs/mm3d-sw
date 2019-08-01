@@ -41,7 +41,7 @@ def writetodebuglog(level,text):
         d.write(dt+'  '+lv+' '+text+'\n')
         d.close()
     except:
-      print()
+      print ""
 
 # load configuration
 def loadconfiguration(conffile):
@@ -120,6 +120,9 @@ def writelog(temperature,humidity,inputs,outputs):
   writetodebuglog("i","Writing data to log.")
   dt=(strftime("%Y-%m-%d,%H:%M", gmtime()))
   lckfile(1)
+  if not os.path.isfile(logfile):
+    f=open(logfile,'w')
+    f.close()
   try:
     with open(logfile, "r+") as f:
       first_line = f.readline()
@@ -157,7 +160,20 @@ def initports():
 
 # check external control files
 def extcont(channel,status):
-  writetodebuglog("i","Checking override files.")
+  s=status
+  writetodebuglog("i","Checking override file: "+dir_var+"out"+str(channel)+".")
+  if os.path.isfile(dir_var+"out"+str(channel)):
+    try:
+      f=open(dir_var+"out"+str(channel),'r')
+      v=f.read()
+      f.close()
+      if v == "neutral": return status
+      if v == "off": return "0"
+      if v == "on": return "1"
+    except:
+      print ""
+  else:
+    return s
 
 # blink ACT LED
 def blinkactled():
@@ -201,9 +217,11 @@ with daemon.DaemonContext() as context:
       outputs=CR.control(temperature,humidity,inputs,wrongvalues)
       aop1=CR.autooffport1()
       blinkactled()
-      # external control
-#      for x in range(0, 4):
-#        outputs[x]=extcont(x+1,outputs[x])
+      # override state of outputs
+      for x in range(0, 4):
+        writetodebuglog("i","Original value of out"+str(x)+" port: " +outputs[x])
+        writetodebuglog("i",extcont(x+1,outputs[x]))
+#        writetodebuglog("i","New value of out"+str(x)+" port: " +outputs[x])
       # write output data to GPIO
       writetodebuglog("i","Writing output ports.")
       GPIO.output(prt_err1,not int(outputs[4]))
