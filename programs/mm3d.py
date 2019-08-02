@@ -171,7 +171,7 @@ def extcont(channel,status):
       if v == "off": return "0"
       if v == "on": return "1"
     except:
-      print ""
+      return s
   else:
     return s
 
@@ -218,10 +218,12 @@ with daemon.DaemonContext() as context:
       aop1=CR.autooffport1()
       blinkactled()
       # override state of outputs
+      ss=""
+      writetodebuglog("i","Original value of outputs: "+outputs)
       for x in range(0, 4):
-        writetodebuglog("i","Original value of out"+str(x)+" port: " +outputs[x])
-        writetodebuglog("i",extcont(x+1,outputs[x]))
-#        writetodebuglog("i","New value of out"+str(x)+" port: " +outputs[x])
+        ss=ss+extcont(x+1,outputs[x])
+      outputs=ss+outputs[4]+outputs[5]+outputs[6]+outputs[7]
+      writetodebuglog("i","New value of outputs: "+outputs)
       # write output data to GPIO
       writetodebuglog("i","Writing output ports.")
       GPIO.output(prt_err1,not int(outputs[4]))
