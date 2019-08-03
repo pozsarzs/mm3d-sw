@@ -30,7 +30,7 @@ writetofile()
   then
     if [ $2 = "neutral" ] || [ $2 = "on" ] || [ $2 = "off" ]
     then
-      echo $2 > $DIR_VAR$1
+      echo -n $2 > $DIR_VAR$1
       echo "Port '"$1"' has set to $2."
       exit 0
     fi

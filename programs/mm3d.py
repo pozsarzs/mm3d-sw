@@ -117,9 +117,9 @@ def lckfile(mode):
 
 # write data to log with timestamp
 def writelog(temperature,humidity,inputs,outputs):
-  writetodebuglog("i","Writing data to log.")
   dt=(strftime("%Y-%m-%d,%H:%M", gmtime()))
   lckfile(1)
+  writetodebuglog("i","Writing data to log.")
   if not os.path.isfile(logfile):
     f=open(logfile,'w')
     f.close()
@@ -160,20 +160,20 @@ def initports():
 
 # check external control files
 def extcont(channel,status):
-  s=status
   writetodebuglog("i","Checking override file: "+dir_var+"out"+str(channel)+".")
   if os.path.isfile(dir_var+"out"+str(channel)):
     try:
       f=open(dir_var+"out"+str(channel),'r')
       v=f.read()
       f.close()
-      if v == "neutral": return status
-      if v == "off": return "0"
-      if v == "on": return "1"
+      if v == "neutral": s=status
+      if v == "off": s="0"
+      if v == "on": s="1"
     except:
-      return s
+      s=status
   else:
-    return s
+    s=status
+  return s
 
 # blink ACT LED
 def blinkactled():
