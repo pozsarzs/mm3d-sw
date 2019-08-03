@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # +----------------------------------------------------------------------------+
-# | MM3D v0.3 * Growing house controlling and remote monitoring system         |
+# | MM3D v0.2 * Growing house controlling and remote monitoring system         |
 # | Copyright (C) 2018-2019 Pozsar Zsolt <pozsar.zsolt@.szerafingomba.hu>      |
 # | prg_example.py                                                             |
 # | User's program                                                             |
@@ -66,8 +66,6 @@ def control(temperature,humidity,inputs,wrongvalues):
   else:
     err2=1
 
-  enabled_hour=14
-  enabled_interval=1
 
   # check growing mode:
   if in3==1:
@@ -90,6 +88,8 @@ def control(temperature,humidity,inputs,wrongvalues):
     light_off=22
     vent_on=0
     vent_off=30
+  allowed_hour=14
+  allowed_minute=0
 
   # humidifying
   if wrongvalues == 0:
@@ -100,7 +100,7 @@ def control(temperature,humidity,inputs,wrongvalues):
     if (humidity<humidity_min) and (err2==0):
       h=int(time.strftime("%H"))
       m=int(time.strftime("%M"))
-      if (h==enabled_hour) and (m<=enabled_interval):
+      if (h==allowed_hour) and (m==allowed_minute):
         out1=1
       else:
         out1=0

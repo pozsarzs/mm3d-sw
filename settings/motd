@@ -1,0 +1,10 @@
+
+MM3D v0.3 * Growing house controlling and remote monitoring system
+Copyright (C) 2018-2019 Pozsár Zsolt <pozsar.zsolt@.szerafingomba.hu>
+
+Useable commands:
+  mm3d-editconf; mm3d-editcurrentprog; mm3d-maintainlog; mm3d-override;
+  mm3d-startdaemon; mm3d-stopdaemon; mm3d-updatestartpage; mm3d-viewlog.
+
+See manual page of commands for more information.
+

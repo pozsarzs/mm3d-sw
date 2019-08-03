@@ -13,7 +13,7 @@
 # ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
 # FOR A PARTICULAR PURPOSE.
 
-BACKTITLE="Configure and make user's controller program - cfg_example.sh v0.11"
+BACKTITLE="Configure and make user's controller program - cfg_example.sh v0.3"
 TITLE=" Oyster mushroom "
 MENU1="Minimum humidity [0-100 %]"
 MENU2="Maximum humidity [0-100 %]"
@@ -24,8 +24,8 @@ MENU6="Time when light off [0-23 h]"
 MENU7="Time when ventilation on [0-59 m]"
 MENU8="Time when ventilation off [0-59 m]"
 MENU9="Back to main menu"
-MENU10="Start (hour)"
-MENU11="Interval (minute)"
+MENU10="Hour"
+MENU11="Minute"
 
 INIFILE=./cfg_example.ini
 PRGDIR=../programs
@@ -79,7 +79,7 @@ loadconfig()
   MVOFF=0
   MVON=0
   HTH=0
-  HTIV=0
+  HTM=0
   # loaded values
   if [ -f $INIFILE ]
   then
@@ -99,8 +99,8 @@ loadconfig()
     MTMIN=$(ini_parser "mushroom" "temperature_min" $INIFILE)
     MVOFF=$(ini_parser "mushroom" "vent_off" $INIFILE)
     MVON=$(ini_parser "mushroom" "vent_on" $INIFILE)
-    HTH=$(ini_parser "humidification" "enabled_hour" $INIFILE)
-    HTIV=$(ini_parser "humidification" "enabled_interval" $INIFILE)
+    HTH=$(ini_parser "humidification" "allowed_hour" $INIFILE)
+    HTM=$(ini_parser "humidification" "allowed_minute" $INIFILE)
   fi
 }
 
@@ -134,8 +134,8 @@ saveconfig()
   echo "vent_off=$MVOFF" >> $INIFILE
   echo '' >> $INIFILE
   echo '[humidification]' >> $INIFILE
-  echo "enabled_hour=$HTH" >> $INIFILE
-  echo "enabled_interval=$HTIV" >> $INIFILE
+  echo "allowed_hour=$HTH" >> $INIFILE
+  echo "allowed_minute=$HTM" >> $INIFILE
 }
 
 saveoutfile()
@@ -212,8 +212,6 @@ def control(temperature,humidity,inputs,wrongvalues):
     err2=1
 
 EOF
-  echo "  enabled_hour=$HTH" >> $PYFILE
-  echo "  enabled_interval=$HTIV" >> $PYFILE
   echo '' >> $PYFILE
   echo '  # check growing mode:' >> $PYFILE
   echo '  if in3==1:' >> $PYFILE
@@ -236,6 +234,8 @@ EOF
   echo "    light_off=$MLOFF" >> $PYFILE
   echo "    vent_on=$MVON" >> $PYFILE
   echo "    vent_off=$MVOFF" >> $PYFILE
+  echo "  allowed_hour=$HTH" >> $PYFILE
+  echo "  allowed_minute=$HTM" >> $PYFILE
   cat << EOF >> $PYFILE
 
   # humidifying
@@ -247,7 +247,7 @@ EOF
     if (humidity<humidity_min) and (err2==0):
       h=int(time.strftime("%H"))
       m=int(time.strftime("%M"))
-      if (h==enabled_hour) and (m<=enabled_interval):
+      if (h==allowed_hour) and (m==allowed_minute):
         out1=1
       else:
         out1=0
@@ -365,13 +365,13 @@ inputbox()
   then
     case $2 in
       1) dialog --backtitle "$BACKTITLE" --title "$TITLE" --rangebox "$MENU10" 3 50 0 23 "$HTH" 2> /tmp/$$_3.tmp;;
-      2) dialog --backtitle "$BACKTITLE" --title "$TITLE" --rangebox "$MENU11" 3 50 0 15 "$HTIV" 2> /tmp/$$_3.tmp;;
+      2) dialog --backtitle "$BACKTITLE" --title "$TITLE" --rangebox "$MENU11" 3 50 0 15 "$HTM" 2> /tmp/$$_3.tmp;;
     esac
     if [ $? -ne 0 ]; then return; fi
     RESULT=`cat /tmp/$$_3.tmp | sed s/' '//`
     case $2 in
       1) HTH=$RESULT;;
-      2) HTIV=$RESULT;;
+      2) HTM=$RESULT;;
     esac
   fi
 
