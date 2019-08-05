@@ -1,16 +1,20 @@
-2019-08-01 Pozsár Zsolt <pozsar.zsolt@szerafingomba.hu>
-	*  0.3: new version: added a new utility script with manual page
-	        (override outputs), added verbose debug log function to
-	        daemon, added sensor type and GPIO port numbers to
-	        configuration file.
+2019-08-05 Pozsár Zsolt <pozsar.zsolt@szerafingomba.hu>
+	*  0.3: new version: fixed a bug, added a new utility script with
+	        manual page (override outputs), added verbose debug log
+	        function to daemon, added sensor type and GPIO port numbers
+	        to configuration file.
 	*  install: modified
 	*  prepare: modified
 	*  uninstall: modified
 	*  manuals/*.1.gz: modified
 	*  manuals/mm3d-override.1.gz: new file
 	*  programs/mm3d.py: modified
+	*  programs/prg_example/cfg_example.ini: modified
+	*  programs/prg_example/cfg_example.sh: modified
+	*  programs/prg_example/prg_example.py: modified
 	*  scripts/mm3d-override: new file
 	*  settings/mm3d.ini: modified
+	*  settings/motd: new file
 
 2019-06-26 Pozsár Zsolt <pozsar.zsolt@szerafingomba.hu>
 	*  0.2: new version: added new message files and webpages (11 new
