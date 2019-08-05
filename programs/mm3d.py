@@ -203,8 +203,8 @@ with daemon.DaemonContext() as context:
       if humidity<100:
         wrongvalues=0
       else:
-        writetodebuglog("w","Measured values are bad!")
         wrongvalues=1
+        writetodebuglog("w","Measured values are bad!")
       # read input data from GPIO
       writetodebuglog("i","Reading input ports.")
       inputs=str(int(not GPIO.input(prt_in1)))

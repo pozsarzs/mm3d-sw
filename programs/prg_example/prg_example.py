@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # +----------------------------------------------------------------------------+
-# | MM3D v0.2 * Growing house controlling and remote monitoring system         |
+# | MM3D v0.3 * Growing house controlling and remote monitoring system         |
 # | Copyright (C) 2018-2019 Pozsar Zsolt <pozsar.zsolt@.szerafingomba.hu>      |
 # | prg_example.py                                                             |
 # | User's program                                                             |
@@ -42,6 +42,7 @@ def control(temperature,humidity,inputs,wrongvalues):
   #         in3:  integer  status of input port #3, 0: opened | 1: closed to GND
   #         in4:  integer  status of input port #4, 0: opened | 1: closed to GND
   # temperature:  integer  measured temperature in degree Celsius
+  # wrongvalues:  measured data is invalid
   #
   # ------------------------- do not edit before this row ----------------------
 
@@ -65,7 +66,6 @@ def control(temperature,humidity,inputs,wrongvalues):
     err2=0
   else:
     err2=1
-
 
   # check growing mode:
   if in3==1:
@@ -92,20 +92,20 @@ def control(temperature,humidity,inputs,wrongvalues):
   allowed_minute=0
 
   # humidifying
-  if wrongvalues == 0:
-    if (humidity<humidity_min) or (humidity>humidity_max):
-      err1=1
-    else:
-      err1=0
-    if (humidity<humidity_min) and (err2==0):
-      h=int(time.strftime("%H"))
-      m=int(time.strftime("%M"))
-      if (h==allowed_hour) and (m==allowed_minute):
-        out1=1
-      else:
-        out1=0
+  if (wrongvalues == 0) and ((humidity<humidity_min) or (humidity>humidity_max)):
+    err1=1
+  else:
+    err1=0
+
+  if (wrongvalues == 0) and ((humidity<humidity_min) and (err2==0)):
+    h=int(time.strftime("%H"))
+    m=int(time.strftime("%M"))
+    if (h==allowed_hour) and (m==allowed_minute):
+      out1=1
     else:
       out1=0
+  else:
+    out1=0
 
   # lighting
   h=int(time.strftime("%H"))
@@ -122,15 +122,15 @@ def control(temperature,humidity,inputs,wrongvalues):
     out3=0
 
   # heating
-  if wrongvalues == 0:
-    if (temperature<temperature_min) or (temperature>temperature_max):
-      err4=1
-    else:
-      err4=0
-    if (temperature<temperature_min):
-      out4=1
-    else:
-      out4=0
+  if (wrongvalues == 0) and ((temperature<temperature_min) or (temperature>temperature_max)):
+    err4=1
+  else:
+    err4=0
+
+  if (wrongvalues == 0) and (temperature<temperature_min):
+    out4=1
+  else:
+    out4=0
 
   # other error light
   err3=wrongvalues
