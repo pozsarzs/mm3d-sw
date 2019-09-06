@@ -87,6 +87,7 @@ done
 sudo chmod 777 /var/$INSTDIR/lib/$SWN2
 echo "- copying files:"
 copy "documents/*" "/usr/$INSTDIR/share/doc/$SWN2/"
+copy "LICENCE" "/usr/$INSTDIR/share/doc/$SWN2/COPYING"
 copy "manuals/*" "/usr/$INSTDIR/share/man/man1/"
 for X in $LANGUAGES; do
   if [ -e "messages/"$SWN2"_"$X".msg" ];
