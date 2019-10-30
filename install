@@ -1,6 +1,6 @@
 #!/bin/bash
 # +----------------------------------------------------------------------------+
-# | MM3D v0.3 * Growing house controlling and remote monitoring system         |
+# | MM3D v0.4 * Growing house controlling and remote monitoring system         |
 # | Copyright (C) 2018-2019 Pozsár Zsolt <pozsar.zsolt@.szerafingomba.hu>      |
 # | install                                                                    |
 # | Installer script                                                           |
@@ -63,12 +63,6 @@ if ! [ -x "$(command -v apache2)" ]; then
   exit;
 fi
 
-if [ ! -d /home/$SWN2/programs ]
-then
-  echo "ERROR: Run prepare script firstly!"
-exit 1
-fi
-
 echo -e "\nInstalling..."
 echo "- creating directories:"
 sudo mkdir --parents /usr/$INSTDIR 2> /dev/null
@@ -95,13 +89,11 @@ for X in $LANGUAGES; do
     copy "messages/"$SWN2"_"$X".msg" "/usr/$INSTDIR/share/locale/$X/$SWN2.msg"
   fi;
 done
-copy "programs/prg_empty/prg_*.py" "/home/$SWN2/programs/"
-copy "programs/prg_example/cfg_example*" "/home/$SWN2/cfg_example/"
-copy "programs/prg_example/prg_*.py" "/home/$SWN2/programs/"
 copy "programs/$SWN2*.py" "/usr/$INSTDIR/bin/"
 copy "scripts/*" "/usr/$INSTDIR/bin/"
 copy "settings/cron.d/*" "/etc/cron.d/"
 copy "settings/$SWN2.ini" "/usr/$INSTDIR/etc/$SWN2/"
+copy "settings/envir.ini" "/usr/$INSTDIR/etc/$SWN2/"
 copy "settings/init.d/*" "/etc/init.d/"
 copy "webpage/cgi-bin/*.cgi" "/usr/lib/cgi-bin/"
 copy "webpage/*.css" "/var/www/html/"
@@ -109,7 +101,6 @@ copy "webpage/*.html" "/usr/$INSTDIR/share/$SWN2/"
 copy "webpage/pics/*.ico" "/var/www/html/pics/"
 copy "webpage/pics/*.png" "/var/www/html/pics/"
 sudo cat /etc/motd | grep -qv MM3D && sudo mv /etc/motd /etc/motd.orig && sudo cp settings/motd /etc/
-sudo ln -s /home/$SWN2/programs/prg_example.py /home/$SWN2/programs/prg_current.py
 sudo chown -R $SWN2:$SWN2 /home/$SWN2/
 echo "- set init.d:"
 sudo /etc/init.d/$SWN2.sh stop

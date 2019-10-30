@@ -1,6 +1,6 @@
 #!/bin/bash
 # +----------------------------------------------------------------------------+
-# | MM3D v0.3 * Growing house controlling and remote monitoring system         |
+# | MM3D v0.4 * Growing house controlling and remote monitoring system         |
 # | Copyright (C) 2018-2019 Pozsár Zsolt <pozsar.zsolt@.szerafingomba.hu>      |
 # | mm3d-updatestartpage                                                       |
 # | update startpage                                                           |
@@ -25,6 +25,7 @@ loadconfiguration()
   DIR_HTM=`cat $CFGFILE | grep dir_htm= | sed 's/dir_htm=//'`
   DIR_MSG=`cat $CFGFILE | grep dir_msg= | sed 's/dir_msg=//'`
   DIR_SHR=`cat $CFGFILE | grep dir_shr= | sed 's/dir_shr=//'`
+  DIR_TMP=`cat $CFGFILE | grep dir_tmp= | sed 's/dir_tmp=//'`
   NAM_ERR1=`cat $CFGFILE | grep nam_err1= | sed 's/nam_err1=//'`
   NAM_ERR2=`cat $CFGFILE | grep nam_err2= | sed 's/nam_err2=//'`
   NAM_ERR3=`cat $CFGFILE | grep nam_err3= | sed 's/nam_err3=//'`
@@ -78,12 +79,12 @@ makehomepage()
 {
   if [ -f "$DIR_SHR/header_$LNG.html" ]
   then
-    cat $DIR_SHR/header_$LNG.html > $DIR_HTM/index.html
+    cat $DIR_SHR/header_$LNG.html > $DIR_TMP/index.html
   else
-    cat $DIR_SHR/header_en.html > $DIR_HTM/index.html
+    cat $DIR_SHR/header_en.html > $DIR_TMP/index.html
   fi
 
-  cat >> $DIR_HTM/index.html << EOF
+  cat >> $DIR_TMP/index.html << EOF
     <table border=0 cellspacing=0 cellpadding=6 width="100%">
       <tbody>
         <tr>
@@ -154,10 +155,12 @@ makehomepage()
 EOF
   if [ -f "$DIR_SHR/footer_$LNG.html" ]
   then
-    cat $DIR_SHR/footer_$LNG.html >> $DIR_HTM/index.html
+    cat $DIR_SHR/footer_$LNG.html >> $DIR_TMP/index.html
   else
-    cat $DIR_SHR/footer_en.html >> $DIR_HTM/index.html
+    cat $DIR_SHR/footer_en.html >> $DIR_TMP/index.html
   fi
+  sudo mv $DIR_TMP/index.html $DIR_HTM/index.html
+  rm --force $DIR_TMP/index.html
 }
 
 # Main function

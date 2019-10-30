@@ -1,0 +1,42 @@
+dnl +--------------------------------------------------------------------------+
+dnl | MM3D v0.4 * Growing house controlling and remote monitoring system         |
+dnl | Copyright (C) 2018-2019 Pozsár Zsolt <pozsar.zsolt@.szerafingomba.hu>      |
+dnl | configure.in                                                             |
+dnl | Autoconf input file for unix-like systems                                |
+dnl +--------------------------------------------------------------------------+
+
+AC_INIT
+AC_CONFIG_AUX_DIR(config)
+AC_CANONICAL_SYSTEM
+
+AC_PATH_PROG(rm, rm, no)
+AC_PATH_PROG(install, install, no)
+
+AC_CHECK_PROGS(make, gmake make)
+test "$make" = "" && AC_MSG_ERROR(Make not found!)
+AC_CHECK_PROGS(hfpc,ppcarm,no)
+test x"$hfpc" = xno && AC_MSG_ERROR(FreePascal compiler not found!)
+
+AC_CHECK_FILE(../documents/VERSION,,AC_MSG_ERROR(VERSION file not found!))
+version=`cat ../documents/VERSION`
+os=`ppcarm -iSO`
+architecture=`ppcarm -iSP`
+
+AC_SUBST(architecture)
+AC_SUBST(fpflag)
+AC_SUBST(install)
+AC_SUBST(make)
+AC_SUBST(os)
+AC_SUBST(rm)
+AC_SUBST(version)
+AC_OUTPUT(Makefile.global)
+
+echo "
+Summary
+=======
+    Target op. system	$os
+    Target processor	$architecture
+    Install prefix	$bprefix
+
+  Type '${make}' for compilation and then '${make} install'.
+"

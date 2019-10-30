@@ -1,0 +1,29 @@
+# +----------------------------------------------------------------------------+
+# | MM3D v0.4 * Growing house controlling and remote monitoring system         |
+# | Copyright (C) 2018-2019 Pozsár Zsolt <pozsar.zsolt@.szerafingomba.hu>      |
+# | Makefile.global                                                            |
+# | Global makefile for Unix-like systems                                      |
+# +----------------------------------------------------------------------------+
+
+name		= editenvirconf
+version		= @version@
+architecture	= @architecture@
+os              = @os@
+
+binmode		= 0755
+txtmode		= 0644
+
+install		= @install@
+make		= @make@
+rm		= @rm@ -f
+
+fpflag		= -T@os@ \
+                  -MObjFPC \
+                  -Scgi \
+                  -O1 \
+                  -v0 \
+                  -ve \
+                  -FE./lib/@architecture@-@os@/ \
+                  -Fu. \
+                  -Fu./lib/@architecture@-@os@/
+

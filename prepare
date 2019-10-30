@@ -1,6 +1,6 @@
 #!/bin/bash
 # +----------------------------------------------------------------------------+
-# | MM3D v0.3 * Growing house controlling and remote monitoring system         |
+# | MM3D v0.4 * Growing house controlling and remote monitoring system         |
 # | Copyright (C) 2018-2019 Pozsár Zsolt <pozsar.zsolt@.szerafingomba.hu>      |
 # | prepare                                                                    |
 # | Prepare OS                                                                 |
@@ -25,7 +25,6 @@ echo "--------------------------------------------------------------------------
 echo "Installing required components..."
 sudo apt-get install apache2 \
                      build-essential \
-                     dialog \
                      git \
                      libswitch-perl \
                      python-daemon \
@@ -39,10 +38,6 @@ cd Adafruit_Python_DHT
 sudo python setup.py install
 echo -e "\nCreating a new user..."
 sudo adduser $SWN2
-sudo mkdir --parents /home/$SWN2/programs
-sudo chown -R $SWN2:$SWN2 /home/$SWN2/programs
-sudo mkdir --parents /home/$SWN2/cfg_example
-sudo chown -R $SWN2:$SWN2 /home/$SWN2/cfg_example
 sudo echo "$SWN2 ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/010_$SWN2-nopasswd
 echo -e "\nSetting Apache2..."
 sudo ln --symbolic /etc/apache2/mods-available/cgid.load /etc/apache2/mods-enabled/

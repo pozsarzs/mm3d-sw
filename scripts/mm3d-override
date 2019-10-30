@@ -1,6 +1,6 @@
 #!/bin/bash
 # +----------------------------------------------------------------------------+
-# | MM3D v0.3 * Growing house controlling and remote monitoring system         |
+# | MM3D v0.4 * Growing house controlling and remote monitoring system         |
 # | Copyright (C) 2018-2019 Pozsár Zsolt <pozsar.zsolt@.szerafingomba.hu>      |
 # | mm3d-override                                                              |
 # | Override output status                                                     |
@@ -30,10 +30,22 @@ writetofile()
   then
     if [ $2 = "neutral" ] || [ $2 = "on" ] || [ $2 = "off" ]
     then
-      echo -n $2 > $DIR_VAR$1
+      sudo echo -n $2 > $DIR_VAR$1
       echo "Port '"$1"' has set to $2."
       exit 0
     fi
+  fi
+  usage
+  exit 2
+}
+
+getstatus()
+{
+  if [ $1 = "out1" ] || [ $1 = "out2" ] || [ $1 = "out3" ] || [ $1 = "out4" ]
+  then
+    echo "Port '"$1"'status is:"
+    cat $DIR_VAR$1
+    exit 0
   fi
   usage
   exit 2
@@ -48,10 +60,15 @@ usage()
 }
 
 # main function
+loadconfiguration
 if [ $# -eq 2 ];
 then
-  loadconfiguration
   writetofile $1 $2
+  exit 0
+fi
+if [ $# -eq 1 ];
+then
+  getstatus $1
   exit 0
 fi
 usage
