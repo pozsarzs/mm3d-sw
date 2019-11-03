@@ -2,7 +2,7 @@
 { | MM3D v0.4 * Growing house controlling and remote monitoring system       | }
 { | Copyright (C) 2018-2019 Pozsár Zsolt <pozsar.zsolt@.szerafingomba.hu>    | }
 { | saveinifile.inc                                                          | }
-{ | Save configuration to ini file.                                          | }
+{ | Save configuration to ini file                                           | }
 { +--------------------------------------------------------------------------+ }
 
 //   This program is free software: you can redistribute it and/or modify it
@@ -15,19 +15,24 @@
 function saveinifile(filename: string): boolean;
 var
   iif: text;
+const
+  HEADER1='; +----------------------------------------------------------------------------+';
+  HEADER2='; | MM3D v0.4 * Growing house controlling and remote monitoring system         |';
+  HEADER3='; | Copyright (C) 2018-2019 Pozsár Zsolt <pozsar.zsolt@.szerafingomba.hu>      |';
+  HEADER4='; | envir.ini                                                                  |';
+  HEADER5='; | growing environment characteristics                                        |';
+
 begin
-  {$I-}
-  rewrite(iif);
-  {$I+}
-  if ioresult=0 then
-  begin
-    saveinifile:=true;
-    writeln(iif,'; +----------------------------------------------------------------------------+');
-    writeln(iif,'; | MM3D v0.4 * Growing house controlling and remote monitoring system         |');
-    writeln(iif,'; | Copyright (C) 2018-2019 Pozsár Zsolt <pozsar.zsolt@.szerafingomba.hu>      |');
-    writeln(iif,'; | envir.ini                                                                  |');
-    writeln(iif,'; | growing environment characteristics                                        |');
-    writeln(iif,'; +----------------------------------------------------------------------------+');
+  saveinifile:=true;
+  try
+    assign(iif,filename);
+    rewrite(iif);
+    writeln(iif,HEADER1);
+    writeln(iif,HEADER2);
+    writeln(iif,HEADER3);
+    writeln(iif,HEADER4);
+    writeln(iif,HEADER5);
+    writeln(iif,HEADER1);
     writeln(iif,'');
     writeln(iif,'[hyphae]');
     writeln(iif,'; humidifier');
@@ -288,5 +293,7 @@ begin
     writeln(iif,'vent_lowtemp=',mventlowtemp);
     writeln(iif,'');
     close(iif);
-  end else saveinifile:=false;
+  except
+    saveinifile:=false;
+  end;
 end;
