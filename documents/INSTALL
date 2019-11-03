@@ -9,32 +9,22 @@ Installation
   pi@raspberry$ sudo apt-get update
   pi@raspberry$ sudo apt-get upgrade
   pi@raspberry$ sudo apt-get install mc wget
-  pi@raspberry$ wget --directory-prefix=$HOME/download http://www.szerafingomba.hu/equipments/mm3d/mm3d-sw-0.3-noarch.tar.gz
+  pi@raspberry$ wget --directory-prefix=$HOME/download http://www.szerafingomba.hu/equipments/mm3d/mm3d-sw-0.4-arm.tar.gz
   pi@raspberry$ cd $HOME/download
-  pi@raspberry$ tar -xzf mm3d-sw-0.3-noarch.tar.gz
-  pi@raspberry$ cd mm3d-sw-0.3
+  pi@raspberry$ tar -xzf mm3d-sw-0.4-arm.tar.gz
+  pi@raspberry$ cd mm3d-sw
   pi@raspberry$ ./prepare
   pi@raspberry$ ./install
 
 Configuration
 -------------
-  mm3d@raspberry$ sudo /etc/init.d/mm3d.sh stop
-  mm3d@raspberry$ mm3d-editconf
-  mm3d@raspberry$ sudo mm3d-updatestartpage
-  mm3d@raspberry$ sudo /etc/init.d/mm3d.sh start
+  mm3d@raspberry$ mm3d-editmainconf
 
-Edit example user's controller program
---------------------------------------
-  mm3d@raspberry$ sudo /etc/init.d/mm3d.sh stop
-  mm3d@raspberry$ mm3d-editcurrentprog
-  mm3d@raspberry$ sudo /etc/init.d/mm3d.sh start
-  
-  or
-  
-  mm3d@raspberry$ cd ~/cfg_example/
-  mm3d@raspberry$ ./cfg_example.sh
-  
+Set environment characteristics
+-------------------------------
+  mm3d@raspberry$ mm3d-editenvirconf
+
 Remove
 ------
-  pi@raspberry$ cd mm3d-sw-0.3
+  pi@raspberry$ cd mm3d-sw
   pi@raspberry$ ./uninstall

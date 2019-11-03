@@ -1,3 +1,49 @@
+2019-12-01 Pozsár Zsolt <pozsar.zsolt@szerafingomba.hu>
+	*  0.4: new version:
+	*  install: modified
+	*  prepare: modified
+	*  uninstall: modified
+	*  README: modified
+	*  binary/mm3d-editenvirconf.bin: new file
+	*  document/INSTALL: modified
+	*  document/README: modified
+	*  document/VERSION: modified
+	*  manuals/mm3d-editconf.1.gz: removed
+	*  manuals/mm3d-editcurrentprog.1.gz: removed
+	*  manuals/mm3d-editenvirconf.1.gz: new file
+	*  manuals/mm3d-editmainconf.1.gz: new file
+	*  manuals/mm3d-hwtest.py.1.gz: modified
+	*  manuals/mm3d-maintainlog.1.gz: modified
+	*  manuals/mm3d-override.1.gz: modified
+	*  manuals/mm3d.py.1.gz: modified
+	*  manuals/mm3d-startdaemon.1.gz: modified
+	*  manuals/mm3d-stopdaemon.1.gz: modified
+	*  manuals/mm3d-updatestartpage.1.gz: modified
+	*  manuals/mm3d-viewlog.1.gz: modified
+	*  messages/*.msg: modified
+	*  programs/mm3d.py: modified
+	*  programs/prg_empty/prg_empty.py: removed
+	*  programs/prg_example/cfg_example.ini: removed
+	*  programs/prg_example/cfg_example.sh: removed
+	*  programs/prg_example/prg_example.py: removed
+	*  scripts/mm3d-editconf: removed
+	*  scripts/mm3d-editcurrentprog: removed
+	*  scripts/mm3d-editenvirconf: new file
+	*  scripts/mm3d-editmainconf: new file
+	*  scripts/mm3d-override: modified
+	*  scripts/mm3d-updatestartpage: modified
+	*  settings/envir.ini: new file
+	*  settings/mm3d.ini: modified
+	*  settings/motd: modified
+	*  source/config/*: new file
+	*  source/configure.in: new file
+	*  source/configure: new file
+	*  source/*.inc: new file
+	*  source/Makefile.global.in: new file
+	*  source/Makefile: new file
+	*  source/*.pas: new file
+	*  webpage/footer_??.html: modified
+
 2019-08-05 Pozsár Zsolt <pozsar.zsolt@szerafingomba.hu>
 	*  0.3: new version: fixed a bug, added a new utility script with
 	        manual page (override outputs), added verbose debug log
@@ -6,6 +52,10 @@
 	*  install: modified
 	*  prepare: modified
 	*  uninstall: modified
+	*  README: modified
+	*  document/INSTALL: modified
+	*  document/README: modified
+	*  document/VERSION: modified
 	*  manuals/*.1.gz: modified
 	*  manuals/mm3d-override.1.gz: new file
 	*  programs/mm3d.py: modified
@@ -22,6 +72,10 @@
 	        configuration file.
 	*  install: modified
 	*  uninstall: modified
+	*  README: modified
+	*  document/INSTALL: modified
+	*  document/README: modified
+	*  document/VERSION: modified
 	*  messages/mm3d_cs.msg: new file
 	*  messages/mm3d_de.msg: new file
 	*  messages/mm3d_fr.msg: new file
@@ -72,7 +126,10 @@
 	*  install: modified
 	*  prepare: modified
 	*  uninstall: modified
+	*  README: modified
 	*  document/INSTALL: modified
+	*  document/README: modified
+	*  document/VERSION: modified
 	*  manuals/mm3d-editconf.1.gz: new file
 	*  manuals/mm3d-editcurrentprog.1.gz: new file
 	*  manuals/mm3d-hwtest.py.1.gz: new file

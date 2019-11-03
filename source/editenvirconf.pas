@@ -121,8 +121,10 @@ begin
   until (c=#13) or (c=#27);
   if (c=#13) and (length(s)>0) then
   begin
+    // page #1
     if page=1 then
     begin
+      // page #1 - block #1
       if block=1 then
       begin
         gotoxy(minposx[page,block]-length(s)+1,posy); textbackground(blue);
@@ -132,6 +134,20 @@ begin
           5: begin hhumoff:=strtoint(s); write(hhumoff); end;
           6: begin hhummax:=strtoint(s); write(hhummax); end;
         end;
+      end;
+      // page #1 - block #2
+      if block=2 then
+      begin
+        gotoxy(minposx[page,block],posy); textbackground(blue);
+        hhumdis[posy-10]:=strtoint(s);
+        write(hhumdis[posy-10]);
+      end;
+      // page #1 - block #3
+      if block=3 then
+      begin
+        gotoxy(minposx[page,block],posy); textbackground(blue);
+        hhumdis[posy+2]:=strtoint(s);
+        write(hhumdis[posy+2]);
       end;
     end;
   end;
