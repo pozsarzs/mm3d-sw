@@ -17,11 +17,18 @@ interface
 uses
   crt;
 
+procedure background;
 procedure footer(title: string);
 procedure header(title: string);
 procedure quit(halt_code: byte; clear: boolean; message: string);
 
 implementation
+
+procedure background;
+begin
+  textbackground(blue);
+  clrscr;
+end;
 
 // write footer
 procedure footer(title: string);
@@ -29,8 +36,15 @@ var
   b: byte;
 begin
   textbackground(lightgray); textcolor(black);
-  gotoxy(1,24); clreol;
-  write(' '+title);
+  gotoxy(1,24); clreol; gotoxy(2,24);
+  for b:=1 to length(title) do
+  begin
+    case title[b] of
+      '<': textcolor(red);
+      '>': textcolor(black);
+    else write(title[b]);
+    end;
+  end;
   textcolor(lightgray);textbackground(black);
 end;
 
@@ -42,7 +56,7 @@ begin
   textbackground(lightgray); textcolor(black);
   gotoxy(1,1); clreol;
   write(' '+title);
-  textcolor(lightgray);textbackground(black);
+  textcolor(lightcyan);textbackground(blue);
 end;
 
 // exit

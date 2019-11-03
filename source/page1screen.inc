@@ -14,6 +14,7 @@
 
 procedure page1screen;
 begin
+  textcolor(lightgray);
   gotoxy(4,3);writeln('Minimal RH:');
   gotoxy(4,4);writeln('RH when humidifier switch on:');
   gotoxy(4,5);writeln('RH when humidifier switch off:');
@@ -22,7 +23,7 @@ begin
   gotoxy(46,4);writeln(hhumon,' %');
   gotoxy(46,5);writeln(hhumoff,' %');
   gotoxy(46,6);writeln(hhummax,' %');
-  gotoxy(2,8);writeln('Disable humidifier:');
+  gotoxy(4,9);writeln('Disable humidifier:');
   gotoxy(4,10);writeln('00.00-00.59  ',hhumdis[0]);
   gotoxy(4,11);writeln('01.00-01.59  ',hhumdis[1]);
   gotoxy(4,12);writeln('02.00-02.59  ',hhumdis[2]);
