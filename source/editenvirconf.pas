@@ -35,37 +35,37 @@ var
   htempmin, mtempmin: byte;
   htempoff, mtempoff: byte;
   htempon, mtempon: byte;
-  hventlowtemp, mventlowtemp: byte;
+  hventlowtemp, mventlowtemp: shortint;
   hventoff, mventoff: byte;
   hventon, mventon: byte;
 const
   VERSION: string='v0.4';
 const
-  blocks: array[1..8] of byte=(3,3,1,5,3,3,1,5);
-  minposx: array[1..8,1..5] of byte=((46,17,35,0,0),
-                                     (46,17,35,0,0),
-                                     (46,0,0,0,0),
-                                     (46,17,35,53,71),
-                                     (46,17,35,0,0),
-                                     (46,17,35,0,0),
-                                     (46,0,0,0,0),
-                                     (46,17,35,53,71));
-  minposy: array[1..8,1..5] of byte=((3,10,10,0,0),
-                                     (3,10,10,0,0),
-                                     (3,0,0,0,0),
-                                     (3,10,10,10,10),
-                                     (3,10,10,0,0),
-                                     (3,10,10,0,0),
-                                     (3,0,0,0,0),
-                                     (3,10,10,10,10));
-  maxposy: array[1..8,1..5] of byte=((6,21,21,0,0),
-                                     (6,21,21,0,0),
-                                     (6,0,0,0,0),
-                                     (4,21,21,21,21),
-                                     (6,21,21,0,0),
-                                     (6,21,21,0,0),
-                                     (6,0,0,0,0),
-                                     (4,21,21,21,21));
+  blocks: array[1..8] of byte=(3,3,1,6,3,3,1,6);
+  minposx: array[1..8,1..6] of byte=((46,17,35,0,0,0),
+                                     (46,17,35,0,0,0),
+                                     (46,0,0,0,0,0),
+                                     (46,17,35,53,71,46),
+                                     (46,17,35,0,0,0),
+                                     (46,17,35,0,0,0),
+                                     (46,0,0,0,0,0),
+                                     (46,17,35,53,71,46));
+  minposy: array[1..8,1..6] of byte=((3,10,10,0,0,0),
+                                     (3,10,10,0,0,0),
+                                     (3,0,0,0,0,0),
+                                     (3,8,8,8,8,21),
+                                     (3,10,10,0,0,0),
+                                     (3,8,8,8,8,0),
+                                     (3,0,0,0,0,0),
+                                     (3,8,8,8,8,21));
+  maxposy: array[1..8,1..6] of byte=((6,21,21,0,0,0),
+                                     (6,21,21,0,0,0),
+                                     (6,0,0,0,0,0),
+                                     (4,19,19,19,19,21),
+                                     (6,21,21,0,0,0),
+                                     (6,21,21,0,0,0),
+                                     (6,0,0,0,0,0),
+                                     (4,19,19,19,19,21));
 
 {$I page1screen.inc}
 {$I page2screen.inc}
@@ -108,14 +108,17 @@ begin
   s:='';
   repeat
     c:=readkey;
+    if (block=6) and (length(s)>0) then
+      case c of
+        '-': if strtoint(s)>0 then s:=inttostr(strtoint(s)*(-1));
+        '+': if strtoint(s)<0 then s:=inttostr(strtoint(s)*(-1));
+      end;
     if isnumber(c) then
-    begin
-      if block=1 then
-      begin
-        if length(s)<2 then s:=s+c;
-      end else
-        if (c='0') or (c='1') then s:=c;
-    end;
+      case block of
+        1: if length(s)<2 then s:=s+c;
+        6: if length(s)<3 then s:=s+c;
+      else if (c='0') or (c='1') then s:=c;
+      end;
     if c=#8 then delete(s,length(s),1);
     gotoxy(1,25); clreol; write('>'+s);
   until (c=#13) or (c=#27);
@@ -216,29 +219,35 @@ begin
       if block=2 then
       begin
         gotoxy(minposx[page,block],posy); textbackground(blue);
-        hventdis[posy-10]:=strtoint(s);
-        write(hventdis[posy-10]);
+        hventdis[posy-8]:=strtoint(s);
+        write(hventdis[posy-8]);
       end;
       // page #4 - block #3
       if block=3 then
       begin
         gotoxy(minposx[page,block],posy); textbackground(blue);
-        hventdis[posy+2]:=strtoint(s);
-        write(hventdis[posy+2]);
+        hventdis[posy+4]:=strtoint(s);
+        write(hventdis[posy+4]);
       end;
       // page #4 - block #4
       if block=4 then
       begin
         gotoxy(minposx[page,block],posy); textbackground(blue);
-        hventdislowtemp[posy-10]:=strtoint(s);
-        write(hventdislowtemp[posy-10]);
+        hventdislowtemp[posy-8]:=strtoint(s);
+        write(hventdislowtemp[posy-8]);
       end;
       // page #4 - block #5
       if block=5 then
       begin
         gotoxy(minposx[page,block],posy); textbackground(blue);
-        hventdislowtemp[posy+2]:=strtoint(s);
-        write(hventdislowtemp[posy+2]);
+        hventdislowtemp[posy+4]:=strtoint(s);
+        write(hventdislowtemp[posy+4]);
+      end;
+      // page #4 - block #6
+      if block=6 then
+      begin
+        gotoxy(minposx[page,block]-length(s)+1,posy); textbackground(blue);
+        hventlowtemp:=strtoint(s); write(hventlowtemp);
       end;
     end;
 
@@ -336,29 +345,35 @@ begin
       if block=2 then
       begin
         gotoxy(minposx[page,block],posy); textbackground(blue);
-        mventdis[posy-10]:=strtoint(s);
-        write(mventdis[posy-10]);
+        mventdis[posy-8]:=strtoint(s);
+        write(mventdis[posy-8]);
       end;
       // page #8 - block #3
       if block=3 then
       begin
         gotoxy(minposx[page,block],posy); textbackground(blue);
-        mventdis[posy+2]:=strtoint(s);
-        write(mventdis[posy+2]);
+        mventdis[posy+4]:=strtoint(s);
+        write(mventdis[posy+4]);
       end;
       // page #8 - block #4
       if block=4 then
       begin
         gotoxy(minposx[page,block],posy); textbackground(blue);
-        mventdislowtemp[posy-10]:=strtoint(s);
-        write(mventdislowtemp[posy-10]);
+        mventdislowtemp[posy-8]:=strtoint(s);
+        write(mventdislowtemp[posy-8]);
       end;
       // page #8 - block #5
       if block=5 then
       begin
         gotoxy(minposx[page,block],posy); textbackground(blue);
-        mventdislowtemp[posy+2]:=strtoint(s);
-        write(mventdislowtemp[posy+2]);
+        mventdislowtemp[posy+4]:=strtoint(s);
+        write(mventdislowtemp[posy+4]);
+      end;
+      // page #8 - block #6
+      if block=6 then
+      begin
+        gotoxy(minposx[page,block]-length(s)+1,posy); textbackground(blue);
+        mventlowtemp:=strtoint(s); write(mventlowtemp);
       end;
     end;
 
