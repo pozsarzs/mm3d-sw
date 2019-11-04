@@ -14,4 +14,5 @@
 
 procedure page2screen;
 begin
+  header('EditEnvirConf '+VERSION+' * Page 2/8: Growing hyphae - heating');
 end;

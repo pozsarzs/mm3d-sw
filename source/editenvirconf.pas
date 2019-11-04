@@ -41,28 +41,28 @@ var
 const
   VERSION: string='v0.4';
 const
-  blocks: array[1..8] of byte=(3,3,3,3,3,3,3,3);
+  blocks: array[1..8] of byte=(3,3,1,3,3,3,3,3);
   minposx: array[1..8,1..4] of byte=((46,17,35,0),
                                      (0,0,0,0),
+                                     (46,0,0,0),
                                      (0,0,0,0),
-                                     (0,0,0,0),
-                                     (0,0,0,0),
+                                     (46,17,35,0),
                                      (0,0,0,0),
                                      (0,0,0,0),
                                      (0,0,0,0));
   minposy: array[1..8,1..4] of byte=((3,10,10,0),
                                      (0,0,0,0),
+                                     (3,0,0,0),
                                      (0,0,0,0),
-                                     (0,0,0,0),
-                                     (0,0,0,0),
+                                     (3,10,10,0),
                                      (0,0,0,0),
                                      (0,0,0,0),
                                      (0,0,0,0));
   maxposy: array[1..8,1..4] of byte=((6,21,21,0),
                                      (0,0,0,0),
+                                     (6,0,0,0),
                                      (0,0,0,0),
-                                     (0,0,0,0),
-                                     (0,0,0,0),
+                                     (6,21,21,0),
                                      (0,0,0,0),
                                      (0,0,0,0),
                                      (0,0,0,0));
@@ -81,7 +81,6 @@ const
 procedure screen(page: byte);
 begin
   background;
-  header('EditEnvirConf '+VERSION+' * Page '+inttostr(page)+'/8: Growing hyphae - humidity');
   case page of
     1: page1screen;
     2: page2screen;
@@ -104,6 +103,7 @@ var
 begin
   textbackground(black);
   footer('<Enter> accept  <Esc> cancel');
+  textcolor(lightgray);
   gotoxy(1,25); write('>');
   s:='';
   repeat
@@ -119,6 +119,7 @@ begin
     if c=#8 then delete(s,length(s),1);
     gotoxy(1,25); clreol; write('>'+s);
   until (c=#13) or (c=#27);
+  textcolor(white);
   if (c=#13) and (length(s)>0) then
   begin
     // page #1
@@ -150,6 +151,72 @@ begin
         write(hhumdis[posy+2]);
       end;
     end;
+
+    // page #3
+    if page=3 then
+    begin
+      // page #3 - block #1
+      if block=1 then
+      begin
+        if strtoint(s)>23 then s:=inttostr(23);
+        gotoxy(minposx[page,block]-length(s)+1,posy); textbackground(blue);
+        case posy of
+          3: begin hlightson1:=strtoint(s); write(hlightson1); end;
+          4: begin hlightsoff1:=strtoint(s); write(hlightsoff1); end;
+          5: begin hlightson2:=strtoint(s); write(hlightson2); end;
+          6: begin hlightsoff2:=strtoint(s); write(hlightsoff2); end;
+        end;
+      end;
+    end;
+
+    // page #5
+    if page=5 then
+    begin
+      // page #5 - block #1
+      if block=1 then
+      begin
+        gotoxy(minposx[page,block]-length(s)+1,posy); textbackground(blue);
+        case posy of
+          3: begin mhummin:=strtoint(s); write(mhummin); end;
+          4: begin mhumon:=strtoint(s); write(mhumon); end;
+          5: begin mhumoff:=strtoint(s); write(mhumoff); end;
+          6: begin mhummax:=strtoint(s); write(mhummax); end;
+        end;
+      end;
+      // page #5 - block #2
+      if block=2 then
+      begin
+        gotoxy(minposx[page,block],posy); textbackground(blue);
+        mhumdis[posy-10]:=strtoint(s);
+        write(mhumdis[posy-10]);
+      end;
+      // page #5 - block #3
+      if block=3 then
+      begin
+        gotoxy(minposx[page,block],posy); textbackground(blue);
+        gotoxy(minposx[page,block]-length(s)+1,posy); textbackground(blue);
+        mhumdis[posy+2]:=strtoint(s);
+        write(mhumdis[posy+2]);
+      end;
+    end;
+
+    // page #7
+    if page=7 then
+    begin
+      // page #7 - block #1
+      if block=1 then
+      begin
+        if strtoint(s)>23 then s:=inttostr(23);
+        gotoxy(minposx[page,block]-length(s)+1,posy); textbackground(blue);
+        case posy of
+          3: begin mlightson1:=strtoint(s); write(mlightson1); end;
+          4: begin mlightsoff1:=strtoint(s); write(mlightsoff1); end;
+          5: begin mlightson2:=strtoint(s); write(mlightson2); end;
+          6: begin mlightsoff2:=strtoint(s); write(mlightsoff2); end;
+        end;
+      end;
+    end;
+
   end;
   footer('<Tab>/<Up>/<Down> move  <Enter> edit  <Home>/<PgUp>/<PgDn>/<End> paging');
   gotoxy(1,25); clreol;
@@ -179,23 +246,35 @@ begin
       #71: begin
              page:=1;
              screen(page);
+             block:=1;
+             posy:=minposy[page,block];
+             gotoxy(minposx[page,block],posy);
            end;
       // previous page
       #73: begin
              page:=page-1;
              if page<1 then page:=1;
              screen(page);
+             block:=1;
+             posy:=minposy[page,block];
+             gotoxy(minposx[page,block],posy);
            end;
       // next page
       #81: begin
              page:=page+1;
              if page>8 then page:=8;
              screen(page);
+             block:=1;
+             posy:=minposy[page,block];
+             gotoxy(minposx[page,block],posy);
            end;
       // last page
       #79: begin
              page:=8;
              screen(page);
+             block:=1;
+             posy:=minposy[page,block];
+             gotoxy(minposx[page,block],posy);
            end;
       // next block on page
        #9: begin
@@ -225,7 +304,9 @@ begin
   // exit
   until k=#27;
   footer('<Esc> cancel');
+  textcolor(lightgray);
   gotoxy(1,25); write('Save to '+paramstr(1)+'? (y/n) ');
+  textcolor(white);
   repeat
     k:=lowercase(readkey);
     if k=#27 then goto back;

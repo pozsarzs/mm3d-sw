@@ -38,9 +38,9 @@
 	*  source/config/*: new file
 	*  source/configure.in: new file
 	*  source/configure: new file
-	*  source/*.inc: new file
 	*  source/Makefile.global.in: new file
 	*  source/Makefile: new file
+	*  source/*.inc: new file
 	*  source/*.pas: new file
 	*  webpage/footer_??.html: modified
 

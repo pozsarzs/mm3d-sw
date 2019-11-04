@@ -1963,7 +1963,7 @@ fi
 done
 
 test "$make" = "" && as_fn_error $? "Make not found!" "$LINENO" 5
-for ac_prog in ppcarm
+for ac_prog in fpc
 do
   # Extract the first word of "$ac_prog", so it can be a program name with args.
 set dummy $ac_prog; ac_word=$2
@@ -2030,8 +2030,8 @@ else
 fi
 
 version=`cat ../documents/VERSION`
-os=`ppcarm -iSO`
-architecture=`ppcarm -iSP`
+os=`fpc -iSO`
+architecture=`fpc -iSP`
 
 
 
@@ -3203,7 +3203,6 @@ Summary
 =======
     Target op. system	$os
     Target processor	$architecture
-    Install prefix	$bprefix
 
   Type '${make}' for compilation and then '${make} install'.
 "

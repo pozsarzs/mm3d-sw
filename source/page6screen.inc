@@ -14,4 +14,5 @@
 
 procedure page6screen;
 begin
+  header('EditEnvirConf '+VERSION+' * Page 6/8: Growing mushroom - heating');
 end;

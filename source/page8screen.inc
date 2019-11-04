@@ -14,4 +14,5 @@
 
 procedure page8screen;
 begin
+  header('EditEnvirConf '+VERSION+' * Page 8/8: Growing mushroom - ventilating');
 end;

@@ -45,7 +45,7 @@ begin
     else write(title[b]);
     end;
   end;
-  textcolor(lightgray);textbackground(black);
+  textcolor(white); textbackground(black);
 end;
 
 // write header
@@ -56,7 +56,7 @@ begin
   textbackground(lightgray); textcolor(black);
   gotoxy(1,1); clreol;
   write(' '+title);
-  textcolor(lightcyan);textbackground(blue);
+  textcolor(white); textbackground(blue);
 end;
 
 // exit

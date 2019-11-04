@@ -14,4 +14,14 @@
 
 procedure page7screen;
 begin
+  header('EditEnvirConf '+VERSION+' * Page 7/8: Growing mushroom - lighting');
+  textcolor(white);
+  gotoxy(4,3); writeln('1st time when lights switch on:');
+  gotoxy(4,4); writeln('1st time when lights switch off:');
+  gotoxy(4,5); writeln('2nd time when lights switch on:');
+  gotoxy(4,6); writeln('2nd time when lights switch off:');
+  gotoxy(45,3); if mlightson1<10 then write('0'); write(mlightson1,'.00');
+  gotoxy(45,4); if mlightsoff1<10 then write('0'); write(mlightsoff1,'.00');
+  gotoxy(45,5); if mlightson2<10 then write('0'); write(mlightson2,'.00');
+  gotoxy(45,6); if mlightsoff2<10 then write('0'); write(mlightsoff2,'.00');
 end;
