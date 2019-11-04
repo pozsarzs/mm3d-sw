@@ -16,10 +16,10 @@ procedure page6screen;
 begin
   header('EditEnvirConf '+VERSION+' * Page 6/8: Growing mushroom - heating');
   textcolor(white);
-  gotoxy(4,3); writeln('Minimal temperature (0-99):');
-  gotoxy(4,4); writeln('Temp. when heater switch on: (0-99)');
-  gotoxy(4,5); writeln('Temp. when heater switch off (0-99):');
-  gotoxy(4,6); writeln('Maximal temperature (0-99):');
+  gotoxy(4,3); writeln('Minimal temperature:');
+  gotoxy(4,4); writeln('Heating switch-on temperature:');
+  gotoxy(4,5); writeln('Heating switch-off temperature:');
+  gotoxy(4,6); writeln('Maximal temperature:');
   if mtempmin>9 then gotoxy(45,3) else gotoxy(46,3); writeln(mtempmin,' °C');
   if mtempon>9 then gotoxy(45,4) else gotoxy(46,4); writeln(mtempon,' °C');
   if mtempoff>9 then gotoxy(45,5) else gotoxy(46,5); writeln(mtempoff,' °C');

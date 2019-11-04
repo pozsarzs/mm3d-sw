@@ -83,6 +83,8 @@ begin
     hlightsoff1:=strtoint(iif.ReadString('hyphae','light_off1','0'));
     hlightson2:=strtoint(iif.ReadString('hyphae','light_on2','0'));
     hlightsoff2:=strtoint(iif.ReadString('hyphae','light_off2','0'));
+    hventon:=strtoint(iif.ReadString('hyphae','vent_on','0'));
+    hventoff:=strtoint(iif.ReadString('hyphae','vent_off','0'));
     hventdis[0]:=strtoint(iif.ReadString('hyphae','vent_disable_00','0'));
     hventdis[1]:=strtoint(iif.ReadString('hyphae','vent_disable_01','0'));
     hventdis[2]:=strtoint(iif.ReadString('hyphae','vent_disable_02','0'));
@@ -196,6 +198,8 @@ begin
     mlightsoff1:=strtoint(iif.ReadString('mushroom','light_off1','0'));
     mlightson2:=strtoint(iif.ReadString('mushroom','light_on2','0'));
     mlightsoff2:=strtoint(iif.ReadString('mushroom','light_off2','0'));
+    mventon:=strtoint(iif.ReadString('mushroom','vent_on','0'));
+    mventoff:=strtoint(iif.ReadString('mushroom','vent_off','0'));
     mventdis[0]:=strtoint(iif.ReadString('mushroom','vent_disable_00','0'));
     mventdis[1]:=strtoint(iif.ReadString('mushroom','vent_disable_01','0'));
     mventdis[2]:=strtoint(iif.ReadString('mushroom','vent_disable_02','0'));

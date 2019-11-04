@@ -16,10 +16,10 @@ procedure page5screen;
 begin
   header('EditEnvirConf '+VERSION+' * Page 5/8: Growing mushroom - humidifying');
   textcolor(white);
-  gotoxy(4,3); writeln('Minimal relative humidity (0-99):');
-  gotoxy(4,4); writeln('RH when humidifier switch on (0-99):');
-  gotoxy(4,5); writeln('RH when humidifier switch off (0-99):');
-  gotoxy(4,6); writeln('Maximal relative humidity (0-99):');
+  gotoxy(4,3); writeln('Minimal relative humidity:');
+  gotoxy(4,4); writeln('Humidifier switch-on humidity:');
+  gotoxy(4,5); writeln('Humidifier switch-off humidity:');
+  gotoxy(4,6); writeln('Maximal relative humidity:');
   if mhummin>9 then gotoxy(45,3) else gotoxy(46,3); writeln(mhummin,' %');
   if mhumon>9 then gotoxy(45,4) else gotoxy(46,4); writeln(mhumon,' %');
   if mhumoff>9 then gotoxy(45,5) else gotoxy(46,5); writeln(mhumoff,' %');
