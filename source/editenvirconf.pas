@@ -55,7 +55,7 @@ const
                                      (3,0,0,0,0,0),
                                      (3,8,8,8,8,21),
                                      (3,10,10,0,0,0),
-                                     (3,8,8,8,8,0),
+                                     (3,10,10,0,0,0),
                                      (3,0,0,0,0,0),
                                      (3,8,8,8,8,21));
   maxposy: array[1..8,1..6] of byte=((6,21,21,0,0,0),
@@ -103,6 +103,7 @@ var
 begin
   textbackground(black);
   footer('<Enter> accept  <Esc> cancel');
+  if block=6 then footer('<+>/<-> sign change  <Enter> accept  <Esc> cancel');
   textcolor(lightgray);
   gotoxy(1,25); write('>');
   s:='';
@@ -131,7 +132,9 @@ begin
       // page #1 - block #1
       if block=1 then
       begin
-        gotoxy(minposx[page,block]-length(s)+1,posy); textbackground(blue);
+        textbackground(blue);
+        gotoxy(minposx[page,block]-1,posy); write('  ');
+        gotoxy(minposx[page,block]-length(s)+1,posy);
         case posy of
           3: begin hhummin:=strtoint(s); write(hhummin); end;
           4: begin hhumon:=strtoint(s); write(hhumon); end;
@@ -161,7 +164,9 @@ begin
       // page #2 - block #1
       if block=1 then
       begin
-        gotoxy(minposx[page,block]-length(s)+1,posy); textbackground(blue);
+        textbackground(blue);
+        gotoxy(minposx[page,block]-1,posy);write('  ');
+        gotoxy(minposx[page,block]-length(s)+1,posy);
         case posy of
           3: begin htempmin:=strtoint(s); write(htempmin); end;
           4: begin htempon:=strtoint(s); write(htempon); end;
@@ -192,7 +197,9 @@ begin
       if block=1 then
       begin
         if strtoint(s)>23 then s:=inttostr(23);
-        gotoxy(minposx[page,block]-length(s)+1,posy); textbackground(blue);
+        textbackground(blue);
+        gotoxy(minposx[page,block]-1,posy); write('  ');
+        gotoxy(minposx[page,block]-length(s)+1,posy);
         case posy of
           3: begin hlightson1:=strtoint(s); write(hlightson1); end;
           4: begin hlightsoff1:=strtoint(s); write(hlightsoff1); end;
@@ -209,7 +216,9 @@ begin
       if block=1 then
       begin
         if strtoint(s)>59 then s:=inttostr(59);
-        gotoxy(minposx[page,block]-length(s)+1,posy); textbackground(blue);
+        textbackground(blue);
+        gotoxy(minposx[page,block]-1,posy); write('  ');
+        gotoxy(minposx[page,block]-length(s)+1,posy);
         case posy of
           3: begin hventon:=strtoint(s); write(hventon); end;
           4: begin hventoff:=strtoint(s); write(hventoff); end;
@@ -257,7 +266,9 @@ begin
       // page #5 - block #1
       if block=1 then
       begin
-        gotoxy(minposx[page,block]-length(s)+1,posy); textbackground(blue);
+        textbackground(blue);
+        gotoxy(minposx[page,block]-1,posy); write('  ');
+        gotoxy(minposx[page,block]-length(s)+1,posy);
         case posy of
           3: begin mhummin:=strtoint(s); write(mhummin); end;
           4: begin mhumon:=strtoint(s); write(mhumon); end;
@@ -287,7 +298,9 @@ begin
       // page #6 - block #1
       if block=1 then
       begin
-        gotoxy(minposx[page,block]-length(s)+1,posy); textbackground(blue);
+        textbackground(blue);
+        gotoxy(minposx[page,block]-1,posy); write('  ');
+        gotoxy(minposx[page,block]-length(s)+1,posy);
         case posy of
           3: begin mtempmin:=strtoint(s); write(mtempmin); end;
           4: begin mtempon:=strtoint(s); write(mtempon); end;
@@ -318,7 +331,9 @@ begin
       if block=1 then
       begin
         if strtoint(s)>23 then s:=inttostr(23);
-        gotoxy(minposx[page,block]-length(s)+1,posy); textbackground(blue);
+        textbackground(blue);
+        gotoxy(minposx[page,block]-1,posy); write('  ');
+        gotoxy(minposx[page,block]-length(s)+1,posy);
         case posy of
           3: begin mlightson1:=strtoint(s); write(mlightson1); end;
           4: begin mlightsoff1:=strtoint(s); write(mlightsoff1); end;
@@ -335,7 +350,9 @@ begin
       if block=1 then
       begin
         if strtoint(s)>59 then s:=inttostr(59);
-        gotoxy(minposx[page,block]-length(s)+1,posy); textbackground(blue);
+        textbackground(blue);
+        gotoxy(minposx[page,block]-1,posy); write('  ');
+        gotoxy(minposx[page,block]-length(s)+1,posy);
         case posy of
           3: begin mventon:=strtoint(s); write(mventon); end;
           4: begin mventoff:=strtoint(s); write(mventoff); end;
@@ -372,7 +389,9 @@ begin
       // page #8 - block #6
       if block=6 then
       begin
-        gotoxy(minposx[page,block]-length(s)+1,posy); textbackground(blue);
+        textbackground(blue);
+        gotoxy(minposx[page,block]-2,posy); write('   ');
+        gotoxy(minposx[page,block]-length(s)+1,posy);
         mventlowtemp:=strtoint(s); write(mventlowtemp);
       end;
     end;
