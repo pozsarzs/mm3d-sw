@@ -99,7 +99,6 @@ procedure getvalue(page,block,posy: byte);
 var
   c: char;
   s: string;
-  b: byte;
 begin
   textbackground(black);
   footer('<Enter> accept  <Esc> cancel');
@@ -255,7 +254,9 @@ begin
       // page #4 - block #6
       if block=6 then
       begin
-        gotoxy(minposx[page,block]-length(s)+1,posy); textbackground(blue);
+        textbackground(blue);
+        gotoxy(minposx[page,block]-2,posy); write('   ');
+        gotoxy(minposx[page,block]-length(s)+1,posy);
         hventlowtemp:=strtoint(s); write(hventlowtemp);
       end;
     end;
@@ -405,7 +406,6 @@ function setvalues: boolean;
 var
   page, block, posy: byte;
   k : char;
-  s: string;
 label back;
 begin
   page:=1;
