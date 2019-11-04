@@ -42,30 +42,30 @@ const
   VERSION: string='v0.4';
 const
   blocks: array[1..8] of byte=(3,3,1,3,3,3,3,3);
-  minposx: array[1..8,1..4] of byte=((46,17,35,0),
-                                     (0,0,0,0),
-                                     (46,0,0,0),
-                                     (0,0,0,0),
-                                     (46,17,35,0),
-                                     (0,0,0,0),
-                                     (0,0,0,0),
-                                     (0,0,0,0));
-  minposy: array[1..8,1..4] of byte=((3,10,10,0),
-                                     (0,0,0,0),
-                                     (3,0,0,0),
-                                     (0,0,0,0),
-                                     (3,10,10,0),
-                                     (0,0,0,0),
-                                     (0,0,0,0),
-                                     (0,0,0,0));
-  maxposy: array[1..8,1..4] of byte=((6,21,21,0),
-                                     (0,0,0,0),
-                                     (6,0,0,0),
-                                     (0,0,0,0),
-                                     (6,21,21,0),
-                                     (0,0,0,0),
-                                     (0,0,0,0),
-                                     (0,0,0,0));
+  minposx: array[1..8,1..5] of byte=((46,17,35,0,0),
+                                     (46,17,35,0,0),
+                                     (46,0,0,0,0),
+                                     (46,17,35,0,0),
+                                     (46,17,35,0,0),
+                                     (46,17,35,0,0),
+                                     (46,0,0,0,0),
+                                     (46,17,35,0,0));
+  minposy: array[1..8,1..5] of byte=((3,10,10,0,0),
+                                     (3,10,10,0,0),
+                                     (3,0,0,0,0),
+                                     (3,10,10,0,0),
+                                     (3,10,10,0,0),
+                                     (3,10,10,0,0),
+                                     (3,0,0,0,0),
+                                     (3,10,10,0,0));
+  maxposy: array[1..8,1..5] of byte=((6,21,21,0,0),
+                                     (6,21,21,0,0),
+                                     (6,0,0,0,0),
+                                     (6,21,21,0,0),
+                                     (6,21,21,0,0),
+                                     (6,21,21,0,0),
+                                     (6,0,0,0,0),
+                                     (6,21,21,21,0));
 
 {$I page1screen.inc}
 {$I page2screen.inc}
@@ -91,7 +91,7 @@ begin
     7: page7screen;
     8: page8screen;
   end;
-  footer('<Tab>/<Up>/<Down> move  <Enter> edit  <Home>/<PgUp>/<PgDn>/<End> paging');
+  footer('<Tab>/<Up>/<Down> move  <Enter> edit  <Home>/<PgUp>/<PgDn>/<End> paging  <Esc> exit');
   textbackground(black); gotoxy(1,25); clreol;
 end;
 
@@ -152,6 +152,36 @@ begin
       end;
     end;
 
+    // page #2
+    if page=2 then
+    begin
+      // page #2 - block #1
+      if block=1 then
+      begin
+        gotoxy(minposx[page,block]-length(s)+1,posy); textbackground(blue);
+        case posy of
+          3: begin htempmin:=strtoint(s); write(htempmin); end;
+          4: begin htempon:=strtoint(s); write(htempon); end;
+          5: begin htempoff:=strtoint(s); write(htempoff); end;
+          6: begin htempmax:=strtoint(s); write(htempmax); end;
+        end;
+      end;
+      // page #2 - block #2
+      if block=2 then
+      begin
+        gotoxy(minposx[page,block],posy); textbackground(blue);
+        hheaterdis[posy-10]:=strtoint(s);
+        write(hheaterdis[posy-10]);
+      end;
+      // page #2 - block #3
+      if block=3 then
+      begin
+        gotoxy(minposx[page,block],posy); textbackground(blue);
+        hheaterdis[posy+2]:=strtoint(s);
+        write(hheaterdis[posy+2]);
+      end;
+    end;
+
     // page #3
     if page=3 then
     begin
@@ -200,6 +230,36 @@ begin
       end;
     end;
 
+    // page #6
+    if page=6 then
+    begin
+      // page #6 - block #1
+      if block=1 then
+      begin
+        gotoxy(minposx[page,block]-length(s)+1,posy); textbackground(blue);
+        case posy of
+          3: begin mtempmin:=strtoint(s); write(mtempmin); end;
+          4: begin mtempon:=strtoint(s); write(mtempon); end;
+          5: begin mtempoff:=strtoint(s); write(mtempoff); end;
+          6: begin mtempmax:=strtoint(s); write(mtempmax); end;
+        end;
+      end;
+      // page #6 - block #2
+      if block=2 then
+      begin
+        gotoxy(minposx[page,block],posy); textbackground(blue);
+        mheaterdis[posy-10]:=strtoint(s);
+        write(mheaterdis[posy-10]);
+      end;
+      // page #6 - block #3
+      if block=3 then
+      begin
+        gotoxy(minposx[page,block],posy); textbackground(blue);
+        mheaterdis[posy+2]:=strtoint(s);
+        write(mheaterdis[posy+2]);
+      end;
+    end;
+
     // page #7
     if page=7 then
     begin
@@ -218,7 +278,7 @@ begin
     end;
 
   end;
-  footer('<Tab>/<Up>/<Down> move  <Enter> edit  <Home>/<PgUp>/<PgDn>/<End> paging');
+  footer('<Tab>/<Up>/<Down> move  <Enter> edit  <Home>/<PgUp>/<PgDn>/<End> paging  <Esc> exit');
   gotoxy(1,25); clreol;
 end;
 
@@ -235,7 +295,7 @@ begin
  back:
   textbackground(black);
   gotoxy(1,25); clreol;
-  footer('<Tab>/<Up>/<Down> move  <Enter> edit  <Home>/<PgUp>/<PgDn>/<End> paging');
+  footer('<Tab>/<Up>/<Down> move  <Enter> edit  <Home>/<PgUp>/<PgDn>/<End> paging  <Esc> exit');
   posy:=minposy[page,block];
   gotoxy(minposx[page,block],posy);
   repeat
