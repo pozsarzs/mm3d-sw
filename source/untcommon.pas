@@ -18,7 +18,7 @@ uses
   crt;
 
 procedure background;
-procedure footer(title: string);
+procedure footer(ypos: byte; title: string);
 procedure header(title: string);
 procedure quit(halt_code: byte; clear: boolean; message: string);
 
@@ -31,12 +31,12 @@ begin
 end;
 
 // write footer
-procedure footer(title: string);
+procedure footer(ypos: byte; title: string);
 var
   b: byte;
 begin
   textbackground(lightgray); textcolor(black);
-  gotoxy(1,24); clreol; gotoxy(2,24);
+  gotoxy(1,ypos); clreol; gotoxy(2,ypos);
   for b:=1 to length(title) do
   begin
     case title[b] of

@@ -19,6 +19,7 @@ uses
   character, crt,
   untcommon;
 var
+  bottom: byte;
   hheaterdis, mheaterdis: array[0..23] of byte;
   hhumdis, mhumdis: array[0..23] of byte;
   hventdis, mventdis: array[0..23] of byte;
@@ -91,8 +92,8 @@ begin
     7: page7screen;
     8: page8screen;
   end;
-  footer('<Tab>/<Up>/<Down> move  <Enter> edit  <Home>/<PgUp>/<PgDn>/<End> paging  <Esc> exit');
-  textbackground(black); gotoxy(1,25); clreol;
+  footer(bottom-1,'<Tab>/<Up>/<Down> move  <Enter> edit  <Home>/<PgUp>/<PgDn>/<End> paging  <Esc> exit');
+  textbackground(black); gotoxy(1,bottom); clreol;
 end;
 
 procedure getvalue(page,block,posy: byte);
@@ -101,10 +102,10 @@ var
   s: string;
 begin
   textbackground(black);
-  footer('<Enter> accept  <Esc> cancel');
-  if block=6 then footer('<+>/<-> sign change  <Enter> accept  <Esc> cancel');
+  footer(bottom-1,'<Enter> accept  <Esc> cancel');
+  if block=6 then footer(bottom-1,'<+>/<-> sign change  <Enter> accept  <Esc> cancel');
   textcolor(lightgray);
-  gotoxy(1,25); write('>');
+  gotoxy(1,bottom); write('>');
   s:='';
   repeat
     c:=readkey;
@@ -120,7 +121,7 @@ begin
       else if (c='0') or (c='1') then s:=c;
       end;
     if c=#8 then delete(s,length(s),1);
-    gotoxy(1,25); clreol; write('>'+s);
+    gotoxy(1,bottom); clreol; write('>'+s);
   until (c=#13) or (c=#27);
   textcolor(white);
   if (c=#13) and (length(s)>0) then
@@ -398,8 +399,8 @@ begin
     end;
 
   end;
-  footer('<Tab>/<Up>/<Down> move  <Enter> edit  <Home>/<PgUp>/<PgDn>/<End> paging  <Esc> exit');
-  gotoxy(1,25); clreol;
+  footer(bottom-1,'<Tab>/<Up>/<Down> move  <Enter> edit  <Home>/<PgUp>/<PgDn>/<End> paging  <Esc> exit');
+  gotoxy(1,bottom); clreol;
 end;
 
 function setvalues: boolean;
@@ -413,8 +414,8 @@ begin
   screen(page);
  back:
   textbackground(black);
-  gotoxy(1,25); clreol;
-  footer('<Tab>/<Up>/<Down> move  <Enter> edit  <Home>/<PgUp>/<PgDn>/<End> paging  <Esc> exit');
+  gotoxy(1,bottom); clreol;
+  footer(bottom-1,'<Tab>/<Up>/<Down> move  <Enter> edit  <Home>/<PgUp>/<PgDn>/<End> paging  <Esc> exit');
   posy:=minposy[page,block];
   gotoxy(minposx[page,block],posy);
   repeat
@@ -482,9 +483,9 @@ begin
         end;
   // exit
   until k=#27;
-  footer('<Esc> cancel');
+  footer(bottom-1,'<Esc> cancel');
   textcolor(lightgray);
-  gotoxy(1,25); write('Save to '+paramstr(1)+'? (y/n) ');
+  gotoxy(1,bottom); write('Save to '+paramstr(1)+'? (y/n) ');
   textcolor(white);
   repeat
     k:=lowercase(readkey);
@@ -493,15 +494,25 @@ begin
   if k='y' then setvalues:=true else setvalues:=false;
 end;
 
+function terminalsize: boolean;
+begin
+  if (screenwidth>=80) and (screenheight>=25)
+    then terminalsize:=true
+    else terminalsize:=false;
+  bottom:=screenheight;
+end;
+
 begin
   textcolor(lightgray); textbackground(black);
   if paramcount=0 then
     quit(1,false,'Usage:'+#10+'    '+paramstr(0)+' /path/envir.ini');
-  if not loadinifile(paramstr(1)) then
-    quit(2,false,'ERROR: Cannot read '+paramstr(1)+' file!');
-  if not setvalues then
-    quit(0,true,'File '+paramstr(1)+' is not saved.');
-  if not saveinifile(paramstr(1)) then
-    quit(3,true,'ERROR: Cannot write '+paramstr(1)+' file!');
+  if not terminalsize
+    then quit(2,false,'Usage:'+#10+'    '+paramstr(0)+' /path/envir.ini');
+  if not loadinifile(paramstr(1))
+    then quit(3,false,'ERROR: Cannot read '+paramstr(1)+' file!');
+  if not setvalues
+    then quit(0,true,'File '+paramstr(1)+' is not saved.');
+  if not saveinifile(paramstr(1))
+    then quit(4,true,'ERROR: Cannot write '+paramstr(1)+' file!');
   quit(0,true,'');
 end.
