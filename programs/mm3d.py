@@ -14,6 +14,7 @@
 # FOR A PARTICULAR PURPOSE.
 
 import ConfigParser
+import array as arr
 import daemon
 import io
 import os
@@ -139,455 +140,95 @@ def loadconfiguration(conffile):
 
 # load environment characteristics
 def loadenvirchars(conffile):
-  global hhumidity_min
-  global hhumidifier_on
-  global hhumidifier_off
-  global hhumidity_max
-  global hhumidifier_disable_00
-  global hhumidifier_disable_01
-  global hhumidifier_disable_02
-  global hhumidifier_disable_03
-  global hhumidifier_disable_04
-  global hhumidifier_disable_05
-  global hhumidifier_disable_06
-  global hhumidifier_disable_07
-  global hhumidifier_disable_08
-  global hhumidifier_disable_09
-  global hhumidifier_disable_10
-  global hhumidifier_disable_11
-  global hhumidifier_disable_12
-  global hhumidifier_disable_13
-  global hhumidifier_disable_14
-  global hhumidifier_disable_15
-  global hhumidifier_disable_16
-  global hhumidifier_disable_17
-  global hhumidifier_disable_18
-  global hhumidifier_disable_19
-  global hhumidifier_disable_20
-  global hhumidifier_disable_21
-  global hhumidifier_disable_22
-  global hhumidifier_disable_23
-  global htemperature_min
-  global hheater_on
+  global hheater_disable=arr.array('i',[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,])
   global hheater_off
-  global htemperature_max
-  global hheater_disable_00
-  global hheater_disable_01
-  global hheater_disable_02
-  global hheater_disable_03
-  global hheater_disable_04
-  global hheater_disable_05
-  global hheater_disable_06
-  global hheater_disable_07
-  global hheater_disable_08
-  global hheater_disable_09
-  global hheater_disable_10
-  global hheater_disable_11
-  global hheater_disable_12
-  global hheater_disable_13
-  global hheater_disable_14
-  global hheater_disable_15
-  global hheater_disable_16
-  global hheater_disable_17
-  global hheater_disable_18
-  global hheater_disable_19
-  global hheater_disable_20
-  global hheater_disable_21
-  global hheater_disable_22
-  global hheater_disable_23
-  global hlight_on1
+  global hheater_on
+  global hhumidifier_disable=arr.array('i',[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,])
+  global hhumidifier_off
+  global hhumidifier_on
+  global hhumidity_max
+  global hhumidity_min
   global hlight_off1
-  global hlight_on2
   global hlight_off2
-  global hvent_on
-  global hvent_off
-  global hvent_disable_00
-  global hvent_disable_01
-  global hvent_disable_02
-  global hvent_disable_03
-  global hvent_disable_04
-  global hvent_disable_05
-  global hvent_disable_06
-  global hvent_disable_07
-  global hvent_disable_08
-  global hvent_disable_09
-  global hvent_disable_10
-  global hvent_disable_11
-  global hvent_disable_12
-  global hvent_disable_13
-  global hvent_disable_14
-  global hvent_disable_15
-  global hvent_disable_16
-  global hvent_disable_17
-  global hvent_disable_18
-  global hvent_disable_19
-  global hvent_disable_20
-  global hvent_disable_21
-  global hvent_disable_22
-  global hvent_disable_23
-  global hvent_disablelowtemp_00
-  global hvent_disablelowtemp_01
-  global hvent_disablelowtemp_02
-  global hvent_disablelowtemp_03
-  global hvent_disablelowtemp_04
-  global hvent_disablelowtemp_05
-  global hvent_disablelowtemp_06
-  global hvent_disablelowtemp_07
-  global hvent_disablelowtemp_08
-  global hvent_disablelowtemp_09
-  global hvent_disablelowtemp_10
-  global hvent_disablelowtemp_11
-  global hvent_disablelowtemp_12
-  global hvent_disablelowtemp_13
-  global hvent_disablelowtemp_14
-  global hvent_disablelowtemp_15
-  global hvent_disablelowtemp_16
-  global hvent_disablelowtemp_17
-  global hvent_disablelowtemp_18
-  global hvent_disablelowtemp_19
-  global hvent_disablelowtemp_20
-  global hvent_disablelowtemp_21
-  global hvent_disablelowtemp_22
-  global hvent_disablelowtemp_23
+  global hlight_on1
+  global hlight_on2
+  global htemperature_max
+  global htemperature_min
+  global hvent_disable=arr.array('i',[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,])
+  global hvent_disablelowtemp=arr.array('i',[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,])
   global hvent_lowtemp
-  global mhumidity_min
-  global mhumidifier_on
-  global mhumidifier_off
-  global mhumidity_max
-  global mhumidifier_disable_00
-  global mhumidifier_disable_01
-  global mhumidifier_disable_02
-  global mhumidifier_disable_03
-  global mhumidifier_disable_04
-  global mhumidifier_disable_05
-  global mhumidifier_disable_06
-  global mhumidifier_disable_07
-  global mhumidifier_disable_08
-  global mhumidifier_disable_09
-  global mhumidifier_disable_10
-  global mhumidifier_disable_11
-  global mhumidifier_disable_12
-  global mhumidifier_disable_13
-  global mhumidifier_disable_14
-  global mhumidifier_disable_15
-  global mhumidifier_disable_16
-  global mhumidifier_disable_17
-  global mhumidifier_disable_18
-  global mhumidifier_disable_19
-  global mhumidifier_disable_20
-  global mhumidifier_disable_21
-  global mhumidifier_disable_22
-  global mhumidifier_disable_23
-  global mtemperature_min
-  global mheater_on
+  global hvent_off
+  global hvent_on
+  global mheater_disable=arr.array('i',[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,])
   global mheater_off
-  global mtemperature_max
-  global mheater_disable_00
-  global mheater_disable_01
-  global mheater_disable_02
-  global mheater_disable_03
-  global mheater_disable_04
-  global mheater_disable_05
-  global mheater_disable_06
-  global mheater_disable_07
-  global mheater_disable_08
-  global mheater_disable_09
-  global mheater_disable_10
-  global mheater_disable_11
-  global mheater_disable_12
-  global mheater_disable_13
-  global mheater_disable_14
-  global mheater_disable_15
-  global mheater_disable_16
-  global mheater_disable_17
-  global mheater_disable_18
-  global mheater_disable_19
-  global mheater_disable_20
-  global mheater_disable_21
-  global mheater_disable_22
-  global mheater_disable_23
-  global mlight_on1
+  global mheater_on
+  global mhumidifier_disable=arr.array('i',[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,])
+  global mhumidifier_off
+  global mhumidifier_on
+  global mhumidity_max
+  global mhumidity_min
   global mlight_off1
-  global mlight_on2
   global mlight_off2
-  global mvent_on
-  global mvent_off
-  global mvent_disable_00
-  global mvent_disable_01
-  global mvent_disable_02
-  global mvent_disable_03
-  global mvent_disable_04
-  global mvent_disable_05
-  global mvent_disable_06
-  global mvent_disable_07
-  global mvent_disable_08
-  global mvent_disable_09
-  global mvent_disable_10
-  global mvent_disable_11
-  global mvent_disable_12
-  global mvent_disable_13
-  global mvent_disable_14
-  global mvent_disable_15
-  global mvent_disable_16
-  global mvent_disable_17
-  global mvent_disable_18
-  global mvent_disable_19
-  global mvent_disable_20
-  global mvent_disable_21
-  global mvent_disable_22
-  global mvent_disable_23
-  global mvent_disablelowtemp_00
-  global mvent_disablelowtemp_01
-  global mvent_disablelowtemp_02
-  global mvent_disablelowtemp_03
-  global mvent_disablelowtemp_04
-  global mvent_disablelowtemp_05
-  global mvent_disablelowtemp_06
-  global mvent_disablelowtemp_07
-  global mvent_disablelowtemp_08
-  global mvent_disablelowtemp_09
-  global mvent_disablelowtemp_10
-  global mvent_disablelowtemp_11
-  global mvent_disablelowtemp_12
-  global mvent_disablelowtemp_13
-  global mvent_disablelowtemp_14
-  global mvent_disablelowtemp_15
-  global mvent_disablelowtemp_16
-  global mvent_disablelowtemp_17
-  global mvent_disablelowtemp_18
-  global mvent_disablelowtemp_19
-  global mvent_disablelowtemp_20
-  global mvent_disablelowtemp_21
-  global mvent_disablelowtemp_22
-  global mvent_disablelowtemp_23
+  global mlight_on1
+  global mlight_on2
+  global mtemperature_max
+  global mtemperature_min
+  global mvent_disable=arr.array('i',[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,])
+  global mvent_disablelowtemp=arr.array('i',[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,])
   global mvent_lowtemp
+  global mvent_off
+  global mvent_on
   try:
     with open(conffile) as f:
       sample_config=f.read()
     config=ConfigParser.RawConfigParser(allow_no_value=True)
     config.readfp(io.BytesIO(sample_config))
-    hhumidity_min=int(config.get('hyphae','humidity_min'))
-    hhumidifier_on=int(config.get('hyphae','humidifier_on'))
-    hhumidifier_off=int(config.get('hyphae','humidifier_off'))
-    hhumidity_max=int(config.get('hyphae','humidity_max'))
-    hhumidifier_disable_00=int(config.get('hyphae','humidifier_disable_00'))
-    hhumidifier_disable_01=int(config.get('hyphae','humidifier_disable_01'))
-    hhumidifier_disable_02=int(config.get('hyphae','humidifier_disable_02'))
-    hhumidifier_disable_03=int(config.get('hyphae','humidifier_disable_03'))
-    hhumidifier_disable_04=int(config.get('hyphae','humidifier_disable_04'))
-    hhumidifier_disable_05=int(config.get('hyphae','humidifier_disable_05'))
-    hhumidifier_disable_06=int(config.get('hyphae','humidifier_disable_06'))
-    hhumidifier_disable_07=int(config.get('hyphae','humidifier_disable_07'))
-    hhumidifier_disable_08=int(config.get('hyphae','humidifier_disable_08'))
-    hhumidifier_disable_09=int(config.get('hyphae','humidifier_disable_09'))
-    hhumidifier_disable_10=int(config.get('hyphae','humidifier_disable_10'))
-    hhumidifier_disable_11=int(config.get('hyphae','humidifier_disable_11'))
-    hhumidifier_disable_12=int(config.get('hyphae','humidifier_disable_12'))
-    hhumidifier_disable_13=int(config.get('hyphae','humidifier_disable_13'))
-    hhumidifier_disable_14=int(config.get('hyphae','humidifier_disable_14'))
-    hhumidifier_disable_15=int(config.get('hyphae','humidifier_disable_15'))
-    hhumidifier_disable_16=int(config.get('hyphae','humidifier_disable_16'))
-    hhumidifier_disable_17=int(config.get('hyphae','humidifier_disable_17'))
-    hhumidifier_disable_18=int(config.get('hyphae','humidifier_disable_18'))
-    hhumidifier_disable_19=int(config.get('hyphae','humidifier_disable_19'))
-    hhumidifier_disable_20=int(config.get('hyphae','humidifier_disable_20'))
-    hhumidifier_disable_21=int(config.get('hyphae','humidifier_disable_21'))
-    hhumidifier_disable_22=int(config.get('hyphae','humidifier_disable_22'))
-    hhumidifier_disable_23=int(config.get('hyphae','humidifier_disable_23'))
-    htemperature_min=int(config.get('hyphae','temperature_min'))
-    hheater_on=int(config.get('hyphae','heater_on'))
+    for x in range(24):
+      hhumidifier_disable[x]=int(config.get('hyphae','humidifier_disable_'+str(x)))
+    for x in range(24):
+      hheater_disable[x]=int(config.get('hyphae','heater_disable_'+str(x)))
+    for x in range(24):
+      hvent_disable[x]=int(config.get('hyphae','vent_disable_'+str(x)))
+    for x in range(24):
+      hvent_disablelowtemp[x]=int(config.get('hyphae','vent_disablelowtemp_'+str(x)))
     hheater_off=int(config.get('hyphae','heater_off'))
+    hheater_on=int(config.get('hyphae','heater_on'))
+    hhumidifier_off=int(config.get('hyphae','humidifier_off'))
+    hhumidifier_on=int(config.get('hyphae','humidifier_on'))
+    hhumidity_max=int(config.get('hyphae','humidity_max'))
+    hhumidity_min=int(config.get('hyphae','humidity_min'))
+    hlight_off1=int(config.get('hyphae','light_off1'))
+    hlight_off2=int(config.get('hyphae','light_off2'))
+    hlight_on1=int(config.get('hyphae','light_on1'))
+    hlight_on2=int(config.get('hyphae','light_on2'))
     htemperature_max=int(config.get('hyphae','temperature_max'))
-    hheater_disable_00=int(config.get('hyphae','heater_disable_00'))
-    hheater_disable_01=int(config.get('hyphae','heater_disable_01'))
-    hheater_disable_02=int(config.get('hyphae','heater_disable_02'))
-    hheater_disable_03=int(config.get('hyphae','heater_disable_03'))
-    hheater_disable_04=int(config.get('hyphae','heater_disable_04'))
-    hheater_disable_05=int(config.get('hyphae','heater_disable_05'))
-    hheater_disable_06=int(config.get('hyphae','heater_disable_06'))
-    hheater_disable_07=int(config.get('hyphae','heater_disable_07'))
-    hheater_disable_08=int(config.get('hyphae','heater_disable_08'))
-    hheater_disable_09=int(config.get('hyphae','heater_disable_09'))
-    hheater_disable_10=int(config.get('hyphae','heater_disable_10'))
-    hheater_disable_11=int(config.get('hyphae','heater_disable_11'))
-    hheater_disable_12=int(config.get('hyphae','heater_disable_12'))
-    hheater_disable_13=int(config.get('hyphae','heater_disable_13'))
-    hheater_disable_14=int(config.get('hyphae','heater_disable_14'))
-    hheater_disable_15=int(config.get('hyphae','heater_disable_15'))
-    hheater_disable_16=int(config.get('hyphae','heater_disable_16'))
-    hheater_disable_17=int(config.get('hyphae','heater_disable_17'))
-    hheater_disable_18=int(config.get('hyphae','heater_disable_18'))
-    hheater_disable_19=int(config.get('hyphae','heater_disable_19'))
-    hheater_disable_20=int(config.get('hyphae','heater_disable_20'))
-    hheater_disable_21=int(config.get('hyphae','heater_disable_21'))
-    hheater_disable_22=int(config.get('hyphae','heater_disable_22'))
-    hheater_disable_23=int(config.get('hyphae','heater_disable_23'))
-    hlight_on1=int(config.get('hyphae','hlight_on1'))
-    hlight_off1=int(config.get('hyphae','hlight_off1'))
-    hlight_on2=int(config.get('hyphae','hlight_on2'))
-    hlight_off2=int(config.get('hyphae','hlight_off2'))
-    hvent_on=int(config.get('hyphae','vent_on'))
-    hvent_off=int(config.get('hyphae','vent_off'))
-    hvent_disable_00=int(config.get('hyphae','vent_disable_03'))
-    hvent_disable_01=int(config.get('hyphae','vent_disable_01'))
-    hvent_disable_02=int(config.get('hyphae','vent_disable_02'))
-    hvent_disable_03=int(config.get('hyphae','vent_disable_03'))
-    hvent_disable_04=int(config.get('hyphae','vent_disable_04'))
-    hvent_disable_05=int(config.get('hyphae','vent_disable_05'))
-    hvent_disable_06=int(config.get('hyphae','vent_disable_06'))
-    hvent_disable_07=int(config.get('hyphae','vent_disable_07'))
-    hvent_disable_08=int(config.get('hyphae','vent_disable_08'))
-    hvent_disable_09=int(config.get('hyphae','vent_disable_09'))
-    hvent_disable_10=int(config.get('hyphae','vent_disable_10'))
-    hvent_disable_11=int(config.get('hyphae','vent_disable_11'))
-    hvent_disable_12=int(config.get('hyphae','vent_disable_12'))
-    hvent_disable_13=int(config.get('hyphae','vent_disable_13'))
-    hvent_disable_14=int(config.get('hyphae','vent_disable_14'))
-    hvent_disable_15=int(config.get('hyphae','vent_disable_15'))
-    hvent_disable_16=int(config.get('hyphae','vent_disable_16'))
-    hvent_disable_17=int(config.get('hyphae','vent_disable_17'))
-    hvent_disable_18=int(config.get('hyphae','vent_disable_18'))
-    hvent_disable_19=int(config.get('hyphae','vent_disable_19'))
-    hvent_disable_20=int(config.get('hyphae','vent_disable_20'))
-    hvent_disable_21=int(config.get('hyphae','vent_disable_21'))
-    hvent_disable_22=int(config.get('hyphae','vent_disable_22'))
-    hvent_disable_23=int(config.get('hyphae','vent_disable_23'))
-    hvent_disablelowtemp_00=int(config.get('hyphae','vent_disablelowtemp_00'))
-    hvent_disablelowtemp_01=int(config.get('hyphae','vent_disablelowtemp_01'))
-    hvent_disablelowtemp_02=int(config.get('hyphae','vent_disablelowtemp_02'))
-    hvent_disablelowtemp_03=int(config.get('hyphae','vent_disablelowtemp_03'))
-    hvent_disablelowtemp_04=int(config.get('hyphae','vent_disablelowtemp_04'))
-    hvent_disablelowtemp_05=int(config.get('hyphae','vent_disablelowtemp_05'))
-    hvent_disablelowtemp_06=int(config.get('hyphae','vent_disablelowtemp_06'))
-    hvent_disablelowtemp_07=int(config.get('hyphae','vent_disablelowtemp_07'))
-    hvent_disablelowtemp_08=int(config.get('hyphae','vent_disablelowtemp_08'))
-    hvent_disablelowtemp_09=int(config.get('hyphae','vent_disablelowtemp_09'))
-    hvent_disablelowtemp_10=int(config.get('hyphae','vent_disablelowtemp_10'))
-    hvent_disablelowtemp_11=int(config.get('hyphae','vent_disablelowtemp_11'))
-    hvent_disablelowtemp_12=int(config.get('hyphae','vent_disablelowtemp_12'))
-    hvent_disablelowtemp_13=int(config.get('hyphae','vent_disablelowtemp_13'))
-    hvent_disablelowtemp_14=int(config.get('hyphae','vent_disablelowtemp_14'))
-    hvent_disablelowtemp_15=int(config.get('hyphae','vent_disablelowtemp_15'))
-    hvent_disablelowtemp_16=int(config.get('hyphae','vent_disablelowtemp_16'))
-    hvent_disablelowtemp_17=int(config.get('hyphae','vent_disablelowtemp_17'))
-    hvent_disablelowtemp_18=int(config.get('hyphae','vent_disablelowtemp_18'))
-    hvent_disablelowtemp_19=int(config.get('hyphae','vent_disablelowtemp_19'))
-    hvent_disablelowtemp_20=int(config.get('hyphae','vent_disablelowtemp_20'))
-    hvent_disablelowtemp_21=int(config.get('hyphae','vent_disablelowtemp_21'))
-    hvent_disablelowtemp_22=int(config.get('hyphae','vent_disablelowtemp_22'))
-    hvent_disablelowtemp_23=int(config.get('hyphae','vent_disablelowtemp_23'))
+    htemperature_min=int(config.get('hyphae','temperature_min'))
     hvent_lowtemp=int(config.get('hyphae','vent_lowtemp'))
-    mhumidity_min=int(config.get('mushroom','humidity_min'))
-    mhumidifier_on=int(config.get('mushroom','humidifier_on'))
-    mhumidifier_off=int(config.get('mushroom','humidifier_off'))
-    mhumidity_max=int(config.get('mushroom','humidity_max'))
-    mhumidifier_disable_00=int(config.get('mushroom','humidifier_disable_00'))
-    mhumidifier_disable_01=int(config.get('mushroom','humidifier_disable_01'))
-    mhumidifier_disable_02=int(config.get('mushroom','humidifier_disable_02'))
-    mhumidifier_disable_03=int(config.get('mushroom','humidifier_disable_03'))
-    mhumidifier_disable_04=int(config.get('mushroom','humidifier_disable_04'))
-    mhumidifier_disable_05=int(config.get('mushroom','humidifier_disable_05'))
-    mhumidifier_disable_06=int(config.get('mushroom','humidifier_disable_06'))
-    mhumidifier_disable_07=int(config.get('mushroom','humidifier_disable_07'))
-    mhumidifier_disable_08=int(config.get('mushroom','humidifier_disable_08'))
-    mhumidifier_disable_09=int(config.get('mushroom','humidifier_disable_09'))
-    mhumidifier_disable_10=int(config.get('mushroom','humidifier_disable_10'))
-    mhumidifier_disable_11=int(config.get('mushroom','humidifier_disable_11'))
-    mhumidifier_disable_12=int(config.get('mushroom','humidifier_disable_12'))
-    mhumidifier_disable_13=int(config.get('mushroom','humidifier_disable_13'))
-    mhumidifier_disable_14=int(config.get('mushroom','humidifier_disable_14'))
-    mhumidifier_disable_15=int(config.get('mushroom','humidifier_disable_15'))
-    mhumidifier_disable_16=int(config.get('mushroom','humidifier_disable_16'))
-    mhumidifier_disable_17=int(config.get('mushroom','humidifier_disable_17'))
-    mhumidifier_disable_18=int(config.get('mushroom','humidifier_disable_18'))
-    mhumidifier_disable_19=int(config.get('mushroom','humidifier_disable_19'))
-    mhumidifier_disable_20=int(config.get('mushroom','humidifier_disable_20'))
-    mhumidifier_disable_21=int(config.get('mushroom','humidifier_disable_21'))
-    mhumidifier_disable_22=int(config.get('mushroom','humidifier_disable_22'))
-    mhumidifier_disable_23=int(config.get('mushroom','humidifier_disable_23'))
-    mtemperature_min=int(config.get('mushroom','temperature_min'))
-    mheater_on=int(config.get('mushroom','heater_on'))
+    hvent_off=int(config.get('hyphae','vent_off'))
+    hvent_on=int(config.get('hyphae','vent_on'))
+    for x in range(24):
+      mhumidifier_disable[x]=int(config.get('mushroom','humidifier_disable_'+str(x)))
+    for x in range(24):
+      mheater_disable[x]=int(config.get('mushroom','heater_disable_'+str(x)))
+    for x in range(24):
+      mvent_disable[x]=int(config.get('mushroom','vent_disable_'+str(x)))
+    for x in range(24):
+      mvent_disablelowtemp[x]=int(config.get('mushroom','vent_disablelowtemp_'+str(x)))
     mheater_off=int(config.get('mushroom','heater_off'))
+    mheater_on=int(config.get('mushroom','heater_on'))
+    mhumidifier_off=int(config.get('mushroom','humidifier_off'))
+    mhumidifier_on=int(config.get('mushroom','humidifier_on'))
+    mhumidity_max=int(config.get('mushroom','humidity_max'))
+    mhumidity_min=int(config.get('mushroom','humidity_min'))
+    mlight_off1=int(config.get('mushroom','light_off1'))
+    mlight_off2=int(config.get('mushroom','light_off2'))
+    mlight_on1=int(config.get('mushroom','light_on1'))
+    mlight_on2=int(config.get('mushroom','light_on2'))
     mtemperature_max=int(config.get('mushroom','temperature_max'))
-    mheater_disable_00=int(config.get('mushroom','heater_disable_00'))
-    mheater_disable_01=int(config.get('mushroom','heater_disable_01'))
-    mheater_disable_02=int(config.get('mushroom','heater_disable_02'))
-    mheater_disable_03=int(config.get('mushroom','heater_disable_03'))
-    mheater_disable_04=int(config.get('mushroom','heater_disable_04'))
-    mheater_disable_05=int(config.get('mushroom','heater_disable_05'))
-    mheater_disable_06=int(config.get('mushroom','heater_disable_06'))
-    mheater_disable_07=int(config.get('mushroom','heater_disable_07'))
-    mheater_disable_08=int(config.get('mushroom','heater_disable_08'))
-    mheater_disable_09=int(config.get('mushroom','heater_disable_09'))
-    mheater_disable_10=int(config.get('mushroom','heater_disable_10'))
-    mheater_disable_11=int(config.get('mushroom','heater_disable_11'))
-    mheater_disable_12=int(config.get('mushroom','heater_disable_12'))
-    mheater_disable_13=int(config.get('mushroom','heater_disable_13'))
-    mheater_disable_14=int(config.get('mushroom','heater_disable_14'))
-    mheater_disable_15=int(config.get('mushroom','heater_disable_15'))
-    mheater_disable_16=int(config.get('mushroom','heater_disable_16'))
-    mheater_disable_17=int(config.get('mushroom','heater_disable_17'))
-    mheater_disable_18=int(config.get('mushroom','heater_disable_18'))
-    mheater_disable_19=int(config.get('mushroom','heater_disable_19'))
-    mheater_disable_20=int(config.get('mushroom','heater_disable_20'))
-    mheater_disable_21=int(config.get('mushroom','heater_disable_21'))
-    mheater_disable_22=int(config.get('mushroom','heater_disable_22'))
-    mheater_disable_23=int(config.get('mushroom','heater_disable_23'))
-    mlight_on1=int(config.get('mushroom','hlight_on1'))
-    mlight_off1=int(config.get('mushroom','hlight_off1'))
-    mlight_on2=int(config.get('mushroom','hlight_on2'))
-    mlight_off2=int(config.get('mushroom','hlight_off2'))
-    mvent_on=int(config.get('mushroom','vent_on'))
-    mvent_off=int(config.get('mushroom','vent_off'))
-    mvent_disable_00=int(config.get('mushroom','vent_disable_03'))
-    mvent_disable_01=int(config.get('mushroom','vent_disable_01'))
-    mvent_disable_02=int(config.get('mushroom','vent_disable_02'))
-    mvent_disable_03=int(config.get('mushroom','vent_disable_03'))
-    mvent_disable_04=int(config.get('mushroom','vent_disable_04'))
-    mvent_disable_05=int(config.get('mushroom','vent_disable_05'))
-    mvent_disable_06=int(config.get('mushroom','vent_disable_06'))
-    mvent_disable_07=int(config.get('mushroom','vent_disable_07'))
-    mvent_disable_08=int(config.get('mushroom','vent_disable_08'))
-    mvent_disable_09=int(config.get('mushroom','vent_disable_09'))
-    mvent_disable_10=int(config.get('mushroom','vent_disable_10'))
-    mvent_disable_11=int(config.get('mushroom','vent_disable_11'))
-    mvent_disable_12=int(config.get('mushroom','vent_disable_12'))
-    mvent_disable_13=int(config.get('mushroom','vent_disable_13'))
-    mvent_disable_14=int(config.get('mushroom','vent_disable_14'))
-    mvent_disable_15=int(config.get('mushroom','vent_disable_15'))
-    mvent_disable_16=int(config.get('mushroom','vent_disable_16'))
-    mvent_disable_17=int(config.get('mushroom','vent_disable_17'))
-    mvent_disable_18=int(config.get('mushroom','vent_disable_18'))
-    mvent_disable_19=int(config.get('mushroom','vent_disable_19'))
-    mvent_disable_20=int(config.get('mushroom','vent_disable_20'))
-    mvent_disable_21=int(config.get('mushroom','vent_disable_21'))
-    mvent_disable_22=int(config.get('mushroom','vent_disable_22'))
-    mvent_disable_23=int(config.get('mushroom','vent_disable_23'))
-    mvent_disablelowtemp_00=int(config.get('mushroom','vent_disablelowtemp_00'))
-    mvent_disablelowtemp_01=int(config.get('mushroom','vent_disablelowtemp_01'))
-    mvent_disablelowtemp_02=int(config.get('mushroom','vent_disablelowtemp_02'))
-    mvent_disablelowtemp_03=int(config.get('mushroom','vent_disablelowtemp_03'))
-    mvent_disablelowtemp_04=int(config.get('mushroom','vent_disablelowtemp_04'))
-    mvent_disablelowtemp_05=int(config.get('mushroom','vent_disablelowtemp_05'))
-    mvent_disablelowtemp_06=int(config.get('mushroom','vent_disablelowtemp_06'))
-    mvent_disablelowtemp_07=int(config.get('mushroom','vent_disablelowtemp_07'))
-    mvent_disablelowtemp_08=int(config.get('mushroom','vent_disablelowtemp_08'))
-    mvent_disablelowtemp_09=int(config.get('mushroom','vent_disablelowtemp_09'))
-    mvent_disablelowtemp_10=int(config.get('mushroom','vent_disablelowtemp_10'))
-    mvent_disablelowtemp_11=int(config.get('mushroom','vent_disablelowtemp_11'))
-    mvent_disablelowtemp_12=int(config.get('mushroom','vent_disablelowtemp_12'))
-    mvent_disablelowtemp_13=int(config.get('mushroom','vent_disablelowtemp_13'))
-    mvent_disablelowtemp_14=int(config.get('mushroom','vent_disablelowtemp_14'))
-    mvent_disablelowtemp_15=int(config.get('mushroom','vent_disablelowtemp_15'))
-    mvent_disablelowtemp_16=int(config.get('mushroom','vent_disablelowtemp_16'))
-    mvent_disablelowtemp_17=int(config.get('mushroom','vent_disablelowtemp_17'))
-    mvent_disablelowtemp_18=int(config.get('mushroom','vent_disablelowtemp_18'))
-    mvent_disablelowtemp_19=int(config.get('mushroom','vent_disablelowtemp_19'))
-    mvent_disablelowtemp_20=int(config.get('mushroom','vent_disablelowtemp_20'))
-    mvent_disablelowtemp_21=int(config.get('mushroom','vent_disablelowtemp_21'))
-    mvent_disablelowtemp_22=int(config.get('mushroom','vent_disablelowtemp_22'))
-    mvent_disablelowtemp_23=int(config.get('mushroom','vent_disablelowtemp_23'))
+    mtemperature_min=int(config.get('mushroom','temperature_min'))
     mvent_lowtemp=int(config.get('mushroom','vent_lowtemp'))
+    mvent_off=int(config.get('mushroom','vent_off'))
+    mvent_on=int(config.get('mushroom','vent_on'))
     writetodebuglog("i","Environment characteristics is loaded.")
   except:
     writetodebuglog("e","Cannot open "+conffile+"!")
@@ -665,88 +306,89 @@ def autooffport1():
   aop1="5"
   return aop1
 
-# control function
+# control output ports and error lights
 def control(temperature,humidity,inputs,wrongvalues):
   in1=int(inputs[0])
   in2=int(inputs[1])
   in3=int(inputs[2])
   in4=int(inputs[3])
 
-  #    humidity:  integer  measured relative humidity in %
-  # temperature:  integer  measured temperature in degree Celsius
-  # wrongvalues:  measured data is invalid
-  #         in1:  integer  status of input port #1, 0: opened | 1: closed to GND
-  #         in2:  integer  status of input port #2, 0: opened | 1: closed to GND
-  #         in3:  integer  status of input port #3, 0: opened | 1: closed to GND
-  #         in4:  integer  status of input port #4, 0: opened | 1: closed to GND
+  # input values:
+  # humidity:      integer   measured relative humidity in %
+  # temperature:   integer   measured temperature in degree Celsius
+  # wrongvalues:   integer   measured data is invalid
+  # in1-4:         integer   status of input ports #1-4 (1: closed to GND)
 
-  # in1:  (unused)
-  # in2:  water pressure (closed: good)
-  # in3:  growing hyphae/mushroom (closed: hyphae)
-  # in4:  (unused)
-  # err1: bad relative humidity
-  # err2: bad water pressure
-  # err3: bad measured data
-  # err4: bad temperature
-  # out1: humidifying
-  # out2: lighting
-  # out3: ventilation
-  # out4: heating
+  h=int(time.strftime("%H"))
+  m=int(time.strftime("%M"))
+  exttemp=0
 
   # check water pressure:
-  if in2==1:
-    err2=0
-  else:
-    err2=1
+  # in2:  water pressure input (closed: good)
+  # err2: bad water pressure error light
+  err2=0 if in2==1 else 1
 
-  # lighting
-  h=int(time.strftime("%H"))
+  # switch on-off lamps
+  # in3:  change growing mode input (closed: hyphae)
+  # out2: lighting output
   if in3==1:
     # growing hyphae
-    if (h>hlight_on1) and (h<hlight_off1):
-      out2=1
-    else:
-      out2=0
-    if (h>hlight_on2) and (h<hlight_off2):
-      out2=1
-    else:
-      out2=0
+    out2=1 if (h=>hlight_on1) or (h=>hlight_on2) else 0
+    out2=0 if (h=>hlight_off1) or (h=>hlight_off2)
   else:
     # growing mushroom
-    if (h>mlight_on1) and (h<mlight_off1):
-      out2=1
-    else:
-      out2=0
-    if (h>mlight_on2) and (h<mlight_off2):
-      out2=1
-    else:
-      out2=0
+    out2=1 if (h=>mlight_on1) or (h=>mlight_on2) else 0
+    out2=0 if (h=>mlight_off1) or (h=>mlight_off2)
 
-# <-- Idaig kesz!
-
-  # check growing mode:
+  # switch on-off ventilators
+  # in3:  change growing mode input (closed: hyphae)
+  # out3: ventilating output
   if in3==1:
     # growing hyphae
-    humidity_min=65
-    humidity_max=70
-    temperature_min=17
-    temperature_max=25
-    light_on=0
-    light_off=0
-    vent_on=0
-    vent_off=0
+    if (m>hvent_on) and (m<hvent_off):
+      out3=1
+      out3=0 if hvent_disable[h]==1
+      out3=0 if (hvent_disablelowtemp[h]==1) and (exttemp<=hvent_lowtemp)
+    else:
+      out3=0
   else:
     # growing mushroom
-    humidity_min=70
-    humidity_max=85
-    temperature_min=7
-    temperature_max=25
-    light_on=14
-    light_off=22
-    vent_on=0
-    vent_off=30
-  allowed_hour=14
-  allowed_minute=0
+    if (m>mvent_on) and (m<mvent_off):
+      out3=1
+      out3=0 if mvent_disable[h]==1
+      out3=0 if (mvent_disablelowtemp[h]==1) and (exttemp<=mvent_lowtemp)
+    else:
+      out3=0
+
+  # switch on-off heaters
+  # in3:  change growing mode input (closed: hyphae)
+  # err4: bad temperature
+  # out4: heating output
+  if in3==1:
+    # growing hyphae
+  else:
+    # growing mushroom
+
+  # switch on-off humidifier
+  # in3:  change growing mode input (closed: hyphae)
+  # err1: bad relative humidity
+  # out1: humidifying output
+  if in3==1:
+    # growing hyphae
+  else:
+    # growing mushroom
+
+"""
+  # heating
+  if (wrongvalues == 0) and ((temperature<temperature_min) or (temperature>temperature_max)):
+    err4=1
+  else:
+    err4=0
+
+  if (wrongvalues == 0) and (temperature<temperature_min):
+    out4=1
+  else:
+    out4=0
 
   # humidifying
   if (wrongvalues == 0) and ((humidity<humidity_min) or (humidity>humidity_max)):
@@ -764,12 +406,6 @@ def control(temperature,humidity,inputs,wrongvalues):
   else:
     out1=0
 
-  # ventilation
-  m=int(time.strftime("%M"))
-  if (m>vent_on) and (m<vent_off):
-    out3=1
-  else:
-    out3=0
 
   # heating
   if (wrongvalues == 0) and ((temperature<temperature_min) or (temperature>temperature_max)):
@@ -781,20 +417,13 @@ def control(temperature,humidity,inputs,wrongvalues):
     out4=1
   else:
     out4=0
-
-# <-- Innentol kesz!
-
+"""
   # other error light
+  # err3: measured data is wrong
   err3=wrongvalues
 
-  # out1:  integer  status of output port #1, 0: switch off | 1: switch on relay
-  # out2:  integer  status of output port #2, 0: switch off | 1: switch on relay
-  # out3:  integer  status of output port #3, 0: switch off | 1: switch on relay
-  # out4:  integer  status of output port #4, 0: switch off | 1: switch on relay
-  # err1:  integer  status of error light #1, 0: switch off | 1: switch on LED
-  # err2:  integer  status of error light #2, 0: switch off | 1: switch on LED
-  # err3:  integer  status of error light #3, 0: switch off | 1: switch on LED
-  # err4:  integer  status of error light #4, 0: switch off | 1: switch on LED
+  # out1-4:  integer   status of out ports #1-4, 1: switch on relay
+  # err1-4:  integer   status of error lights #1-4, 1: switch on LED
 
   outputs=str(out1)+str(out2)+str(out3)+str(out4)+ \
           str(err1)+str(err2)+str(err3)+str(err4)
