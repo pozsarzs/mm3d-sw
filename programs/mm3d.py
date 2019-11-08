@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # +----------------------------------------------------------------------------+
-# | MM3D v0.3 * Growing house controlling and remote monitoring system         |
+# | MM3D v0.4 * Growing house controlling and remote monitoring system         |
 # | Copyright (C) 2018-2019 Pozsar Zsolt <pozsar.zsolt@.szerafingomba.hu>      |
 # | mm3d.py                                                                    |
 # | Main program                                                               |
@@ -23,16 +23,16 @@ import Adafruit_DHT
 import RPi.GPIO as GPIO
 from time import gmtime, strftime
 
-# write a line to logfile
+# write a line to debug logfile
 def writetodebuglog(level,text):
-  if dbg_log == "1":
-    if level == "i":
+  if dbg_log=="1":
+    if level=="i":
       lv="INFO   "
-    if level == "w":
+    if level=="w":
       lv="WARNING"
-    if level == "e":
+    if level=="e":
       lv="ERROR  "
-    debugfile = dir_log+time.strftime("debug-%Y%m%d.log")
+    debugfile=dir_log+time.strftime("debug-%Y%m%d.log")
     dt=(strftime("%Y-%m-%d %H:%M:%S", gmtime()))
     try:
       with open(debugfile, "a") as d:
@@ -40,6 +40,43 @@ def writetodebuglog(level,text):
         d.close()
     except:
       print ""
+
+# create and remove lock file
+def lckfile(mode):
+  try:
+    if mode>0:
+      lcf=open(lockfile,'w')
+      lcf.close()
+      writetodebuglog(dir_log,"i","Creating lockfile.")
+    else:
+      writetodebuglog("i","Removing lockfile.")
+      os.remove(lockfile)
+  except:
+    writetodebuglog("w","Cannot create/remove"+lockfile+"!")
+
+# write data to log with timestamp
+def writelog(temperature,humidity,inputs,outputs):
+  dt=(strftime("%Y-%m-%d,%H:%M", gmtime()))
+  lckfile(1)
+  writetodebuglog("i","Writing data to log.")
+  if not os.path.isfile(logfile):
+    f=open(logfile,'w')
+    f.close()
+  try:
+    with open(logfile,"r+") as f:
+      first_line=f.readline()
+      lines=f.readlines()
+      f.seek(0)
+      f.write(dt+','+str(temperature)+','+str(humidity)+','+
+              inputs[0]+','+inputs[1]+','+inputs[2]+','+inputs[3]+','+
+              outputs[0]+','+outputs[1]+','+outputs[2]+','+outputs[3]+','+
+              outputs[4]+','+outputs[5]+','+outputs[6]+','+outputs[7]+'\n')
+      f.write(first_line)
+      f.writelines(lines)
+      f.close()
+  except:
+    writetodebuglog("e","Cannot write "+logfile+"!")
+  lckfile(0)
 
 # load configuration
 def loadconfiguration(conffile):
@@ -65,15 +102,15 @@ def loadconfiguration(conffile):
   global sensor
   try:
     with open(conffile) as f:
-      sample_config = f.read()
-    config = ConfigParser.RawConfigParser(allow_no_value=True)
+      sample_config=f.read()
+    config=ConfigParser.RawConfigParser(allow_no_value=True)
     config.readfp(io.BytesIO(sample_config))
     dbg_log='0'
-    dbg_log=config.get('others', 'dbg_log')
-    dir_log=config.get('directories', 'dir_log')
-    dir_var=config.get('directories', 'dir_var')
+    dbg_log=config.get('others','dbg_log')
+    dir_log=config.get('directories','dir_log')
+    dir_var=config.get('directories','dir_var')
     logfile=dir_log+'mm3d.log'
-    lockfile=config.get('directories', 'dir_lck')+'mm3d.lck'
+    lockfile=config.get('directories','dir_lck')+'mm3d.lck'
     prt_act=int(config.get('ports','prt_act'))
     prt_err1=int(config.get('ports','prt_err1'))
     prt_err2=int(config.get('ports','prt_err2'))
@@ -98,7 +135,7 @@ def loadconfiguration(conffile):
     writetodebuglog("i","Starting program as daemon.")
     writetodebuglog("i","Configuration is loaded.")
   except:
-    writetodebuglog("e","Cannot open " + conffile + "!")
+    writetodebuglog("e","Cannot open "+conffile+"!")
 
 # load environment characteristics
 def loadenvirchars(conffile):
@@ -326,8 +363,8 @@ def loadenvirchars(conffile):
   global mvent_lowtemp
   try:
     with open(conffile) as f:
-      sample_config = f.read()
-    config = ConfigParser.RawConfigParser(allow_no_value=True)
+      sample_config=f.read()
+    config=ConfigParser.RawConfigParser(allow_no_value=True)
     config.readfp(io.BytesIO(sample_config))
     hhumidity_min=int(config.get('hyphae','humidity_min'))
     hhumidifier_on=int(config.get('hyphae','humidifier_on'))
@@ -553,33 +590,20 @@ def loadenvirchars(conffile):
     mvent_lowtemp=int(config.get('mushroom','vent_lowtemp'))
     writetodebuglog("i","Environment characteristics is loaded.")
   except:
-    writetodebuglog("e","Cannot open " + conffile + "!")
-
-# create and remove lock file
-def lckfile(mode):
-  try:
-    if mode > 0:
-      lcf=open(lockfile,'w')
-      lcf.close()
-      writetodebuglog("i","Creating lockfile.")
-    else:
-      writetodebuglog("i","Removing lockfile.")
-      os.remove(lockfile)
-  except:
-    writetodebuglog("w","Cannot create/remove" + lockfile + "!")
+    writetodebuglog("e","Cannot open "+conffile+"!")
 
 # write data to log with timestamp
 def writelog(temperature,humidity,inputs,outputs):
-  dt=(strftime("%Y-%m-%d,%H:%M", gmtime()))
+  dt=(strftime("%Y-%m-%d,%H:%M",gmtime()))
   lckfile(1)
   writetodebuglog("i","Writing data to log.")
   if not os.path.isfile(logfile):
     f=open(logfile,'w')
     f.close()
   try:
-    with open(logfile, "r+") as f:
-      first_line = f.readline()
-      lines = f.readlines()
+    with open(logfile,"r+") as f:
+      first_line=f.readline()
+      lines=f.readlines()
       f.seek(0)
       f.write(dt+','+str(temperature)+','+str(humidity)+','+
               inputs[0]+','+inputs[1]+','+inputs[2]+','+inputs[3]+','+
@@ -589,7 +613,7 @@ def writelog(temperature,humidity,inputs,outputs):
       f.writelines(lines)
       f.close()
   except:
-    writetodebuglog("e","Cannot write " + logfile + "!")
+    writetodebuglog("e","Cannot write "+logfile+"!")
   lckfile(0)
 
 # initializing ports
@@ -613,7 +637,7 @@ def initports():
 
 # check external control files
 def extcont(channel,status):
-  writetodebuglog("i","Checking override file: "+dir_var+"out"+str(channel)+".")
+  writetodebuglog(dir_log,"i","Checking override file: "+dir_var+"out"+str(channel)+".")
   if os.path.isfile(dir_var+"out"+str(channel)):
     try:
       f=open(dir_var+"out"+str(channel),'r')
@@ -647,14 +671,15 @@ def control(temperature,humidity,inputs,wrongvalues):
   in2=int(inputs[1])
   in3=int(inputs[2])
   in4=int(inputs[3])
+
   #    humidity:  integer  measured relative humidity in %
+  # temperature:  integer  measured temperature in degree Celsius
+  # wrongvalues:  measured data is invalid
   #         in1:  integer  status of input port #1, 0: opened | 1: closed to GND
   #         in2:  integer  status of input port #2, 0: opened | 1: closed to GND
   #         in3:  integer  status of input port #3, 0: opened | 1: closed to GND
   #         in4:  integer  status of input port #4, 0: opened | 1: closed to GND
-  # temperature:  integer  measured temperature in degree Celsius
-  # wrongvalues:  measured data is invalid
-  #
+
   # in1:  (unused)
   # in2:  water pressure (closed: good)
   # in3:  growing hyphae/mushroom (closed: hyphae)
@@ -673,6 +698,31 @@ def control(temperature,humidity,inputs,wrongvalues):
     err2=0
   else:
     err2=1
+
+  # lighting
+  h=int(time.strftime("%H"))
+  if in3==1:
+    # growing hyphae
+    if (h>hlight_on1) and (h<hlight_off1):
+      out2=1
+    else:
+      out2=0
+    if (h>hlight_on2) and (h<hlight_off2):
+      out2=1
+    else:
+      out2=0
+  else:
+    # growing mushroom
+    if (h>mlight_on1) and (h<mlight_off1):
+      out2=1
+    else:
+      out2=0
+    if (h>mlight_on2) and (h<mlight_off2):
+      out2=1
+    else:
+      out2=0
+
+# <-- Idaig kesz!
 
   # check growing mode:
   if in3==1:
@@ -714,13 +764,6 @@ def control(temperature,humidity,inputs,wrongvalues):
   else:
     out1=0
 
-  # lighting
-  h=int(time.strftime("%H"))
-  if (h>light_on) and (h<light_off):
-    out2=1
-  else:
-    out2=0
-
   # ventilation
   m=int(time.strftime("%M"))
   if (m>vent_on) and (m<vent_off):
@@ -739,6 +782,8 @@ def control(temperature,humidity,inputs,wrongvalues):
   else:
     out4=0
 
+# <-- Innentol kesz!
+
   # other error light
   err3=wrongvalues
 
@@ -750,6 +795,7 @@ def control(temperature,humidity,inputs,wrongvalues):
   # err2:  integer  status of error light #2, 0: switch off | 1: switch on LED
   # err3:  integer  status of error light #3, 0: switch off | 1: switch on LED
   # err4:  integer  status of error light #4, 0: switch off | 1: switch on LED
+
   outputs=str(out1)+str(out2)+str(out3)+str(out4)+ \
           str(err1)+str(err2)+str(err3)+str(err4)
   return outputs
@@ -781,14 +827,14 @@ with daemon.DaemonContext() as context:
       # read input data from GPIO
       writetodebuglog("i","Reading input ports.")
       inputs=str(int(not GPIO.input(prt_in1)))
-      inputs=inputs + str(int(not GPIO.input(prt_in2)))
-      inputs=inputs + str(int(not GPIO.input(prt_in3)))
-      inputs=inputs + str(int(not GPIO.input(prt_in4)))
+      inputs=inputs+str(int(not GPIO.input(prt_in2)))
+      inputs=inputs+str(int(not GPIO.input(prt_in3)))
+      inputs=inputs+str(int(not GPIO.input(prt_in4)))
       blinkactled()
       # run user's function
       writetodebuglog("i","Running function of user.")
-      outputs=CR.control(temperature,humidity,inputs,wrongvalues)
-      aop1=CR.autooffport1()
+      outputs=control(temperature,humidity,inputs,wrongvalues)
+      aop1=autooffport1()
       blinkactled()
       # override state of outputs
       ss=""
@@ -808,7 +854,7 @@ with daemon.DaemonContext() as context:
       GPIO.output(prt_out3,not int(outputs[2]))
       GPIO.output(prt_out4,not int(outputs[3]))
       # auto-off first port
-      if aop1 != "0":
+      if aop1!="0":
         for i in range(int(aop1)):
           blinkactled()
         GPIO.output(prt_out1,1)
