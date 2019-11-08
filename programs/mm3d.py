@@ -366,8 +366,22 @@ def control(temperature,humidity,inputs,wrongvalues):
   # out4: heating output
   if in3==1:
     # growing hyphae
+    err4=0
+    err4=1 if (wrongvalues==0) and ((temperature<htemperature_min)
+    err4=1 if (wrongvalues==0) and ((temperature>htemperature_max)
+    out4=0
+    out4=1 if (wrongvalues==0) and ((temperature<=hheater_on)
+    out4=0 if (wrongvalues==0) and ((temperature>=hheater_off)
+    out4=0 if hheater_disable[h]==1
   else:
     # growing mushroom
+    err4=0
+    err4=1 if (wrongvalues==0) and ((temperature<mtemperature_min)
+    err4=1 if (wrongvalues==0) and ((temperature>mtemperature_max)
+    out4=0
+    out4=1 if (wrongvalues==0) and ((temperature<=mheater_on)
+    out4=0 if (wrongvalues==0) and ((temperature>=mheater_off)
+    out4=0 if mheater_disable[h]==1
 
   # switch on-off humidifier
   # in3:  change growing mode input (closed: hyphae)
@@ -375,49 +389,32 @@ def control(temperature,humidity,inputs,wrongvalues):
   # out1: humidifying output
   if in3==1:
     # growing hyphae
+    err1=0
+    err1=1 if (wrongvalues==0) and ((humidity<hhumidity_min)
+    err1=1 if (wrongvalues==0) and ((humidity>hhumidity_max)
+    out1=0
+    out1=1 if (wrongvalues==0) and ((humidity<=hhumidifier_on)
+    out1=0 if (wrongvalues==0) and ((humidity>=hhumidifier_off)
+    out1=0 if hhumidifier_disable[h]==1
   else:
     # growing mushroom
-
-"""
-  # heating
-  if (wrongvalues == 0) and ((temperature<temperature_min) or (temperature>temperature_max)):
-    err4=1
-  else:
-    err4=0
-
-  if (wrongvalues == 0) and (temperature<temperature_min):
-    out4=1
-  else:
-    out4=0
-
-  # humidifying
-  if (wrongvalues == 0) and ((humidity<humidity_min) or (humidity>humidity_max)):
-    err1=1
-  else:
     err1=0
-
-  if (wrongvalues == 0) and ((humidity<humidity_min) and (err2==0)):
-    h=int(time.strftime("%H"))
-    m=int(time.strftime("%M"))
-    if (h==allowed_hour) and (m==allowed_minute):
-      out1=1
-    else:
-      out1=0
-  else:
+    err1=1 if (wrongvalues==0) and ((humidity<mhumidity_min)
+    err1=1 if (wrongvalues==0) and ((humidity>mhumidity_max)
     out1=0
+    out1=1 if (wrongvalues==0) and ((humidity<=mhumidifier_on)
+    out1=0 if (wrongvalues==0) and ((humidity>=mhumidifier_off)
+    out1=0 if mhumidifier_disable[h]==1
 
-
-  # heating
-  if (wrongvalues == 0) and ((temperature<temperature_min) or (temperature>temperature_max)):
-    err4=1
-  else:
-    err4=0
-
-  if (wrongvalues == 0) and (temperature<temperature_min):
-    out4=1
-  else:
-    out4=0
 """
+  ami meg kell bele:
+  - magas paratartalomnal szelloztetes
+  - magas homersekletnel szelloztetes
+  - alacsony homersekletnel, ha kint melegebb van, akkor szelloztetes
+  - kulso homerseklet adat lekerese --> exttemp
+
+"""
+
   # other error light
   # err3: measured data is wrong
   err3=wrongvalues
