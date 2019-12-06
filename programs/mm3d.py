@@ -321,7 +321,12 @@ def control(temperature,humidity,inputs,wrongvalues):
 
   h=int(time.strftime("%H"))
   m=int(time.strftime("%M"))
+
+
+# ami meg kell bele:
+#  - kulso homerseklet adat lekerese --> exttemp
   exttemp=0
+
 
   # check water pressure:
   # in2:  water pressure input (closed: good)
@@ -406,14 +411,12 @@ def control(temperature,humidity,inputs,wrongvalues):
     out1=0 if (wrongvalues==0) and ((humidity>=mhumidifier_off)
     out1=0 if mhumidifier_disable[h]==1
 
-"""
-  ami meg kell bele:
-  - magas paratartalomnal szelloztetes
-  - magas homersekletnel szelloztetes
-  - alacsony homersekletnel, ha kint melegebb van, akkor szelloztetes
-  - kulso homerseklet adat lekerese --> exttemp
 
-"""
+#  ami meg kell bele:
+#  - magas paratartalomnal szelloztetes
+#  - magas homersekletnel szelloztetes
+#  - alacsony homersekletnel, ha kint melegebb van, akkor szelloztetes
+
 
   # other error light
   # err3: measured data is wrong

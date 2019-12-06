@@ -507,7 +507,7 @@ begin
   if paramcount=0 then
     quit(1,false,'Usage:'+#10+'    '+paramstr(0)+' /path/envir.ini');
   if not terminalsize
-    then quit(2,false,'Usage:'+#10+'    '+paramstr(0)+' /path/envir.ini');
+    then quit(2,false,'ERROR: Minimal terminal size is 80x25!');
   if not loadinifile(paramstr(1))
     then quit(3,false,'ERROR: Cannot read '+paramstr(1)+' file!');
   if not setvalues
