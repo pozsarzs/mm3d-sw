@@ -1,0 +1,11 @@
+Package: mm3d-eec
+Version: 0.4
+Section: misc
+Priority: extra
+Architecture: arm
+Installed-Size: 964 kB
+Maintainer: Pozsar Zsolt <pozsar.zsolt@szerafingomba.hu>
+Depends: mm3d-sw
+Description: Environment characteristic editor
+ This is a software part of MM3D growing house controlling
+ and remote monitoring equipment.
