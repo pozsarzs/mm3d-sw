@@ -1,49 +1,58 @@
-MM3D Growing house controlling and remote monitoring system
-===========================================================
+MM3D -   Growing house controlling and remote monitoring system
+---------------------------------------------------------------
 
-I. General information
-----------------------
-
+1. About software
+~~~~~~~~~~~~~~~~~
   It is an internal software for MM3D Raspberry Pi based controlling and
 monitoring equipment. It measures temperature and humidity, checks
 programmable inputs, outputs and error lights. You can view actual status
 with a browser application and administrate it with SSH client.
 
-II. Requirements
-----------------
+Requirements
+
   Hardware: Raspberry Pi 3 Model B
   Software: Raspbian Stretch Lite operation system,
             Apache webserver,
             Perl,
             Python.
 
-III. Installation and settings
-------------------------------
-  Installer package is mm3d-sw-0.4-arm.tar.gz
-  See INSTALL for detailed information.
+2. How to get installer package for my OS?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+a. Visit homepage (see later) to download installer packages:
 
-IV. Download and contact
-------------------------
-  Homepage:                          http://www.szerafingomba.hu
-                                     http://www.pozsarzs.hu
-  Contact:                           Pozsar Zsolt (self-employed)
-  E-mail:                            pozsar.zsolt@szerafingomba.hu
-  Phone:                             +36 56/470-272
-  Mobilphone:                        +36 30/249-5030
-  Postal address:                    Pozsar Zsolt
-                                     Kurazsi Fo ut 1., HU-5430 Tiszafoldvar
-                                     Hungary
+  Raspbian OS: mm3d-sw_0.4-1_all.deb
+               mm3d-eec_0.4-1_arm.deb
+               mm3d-web_0.4-1_all.deb
+               mm3d-sw-0.4-arm.tar.gz
 
-  Tax ID:                            60407850-1-36
-  Reg. number:                       20703695
+b. Download from Github
 
-V. Important information
--------------------------
-  MM3D Copyright (C) 2018-2019 Pozsár Zsolt <pozsar.zsolt@szerafingomba.hu>
+  $ git clone https://github.com/pozsarzs/mm3d-sw.git
 
-  This program is free software: you can redistribute it and/or modify it
-under the terms of the European Union Public License 1.1 version.
+c. Download from Debian repository
 
-  This program is distributed in the hope that it will be useful, but WITHOUT
-ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
-FOR A PARTICULAR PURPOSE.
+  set reporitory:
+  # echo "deb http://www.szerafingomba.hu/deb/ ./" >> /etc/apt/sources.list
+  # wget -q -O - http://www.szerafingomba.hu/deb/KEY.gpg | apt-key add -
+  # apt-get update
+
+  install:
+  # apt-get install mm3d-sw mm3d-eec mm3d-web
+
+3. Contact
+~~~~~~~~~~
+   Homepage:             <http://www.szerafingomba.hu/softwares/>
+   Author:               Pozsar Zsolt
+   Tax ID:               60407850-1-36
+   Registration num.:    20703695
+
+   E-mail:               <pozsar.zsolt@szerafingomba.hu>
+   Phone:                +36 56/470-272
+   Mobile:               +36 30/249-5030
+   Postal address:       Pozsar Zsolt
+                         Kurazsi Fo ut 1.
+                         HU-5430 Tiszafoldvar
+                         Hungary
+
+---------------------------------------------------------------------------------
+ MM3D * Copyright (C) 2019 Pozsar Zsolt <pozsar.zsolt@szerafingomba.hu>

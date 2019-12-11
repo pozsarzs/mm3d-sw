@@ -1,30 +1,24 @@
-Installation instruction
-========================
-
+Installation instruction for source and binary tar.gz package
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Before install this program please install Raspbian Lite OS to SD-CARD.
 Do not forget to set hostname and network.
 
 Installation
-------------
-  pi@raspberry$ sudo apt-get update
-  pi@raspberry$ sudo apt-get upgrade
-  pi@raspberry$ sudo apt-get install mc wget
-  pi@raspberry$ wget --directory-prefix=$HOME/download http://www.szerafingomba.hu/equipments/mm3d/mm3d-sw-0.4-arm.tar.gz
-  pi@raspberry$ cd $HOME/download
+~~~~~~~~~~~~
   pi@raspberry$ tar -xzf mm3d-sw-0.4-arm.tar.gz
   pi@raspberry$ cd mm3d-sw
   pi@raspberry$ ./prepare
   pi@raspberry$ ./install
 
-Configuration
--------------
+Set program
+~~~~~~~~~~~
   mm3d@raspberry$ mm3d-editmainconf
 
 Set environment characteristics
--------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   mm3d@raspberry$ mm3d-editenvirconf
 
-Remove
-------
+Removing
+~~~~~~~~
   pi@raspberry$ cd mm3d-sw
   pi@raspberry$ ./uninstall

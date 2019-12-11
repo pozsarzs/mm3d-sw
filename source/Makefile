@@ -2,7 +2,7 @@
 # | MM3D v0.4 * Growing house controlling and remote monitoring system         |
 # | Copyright (C) 2018-2019 Pozsár Zsolt <pozsar.zsolt@.szerafingomba.hu>      |
 # | Makefile                                                                   |
-# | Make file for FreePascal source.                                           |
+# | Make file for source code                                                  |
 # +----------------------------------------------------------------------------+
 
 include Makefile.global
