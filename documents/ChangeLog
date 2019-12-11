@@ -21,6 +21,7 @@
 	*  manuals/mm3d-updatestartpage.1.gz: modified
 	*  manuals/mm3d-viewlog.1.gz: modified
 	*  messages/*.msg: modified
+	*  packaging/*/*: new files
 	*  programs/mm3d.py: modified
 	*  programs/prg_empty/prg_empty.py: removed
 	*  programs/prg_example/cfg_example.ini: removed

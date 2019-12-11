@@ -1,9 +1,9 @@
+2b9367f915a2661f77756963bd3eb7eb  usr/share/doc/mm3d-web/copyright
+e220759b9e669564ea5e7b814a93f5d6  usr/share/man/man1/mm3d-updatestartpage.1.gz
 dee9c5562080a8c8b7382e864205df8d  usr/bin/mm3d-updatestartpage
 b461971f9d7aabc9afd3e1e224c5c789  usr/lib/cgi-bin/getdata.cgi
 6c84b8637aebcdcb949fac9ec772dad9  usr/lib/cgi-bin/getpage.cgi
 c8fb9e658b6ad2a4084068e005ae214d  usr/share/doc/mm3d-web/changelog.Debian.gz
-591175c932afc1d99a99c7ad5da8d7f2  usr/share/doc/mm3d-web/copyright
-612ad771665a70d4232ae326578c8bd2  usr/share/man/man1/mm3d-updatestartpage.1.gz
 cc6d0323212ecc98a468db3caef9e7bc  usr/share/mm3d/footer_cs.html
 cc6d0323212ecc98a468db3caef9e7bc  usr/share/mm3d/footer_de.html
 cc6d0323212ecc98a468db3caef9e7bc  usr/share/mm3d/footer_en.html

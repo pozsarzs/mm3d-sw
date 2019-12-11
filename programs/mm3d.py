@@ -322,11 +322,9 @@ def control(temperature,humidity,inputs,wrongvalues):
   h=int(time.strftime("%H"))
   m=int(time.strftime("%M"))
 
-
-# ami meg kell bele:
-#  - kulso homerseklet adat lekerese --> exttemp
+  # !!! ami meg kell bele:
+  # !!!   - kulso homerseklet adat lekerese --> exttemp
   exttemp=0
-
 
   # check water pressure:
   # in2:  water pressure input (closed: good)

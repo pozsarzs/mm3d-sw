@@ -1,0 +1,8 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_installdocs
+if [ \( "$1" = "upgrade" -o "$1" = "remove" \) -a -L /usr/doc/mm3d-sw ]; then
+  rm -f /usr/doc/mm3d-sw
+fi
+# End automatically added section
+/etc/init.d/mm3d.sh stop

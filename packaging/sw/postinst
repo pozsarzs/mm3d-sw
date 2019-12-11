@@ -1,0 +1,19 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_installdocs
+if [ "$1" = "configure" ]; then
+  if [ -d /usr/doc -a ! -e /usr/doc/mm3d-sw -a -d /usr/share/doc/mm3d-sw ]; then
+    ln -sf /usr/share/doc/mm3d-sw /usr/doc/mm3d-sw
+  fi
+fi
+# End automatically added section
+/etc/init.d/mm3d.sh stop
+sudo ln -s /etc/init.d/mm3d.sh /etc/rc0.d/K01mm3d.sh
+sudo ln -s /etc/init.d/mm3d.sh /etc/rc2.d/S01mm3d.sh
+sudo ln -s /etc/init.d/mm3d.sh /etc/rc3.d/S01mm3d.sh
+sudo ln -s /etc/init.d/mm3d.sh /etc/rc4.d/S01mm3d.sh
+sudo ln -s /etc/init.d/mm3d.sh /etc/rc5.d/S01mm3d.sh
+sudo ln -s /etc/init.d/mm3d.sh /etc/rc6.d/K01mm3d.sh
+systemctl daemon-reload
+/etc/init.d/mm3d.sh start
+/etc/init.d/cron restart
