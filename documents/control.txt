@@ -1,0 +1,55 @@
+Useable values in control function of mm3d.py program
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Values of configuration:
+  htemperature_max	integer		maximal temperature
+  hheater_off		integer		switch off heater temperature
+  hheater_on		integer		switch on heater temperature
+  htemperature_min	integer		minimal temperature
+  hheater_disable	list of int.	hours when disable heater
+  hhumidity_max		integer		maximal humidity
+  hhumidifier_off	integer		switch off heater temperature
+  hhumidifier_on	integer		switch on heater temperature
+  hhumidity_min		integer		minimal humidity
+  hhumidifier_disable	list of int.	hours when disable humidifier
+  hlight_on1		integer		hour when switch on light
+  hlight_off1		integer		hour when switch off light
+  hlight_on2		integer		hour when switch on light
+  hlight_off2		integer		hour when switch off light
+  hvent_on		integer		minute when switch on ventilator
+  hvent_off		integer		minute when switch off ventilator
+  hvent_disable		list of int.	hours when disable ventilator
+  hvent_lowtemp		integer		switch off ventilator temperature
+  hvent_disablelowtemp	list of int.	hours when disable vent. if cold outside
+  mtemperature_max	integer		maximal temperature
+  mheater_off		integer		switch off heater temperature
+  mheater_on		integer		switch on heater temperature
+  mtemperature_min	integer		minimal temperature
+  mheater_disable	list of int.	hours when disable heater
+  mhumidity_max		integer		maximal humidity
+  mhumidifier_off	integer		switch off heater temperature
+  mhumidifier_on	integer		switch on heater temperature
+  mhumidity_min		integer		minimal humidity
+  mhumidifier_disable	list of int.	hours when disable humidifier
+  mlight_on1		integer		hour when switch on light
+  mlight_off1		integer		hour when switch off light
+  mlight_on2		integer		hour when switch on light
+  mlight_off2		integer		hour when switch off light
+  mvent_on		integer		minute when switch on ventilator
+  mvent_off		integer		minute when switch off ventilator
+  mvent_disable		list of int.	hours when disable ventilator
+  mvent_lowtemp		integer		switch off ventilator temperature
+  mvent_disablelowtemp	list of int.	hours when disable vent. if cold outside
+
+Other values:
+  h			integer		hours of time
+  m			integer		minutes of time
+
+Input values:
+  humidity		integer		measured relative humidity in %
+  temperature		integer		measured temperature in degree Celsius
+  wrongvalues		integer		measured data is invalid
+  in1-4			integer		status of input ports #1-4 (1: closed)
+
+Output values
+  out1-4		integer		out ports #1-4, 1: switch on relay
+  err1-4		integer		error lights #1-4, 1: switch on LED
