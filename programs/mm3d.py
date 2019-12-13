@@ -14,7 +14,6 @@
 # FOR A PARTICULAR PURPOSE.
 
 import ConfigParser
-import array as arr
 import daemon
 import io
 import os
@@ -41,43 +40,6 @@ def writetodebuglog(level,text):
         d.close()
     except:
       print ""
-
-# create and remove lock file
-def lckfile(mode):
-  try:
-    if mode>0:
-      lcf=open(lockfile,'w')
-      lcf.close()
-      writetodebuglog(dir_log,"i","Creating lockfile.")
-    else:
-      writetodebuglog("i","Removing lockfile.")
-      os.remove(lockfile)
-  except:
-    writetodebuglog("w","Cannot create/remove"+lockfile+"!")
-
-# write data to log with timestamp
-def writelog(temperature,humidity,inputs,outputs):
-  dt=(strftime("%Y-%m-%d,%H:%M", gmtime()))
-  lckfile(1)
-  writetodebuglog("i","Writing data to log.")
-  if not os.path.isfile(logfile):
-    f=open(logfile,'w')
-    f.close()
-  try:
-    with open(logfile,"r+") as f:
-      first_line=f.readline()
-      lines=f.readlines()
-      f.seek(0)
-      f.write(dt+','+str(temperature)+','+str(humidity)+','+
-              inputs[0]+','+inputs[1]+','+inputs[2]+','+inputs[3]+','+
-              outputs[0]+','+outputs[1]+','+outputs[2]+','+outputs[3]+','+
-              outputs[4]+','+outputs[5]+','+outputs[6]+','+outputs[7]+'\n')
-      f.write(first_line)
-      f.writelines(lines)
-      f.close()
-  except:
-    writetodebuglog("e","Cannot write "+logfile+"!")
-  lckfile(0)
 
 # load configuration
 def loadconfiguration(conffile):
@@ -138,12 +100,21 @@ def loadconfiguration(conffile):
   except:
     writetodebuglog("e","Cannot open "+conffile+"!")
 
+# add a zero char
+def addzero(num):
+  if num<10:
+    z="0"
+  else:
+    z=""
+  s=z+str(num)
+  return s
+
 # load environment characteristics
 def loadenvirchars(conffile):
-  global hheater_disable=arr.array('i',[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,])
+  global hheater_disable
   global hheater_off
   global hheater_on
-  global hhumidifier_disable=arr.array('i',[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,])
+  global hhumidifier_disable
   global hhumidifier_off
   global hhumidifier_on
   global hhumidity_max
@@ -154,15 +125,15 @@ def loadenvirchars(conffile):
   global hlight_on2
   global htemperature_max
   global htemperature_min
-  global hvent_disable=arr.array('i',[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,])
-  global hvent_disablelowtemp=arr.array('i',[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,])
+  global hvent_disable
+  global hvent_disablelowtemp
   global hvent_lowtemp
   global hvent_off
   global hvent_on
-  global mheater_disable=arr.array('i',[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,])
+  global mheater_disable
   global mheater_off
   global mheater_on
-  global mhumidifier_disable=arr.array('i',[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,])
+  global mhumidifier_disable
   global mhumidifier_off
   global mhumidifier_on
   global mhumidity_max
@@ -173,24 +144,32 @@ def loadenvirchars(conffile):
   global mlight_on2
   global mtemperature_max
   global mtemperature_min
-  global mvent_disable=arr.array('i',[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,])
-  global mvent_disablelowtemp=arr.array('i',[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,])
+  global mvent_disable
+  global mvent_disablelowtemp
   global mvent_lowtemp
   global mvent_off
   global mvent_on
+  hheater_disable=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,]
+  hhumidifier_disable=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,]
+  hvent_disable=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,]
+  hvent_disablelowtemp=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,]
+  mheater_disable=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,]
+  mhumidifier_disable=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,]
+  mvent_disable=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,]
+  mvent_disablelowtemp=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,]
   try:
     with open(conffile) as f:
       sample_config=f.read()
     config=ConfigParser.RawConfigParser(allow_no_value=True)
     config.readfp(io.BytesIO(sample_config))
     for x in range(24):
-      hhumidifier_disable[x]=int(config.get('hyphae','humidifier_disable_'+str(x)))
+      hhumidifier_disable[x]=int(config.get('hyphae','humidifier_disable_'+addzero(x)))
     for x in range(24):
-      hheater_disable[x]=int(config.get('hyphae','heater_disable_'+str(x)))
+      hheater_disable[x]=int(config.get('hyphae','heater_disable_'+addzero(x)))
     for x in range(24):
-      hvent_disable[x]=int(config.get('hyphae','vent_disable_'+str(x)))
+      hvent_disable[x]=int(config.get('hyphae','vent_disable_'+addzero(x)))
     for x in range(24):
-      hvent_disablelowtemp[x]=int(config.get('hyphae','vent_disablelowtemp_'+str(x)))
+      hvent_disablelowtemp[x]=int(config.get('hyphae','vent_disablelowtemp_'+addzero(x)))
     hheater_off=int(config.get('hyphae','heater_off'))
     hheater_on=int(config.get('hyphae','heater_on'))
     hhumidifier_off=int(config.get('hyphae','humidifier_off'))
@@ -207,13 +186,13 @@ def loadenvirchars(conffile):
     hvent_off=int(config.get('hyphae','vent_off'))
     hvent_on=int(config.get('hyphae','vent_on'))
     for x in range(24):
-      mhumidifier_disable[x]=int(config.get('mushroom','humidifier_disable_'+str(x)))
+      mhumidifier_disable[x]=int(config.get('mushroom','humidifier_disable_'+addzero(x)))
     for x in range(24):
-      mheater_disable[x]=int(config.get('mushroom','heater_disable_'+str(x)))
+      mheater_disable[x]=int(config.get('mushroom','heater_disable_'+addzero(x)))
     for x in range(24):
-      mvent_disable[x]=int(config.get('mushroom','vent_disable_'+str(x)))
+      mvent_disable[x]=int(config.get('mushroom','vent_disable_'+addzero(x)))
     for x in range(24):
-      mvent_disablelowtemp[x]=int(config.get('mushroom','vent_disablelowtemp_'+str(x)))
+      mvent_disablelowtemp[x]=int(config.get('mushroom','vent_disablelowtemp_'+addzero(x)))
     mheater_off=int(config.get('mushroom','heater_off'))
     mheater_on=int(config.get('mushroom','heater_on'))
     mhumidifier_off=int(config.get('mushroom','humidifier_off'))
@@ -232,6 +211,19 @@ def loadenvirchars(conffile):
     writetodebuglog("i","Environment characteristics is loaded.")
   except:
     writetodebuglog("e","Cannot open "+conffile+"!")
+
+# create and remove lock file
+def lckfile(mode):
+  try:
+    if mode>0:
+      lcf=open(lockfile,'w')
+      lcf.close()
+      writetodebuglog("i","Creating lockfile.")
+    else:
+      writetodebuglog("i","Removing lockfile.")
+      os.remove(lockfile)
+  except:
+    writetodebuglog("w","Cannot create/remove"+lockfile+"!")
 
 # write data to log with timestamp
 def writelog(temperature,humidity,inputs,outputs):
@@ -278,7 +270,7 @@ def initports():
 
 # check external control files
 def extcont(channel,status):
-  writetodebuglog(dir_log,"i","Checking override file: "+dir_var+"out"+str(channel)+".")
+  writetodebuglog("i","Checking override file: "+dir_var+"out"+str(channel)+".")
   if os.path.isfile(dir_var+"out"+str(channel)):
     try:
       f=open(dir_var+"out"+str(channel),'r')
@@ -312,117 +304,19 @@ def control(temperature,humidity,inputs,wrongvalues):
   in2=int(inputs[1])
   in3=int(inputs[2])
   in4=int(inputs[3])
-
-  # input values:
-  # humidity:      integer   measured relative humidity in %
-  # temperature:   integer   measured temperature in degree Celsius
-  # wrongvalues:   integer   measured data is invalid
-  # in1-4:         integer   status of input ports #1-4 (1: closed to GND)
-
   h=int(time.strftime("%H"))
   m=int(time.strftime("%M"))
-
-  # !!! ami meg kell bele:
-  # !!!   - kulso homerseklet adat lekerese --> exttemp
-  exttemp=0
-
-  # check water pressure:
-  # in2:  water pressure input (closed: good)
-  # err2: bad water pressure error light
-  err2=0 if in2==1 else 1
-
-  # switch on-off lamps
-  # in3:  change growing mode input (closed: hyphae)
-  # out2: lighting output
-  if in3==1:
-    # growing hyphae
-    out2=1 if (h=>hlight_on1) or (h=>hlight_on2) else 0
-    out2=0 if (h=>hlight_off1) or (h=>hlight_off2)
-  else:
-    # growing mushroom
-    out2=1 if (h=>mlight_on1) or (h=>mlight_on2) else 0
-    out2=0 if (h=>mlight_off1) or (h=>mlight_off2)
-
-  # switch on-off ventilators
-  # in3:  change growing mode input (closed: hyphae)
-  # out3: ventilating output
-  if in3==1:
-    # growing hyphae
-    if (m>hvent_on) and (m<hvent_off):
-      out3=1
-      out3=0 if hvent_disable[h]==1
-      out3=0 if (hvent_disablelowtemp[h]==1) and (exttemp<=hvent_lowtemp)
-    else:
-      out3=0
-  else:
-    # growing mushroom
-    if (m>mvent_on) and (m<mvent_off):
-      out3=1
-      out3=0 if mvent_disable[h]==1
-      out3=0 if (mvent_disablelowtemp[h]==1) and (exttemp<=mvent_lowtemp)
-    else:
-      out3=0
-
-  # switch on-off heaters
-  # in3:  change growing mode input (closed: hyphae)
-  # err4: bad temperature
-  # out4: heating output
-  if in3==1:
-    # growing hyphae
-    err4=0
-    err4=1 if (wrongvalues==0) and ((temperature<htemperature_min)
-    err4=1 if (wrongvalues==0) and ((temperature>htemperature_max)
-    out4=0
-    out4=1 if (wrongvalues==0) and ((temperature<=hheater_on)
-    out4=0 if (wrongvalues==0) and ((temperature>=hheater_off)
-    out4=0 if hheater_disable[h]==1
-  else:
-    # growing mushroom
-    err4=0
-    err4=1 if (wrongvalues==0) and ((temperature<mtemperature_min)
-    err4=1 if (wrongvalues==0) and ((temperature>mtemperature_max)
-    out4=0
-    out4=1 if (wrongvalues==0) and ((temperature<=mheater_on)
-    out4=0 if (wrongvalues==0) and ((temperature>=mheater_off)
-    out4=0 if mheater_disable[h]==1
-
-  # switch on-off humidifier
-  # in3:  change growing mode input (closed: hyphae)
-  # err1: bad relative humidity
-  # out1: humidifying output
-  if in3==1:
-    # growing hyphae
-    err1=0
-    err1=1 if (wrongvalues==0) and ((humidity<hhumidity_min)
-    err1=1 if (wrongvalues==0) and ((humidity>hhumidity_max)
-    out1=0
-    out1=1 if (wrongvalues==0) and ((humidity<=hhumidifier_on)
-    out1=0 if (wrongvalues==0) and ((humidity>=hhumidifier_off)
-    out1=0 if hhumidifier_disable[h]==1
-  else:
-    # growing mushroom
-    err1=0
-    err1=1 if (wrongvalues==0) and ((humidity<mhumidity_min)
-    err1=1 if (wrongvalues==0) and ((humidity>mhumidity_max)
-    out1=0
-    out1=1 if (wrongvalues==0) and ((humidity<=mhumidifier_on)
-    out1=0 if (wrongvalues==0) and ((humidity>=mhumidifier_off)
-    out1=0 if mhumidifier_disable[h]==1
-
-
-#  ami meg kell bele:
-#  - magas paratartalomnal szelloztetes
-#  - magas homersekletnel szelloztetes
-#  - alacsony homersekletnel, ha kint melegebb van, akkor szelloztetes
-
-
-  # other error light
-  # err3: measured data is wrong
+  # -----------------------------------------------------------------------------
+  # See control.txt for useable variables!
+  out1=0
+  out2=0
+  out3=0
+  out4=0
+  err1=0
+  err2=0
   err3=wrongvalues
-
-  # out1-4:  integer   status of out ports #1-4, 1: switch on relay
-  # err1-4:  integer   status of error lights #1-4, 1: switch on LED
-
+  err4=0
+  # -----------------------------------------------------------------------------
   outputs=str(out1)+str(out2)+str(out3)+str(out4)+ \
           str(err1)+str(err2)+str(err3)+str(err4)
   return outputs
@@ -440,8 +334,10 @@ with daemon.DaemonContext() as context:
   try:
     while True:
       # read input data from sensor
-      writetodebuglog("i","Meausuring T/RH.")
-      shum,stemp=Adafruit_DHT.read_retry(sensor,prt_sens)
+      writetodebuglog("i","Measuring T/RH.")
+      # shum,stemp=Adafruit_DHT.read_retry(sensor,prt_sens)
+      shum=75  # !!! Remove it !!!
+      stemp=18 # !!! Remove it !!!
       writetodebuglog("i","Measure is done.")
       humidity=int(shum)
       temperature=int(stemp)
@@ -458,8 +354,8 @@ with daemon.DaemonContext() as context:
       inputs=inputs+str(int(not GPIO.input(prt_in3)))
       inputs=inputs+str(int(not GPIO.input(prt_in4)))
       blinkactled()
-      # run user's function
-      writetodebuglog("i","Running function of user.")
+      # check values and set outputs
+      writetodebuglog("i","Check values and set outputs.")
       outputs=control(temperature,humidity,inputs,wrongvalues)
       aop1=autooffport1()
       blinkactled()

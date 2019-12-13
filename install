@@ -89,6 +89,7 @@ for X in $LANGUAGES; do
     copy "messages/"$SWN2"_"$X".msg" "/usr/$INSTDIR/share/locale/$X/$SWN2.msg"
   fi;
 done
+copy "binary/*.bin" "/usr/$INSTDIR/bin/"
 copy "programs/$SWN2*.py" "/usr/$INSTDIR/bin/"
 copy "scripts/*" "/usr/$INSTDIR/bin/"
 copy "settings/cron.d/*" "/etc/cron.d/"
