@@ -306,16 +306,108 @@ def control(temperature,humidity,inputs,wrongvalues):
   in4=int(inputs[3])
   h=int(time.strftime("%H"))
   m=int(time.strftime("%M"))
+  exttemp=0  # !!! Remove it !!!
   # -----------------------------------------------------------------------------
   # See control.txt for useable variables!
-  out1=0
-  out2=0
-  out3=0
-  out4=0
-  err1=0
-  err2=0
-  err3=wrongvalues
-  err4=0
+  # switch on/off outputs:
+  if in3==1: # growing hyphae
+    # humidifier
+    out1=0
+    if (wrongvalues==0) and (humidity<hhumidifier_on):
+      out1=1
+    if (wrongvalues==0) and (humidity>hhumidifier_off):
+      out1=0
+    if hhumidifier_disable[h]==1:
+      out1=0
+    # lights
+    out2=0
+    if (h>=hlight_on1) and (h<hlight_off1):
+      out2=1
+    if (h>=hlight_on2) and (h<hlight_off2):
+      out2=1
+    # ventilators
+    out3=0
+    if (m>hvent_on) and (m<hvent_off):
+      out3=1
+    if hvent_disable[h]==1:
+      out3=0
+    if (hvent_disablelowtemp[h]==1) and (exttemp<hvent_lowtemp):
+      out3=0
+    # heaters
+    out4=0
+    if (wrongvalues==0) and (temperature<hheater_on):
+      out4=1
+    if (wrongvalues==0) and (temperature>hheater_off):
+      out4=0
+    if hheater_disable[h]==1:
+      out4=0
+  else: # growing mushroom
+    # humidifier
+    out1=0
+    if (wrongvalues==0) and (humidity<mhumidifier_on):
+      out1=1
+    if (wrongvalues==0) and (humidity>mhumidifier_off):
+      out1=0
+    if mhumidifier_disable[h]==1:
+      out1=0
+    # lights
+    out2=0
+    if (h>=mlight_on1) and (h<mlight_off1):
+      out2=1
+    if (h>=mlight_on2) and (h<mlight_off2):
+      out2=1
+    # ventilators
+    out3=0
+    if (m>mvent_on) and (m<mvent_off):
+      out3=1
+    if mvent_disable[h]==1:
+      out3=0
+    if (mvent_disablelowtemp[h]==1) and (exttemp<mvent_lowtemp):
+      out3=0
+    # heaters
+    out4=0
+    if (wrongvalues==0) and (temperature<mheater_on):
+      out4=1
+    if (wrongvalues==0) and (temperature>mheater_off):
+      out4=0
+    if mheater_disable[h]==1:
+      out4=0
+  # -----------------------------------------------------------------------------
+  # switch on/off error lights:
+  if in3==1: # growing hyphae
+    # bad relative humidity
+    err1=0
+    if (wrongvalues==0) and (humidity<hhumidity_min):
+      err1=1
+    if (wrongvalues==0) and (humidity>hhumidity_max):
+      err1=1
+    # bad water pressure error light
+    err2=0 if in2==1 else 1
+    # one or more measured values are bad
+    err3=wrongvalues
+    # bad temperature
+    err4=0
+    if (wrongvalues==0) and (temperature<htemperature_min):
+      err4=1
+    if (wrongvalues==0) and (temperature>htemperature_max):
+      err4=1
+  else: # growing mushroom
+    # bad relative humidity
+    err1=0
+    if (wrongvalues==0) and (humidity<mhumidity_min):
+      err1=1
+    if (wrongvalues==0) and (humidity>mhumidity_max):
+      err1=1
+    # bad water pressure error light
+    err2=0 if in2==1 else 1
+    # one or more measured values are bad
+    err3=wrongvalues
+    # bad temperature
+    err4=0
+    if (wrongvalues==0) and (temperature<mtemperature_min):
+      err4=1
+    if (wrongvalues==0) and (temperature>mtemperature_max):
+      err4=1
   # -----------------------------------------------------------------------------
   outputs=str(out1)+str(out2)+str(out3)+str(out4)+ \
           str(err1)+str(err2)+str(err3)+str(err4)
