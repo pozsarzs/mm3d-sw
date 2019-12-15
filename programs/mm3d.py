@@ -355,6 +355,10 @@ def control(temperature,humidity,inputs,exttemp,wrongvalues):
       out3=1
     if hvent_disable[h]==1:
       out3=0
+    if (wrongvalues==0) and (humidity>hhumidity_max) and (exttemp<htemperature_max):
+      out3=1
+    if (wrongvalues==0) and (temperature>htemperature_max) and (exttemp<htemperature_max):
+      out3=1
     if (hvent_disablelowtemp[h]==1) and (exttemp<hvent_lowtemp):
       out3=0
     # heaters
@@ -473,7 +477,7 @@ with daemon.DaemonContext() as context:
       blinkactled()
       # check values and set outputs
       writetodebuglog("i","Check values and set outputs.")
-      if (int(time.strftime("%M"))==0):
+      if (int(time.strftime("%M"))==3):
         exttemp=getexttemp()
       outputs=control(temperature,humidity,inputs,exttemp,wrongvalues)
       aop1=autooffport1()
