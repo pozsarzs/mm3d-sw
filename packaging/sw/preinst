@@ -1,0 +1,9 @@
+#!/bin/sh
+set -e
+mkdir --parents /home/pi/download
+cd /home/pi/download
+git clone https://github.com/adafruit/Adafruit_Python_DHT.git
+cd Adafruit_Python_DHT
+sudo python setup.py install
+sudo adduser mm3d
+sudo echo "mm3d ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/010_mm3d-nopasswd
