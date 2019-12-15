@@ -16,12 +16,16 @@
 import ConfigParser
 import daemon
 import io
+import json
 import os
+import requests
 import sys
 import time
 import Adafruit_DHT
 import RPi.GPIO as GPIO
 from time import gmtime, strftime
+
+#global exttemp
 
 # write a line to debug logfile
 def writetodebuglog(level,text):
@@ -43,11 +47,14 @@ def writetodebuglog(level,text):
 
 # load configuration
 def loadconfiguration(conffile):
+  global api_key
+  global base_url
+  global city_name
   global dbg_log
   global dir_log
   global dir_var
-  global logfile
   global lockfile
+  global logfile
   global prt_act
   global prt_err1
   global prt_err2
@@ -57,11 +64,11 @@ def loadconfiguration(conffile):
   global prt_in2
   global prt_in3
   global prt_in4
-  global prt_sens
   global prt_out1
   global prt_out2
   global prt_out3
   global prt_out4
+  global prt_sens
   global sensor
   try:
     with open(conffile) as f:
@@ -88,6 +95,9 @@ def loadconfiguration(conffile):
     prt_out2=int(config.get('ports','prt_out2'))
     prt_out3=int(config.get('ports','prt_out3'))
     prt_out4=int(config.get('ports','prt_out4'))
+    api_key=config.get('openweathermap.org','api_key')
+    base_url=config.get('openweathermap.org','base_url')
+    city_name=config.get('openweathermap.org','city_name')
     sensor_type=config.get('sensors','sensor_type')
     if sensor_type=='AM2302':
       sensor=Adafruit_DHT.AM2302
@@ -298,15 +308,29 @@ def autooffport1():
   aop1="5"
   return aop1
 
+# get external temperature from openweathermap.org
+def getexttemp():
+  writetodebuglog("i","Get external temperature from internet.")
+  response = requests.get(base_url+"appid="+api_key+"&q="+city_name)
+  x=response.json()
+  if x["cod"]!="404":
+    y=x["main"] 
+    current_temperature=y["temp"]
+    current_temperature=round(current_temperature-273)
+    writetodebuglog("i","External temperature: "+str(current_temperature)+" degree Celsius")
+    return current_temperature
+  else:
+    writetodebuglog("w","Cannot get external temperature from internet.")
+    return 18
+
 # control output ports and error lights
-def control(temperature,humidity,inputs,wrongvalues):
+def control(temperature,humidity,inputs,exttemp,wrongvalues):
   in1=int(inputs[0])
   in2=int(inputs[1])
   in3=int(inputs[2])
   in4=int(inputs[3])
   h=int(time.strftime("%H"))
   m=int(time.strftime("%M"))
-  exttemp=0  # !!! Remove it !!!
   # -----------------------------------------------------------------------------
   # See control.txt for useable variables!
   # switch on/off outputs:
@@ -418,6 +442,7 @@ loadconfiguration('/usr/local/etc/mm3d/mm3d.ini')
 loadenvirchars('/usr/local/etc/mm3d/envir.ini')
 initports()
 first=1
+exttemp=18
 prevtemperature=0
 prevhumidity=0
 previnputs=""
@@ -448,7 +473,9 @@ with daemon.DaemonContext() as context:
       blinkactled()
       # check values and set outputs
       writetodebuglog("i","Check values and set outputs.")
-      outputs=control(temperature,humidity,inputs,wrongvalues)
+      if (int(time.strftime("%M"))==0):
+        exttemp=getexttemp()
+      outputs=control(temperature,humidity,inputs,exttemp,wrongvalues)
       aop1=autooffport1()
       blinkactled()
       # override state of outputs

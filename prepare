@@ -30,6 +30,7 @@ sudo apt-get install apache2 \
                      python-daemon \
                      python-dev \
                      python-openssl \
+                     python-requests \
                      python-rpi.gpio
 mkdir --parents $HOME/download
 cd $HOME/download
