@@ -390,6 +390,10 @@ def control(temperature,humidity,inputs,exttemp,wrongvalues):
       out3=1
     if mvent_disable[h]==1:
       out3=0
+    if (wrongvalues==0) and (humidity>mhumidity_max) and (exttemp<mtemperature_max):
+      out3=1
+    if (wrongvalues==0) and (temperature>mtemperature_max) and (exttemp<mtemperature_max):
+      out3=1
     if (mvent_disablelowtemp[h]==1) and (exttemp<mvent_lowtemp):
       out3=0
     # heaters
@@ -456,9 +460,9 @@ with daemon.DaemonContext() as context:
     while True:
       # read input data from sensor
       writetodebuglog("i","Measuring T/RH.")
-      # shum,stemp=Adafruit_DHT.read_retry(sensor,prt_sens)
-      shum=75  # !!! Remove it !!!
-      stemp=18 # !!! Remove it !!!
+      shum,stemp=Adafruit_DHT.read_retry(sensor,prt_sens)
+      # shum=75  # !!! Remove it !!!
+      # stemp=18 # !!! Remove it !!!
       writetodebuglog("i","Measure is done.")
       humidity=int(shum)
       temperature=int(stemp)
