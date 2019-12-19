@@ -43,7 +43,7 @@ echo "- stopping daemon:"
 sudo /etc/init.d/$SWN2.sh stop
 echo "- removing from cron:"
 erase "/etc/cron.d/$SWN2"
-/etc/init.d/cron restart
+sudo /etc/init.d/cron restart
 echo "- removing files:"
 erase "/etc/init.d/$SWN2.sh"
 erase "/etc/rc0.d/K01$SWN2.sh"

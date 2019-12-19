@@ -1,0 +1,5 @@
+/etc/cron.d/mm3d
+/etc/init.d/mm3d.sh
+/etc/mm3d/envir.ini
+/etc/mm3d/mm3d.ini
+/etc/motd

@@ -7,13 +7,14 @@ if [ "$1" = "configure" ]; then
   fi
 fi
 # End automatically added section
-invoke-rd.d mm3d.sh stop
-sudo ln -s /etc/init.d/mm3d.sh /etc/rc0.d/K01mm3d.sh
-sudo ln -s /etc/init.d/mm3d.sh /etc/rc2.d/S01mm3d.sh
-sudo ln -s /etc/init.d/mm3d.sh /etc/rc3.d/S01mm3d.sh
-sudo ln -s /etc/init.d/mm3d.sh /etc/rc4.d/S01mm3d.sh
-sudo ln -s /etc/init.d/mm3d.sh /etc/rc5.d/S01mm3d.sh
-sudo ln -s /etc/init.d/mm3d.sh /etc/rc6.d/K01mm3d.sh
+mkdir --parents /var/lib/mm3d/
+invoke-rc.d mm3d.sh stop
+sudo ln --force -s /etc/init.d/mm3d.sh /etc/rc0.d/K01mm3d.sh
+sudo ln --force -s /etc/init.d/mm3d.sh /etc/rc2.d/S01mm3d.sh
+sudo ln --force -s /etc/init.d/mm3d.sh /etc/rc3.d/S01mm3d.sh
+sudo ln --force -s /etc/init.d/mm3d.sh /etc/rc4.d/S01mm3d.sh
+sudo ln --force -s /etc/init.d/mm3d.sh /etc/rc5.d/S01mm3d.sh
+sudo ln --force -s /etc/init.d/mm3d.sh /etc/rc6.d/K01mm3d.sh
 systemctl daemon-reload
-invoke-rd.d mm3d.sh start
-invoke-rd.d cron restart
+invoke-rc.d mm3d.sh start
+invoke-rc.d cron restart

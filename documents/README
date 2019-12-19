@@ -21,9 +21,9 @@ Requirements
 a. Visit homepage (see later) to download installer packages:
 
   Raspbian OS: mm3d-sw_0.4-1_all.deb
-               mm3d-eec_0.4-1_arm.deb
+               mm3d-eec_0.4-1_armhf.deb
                mm3d-web_0.4-1_all.deb
-               mm3d-sw-0.4-arm.tar.gz
+               mm3d-sw-0.4-armhf.tar.gz
 
 b. Download from Github
 
