@@ -1,0 +1,11 @@
+[Unit]
+Description=MM3D controlling software
+
+[Service]
+ExecStart=/usr/local/bin/mm3d.py
+Restart=on-failure
+RestartSec=5s
+
+[Install]
+WantedBy=multi-user.target
+

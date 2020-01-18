@@ -41,6 +41,7 @@ sleep 1
 echo "Uninstalling..."
 echo "- stopping daemon:"
 sudo /etc/init.d/$SWN2.sh stop
+sudo systemctl disable mm3d.service
 echo "- removing from cron:"
 erase "/etc/cron.d/$SWN2"
 sudo /etc/init.d/cron restart
@@ -52,6 +53,7 @@ erase "/etc/rc3.d/S01$SWN2.sh"
 erase "/etc/rc4.d/S01$SWN2.sh"
 erase "/etc/rc5.d/S01$SWN2.sh"
 erase "/etc/rc6.d/K01$SWN2.sh"
+erase "/etc/systemd/system/mm3d.service"
 erase "/usr/$INSTDIR/bin/$SWN2*"
 erase "/usr/$INSTDIR/share/doc/$SWN2/*"
 erase "/usr/$INSTDIR/share/locale/*/$SWN2.msg"

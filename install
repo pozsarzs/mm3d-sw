@@ -93,9 +93,10 @@ copy "binary/*.bin" "/usr/$INSTDIR/bin/"
 copy "programs/$SWN2*.py" "/usr/$INSTDIR/bin/"
 copy "scripts/*" "/usr/$INSTDIR/bin/"
 copy "settings/cron.d/*" "/etc/cron.d/"
-copy "settings/$SWN2.ini" "/usr/$INSTDIR/etc/$SWN2/"
-copy "settings/envir.ini" "/usr/$INSTDIR/etc/$SWN2/"
+copy "settings/$SWN2/$SWN2.ini" "/usr/$INSTDIR/etc/$SWN2/"
+copy "settings/$SWN2/envir.ini" "/usr/$INSTDIR/etc/$SWN2/"
 copy "settings/init.d/*" "/etc/init.d/"
+copy "settings/systemd/system/mm3d.service" "/etc/systemd/system/"
 copy "webpage/cgi-bin/*.cgi" "/usr/lib/cgi-bin/"
 copy "webpage/*.css" "/var/www/html/"
 copy "webpage/*.html" "/usr/$INSTDIR/share/$SWN2/"
@@ -113,6 +114,7 @@ sudo ln -s /etc/init.d/$SWN2.sh /etc/rc4.d/S01$SWN2.sh
 sudo ln -s /etc/init.d/$SWN2.sh /etc/rc5.d/S01$SWN2.sh
 sudo ln -s /etc/init.d/$SWN2.sh /etc/rc6.d/K01$SWN2.sh
 sudo systemctl daemon-reload
+sudo systemctk enable mm3d.service
 sudo /etc/init.d/$SWN2.sh start
 echo "- set cron.d:"
 copy settings/cron.d/$SWN2 /etc/cron.d/

@@ -1,3 +1,11 @@
+2020-01-18 Pozsár Zsolt <pozsar.zsolt@szerafingomba.hu>
+	*  0.4.1: new version: set restart at failure
+	*  install: modified
+	*  uninstall: modified
+	*  documents/gpioports.txt: new file
+	*  settings/*.ini: moved to mm3d subdirectory
+	*  settings/systemd/system/mm3d.service: new file
+
 2019-12-15 Pozsár Zsolt <pozsar.zsolt@szerafingomba.hu>
 	*  0.4: new version:
 	*  install: modified
@@ -8,6 +16,7 @@
 	*  document/INSTALL: modified
 	*  document/README: modified
 	*  document/VERSION: modified
+	*  documents/control.txt: new file
 	*  manuals/mm3d-editconf.1.gz: removed
 	*  manuals/mm3d-editcurrentprog.1.gz: removed
 	*  manuals/mm3d-editenvirconf.1.gz: new file
@@ -120,10 +129,10 @@
 	*  webpage/header_uk.html: new file
 
 2019-02-03 Pozsár Zsolt <pozsar.zsolt@szerafingomba.hu>
-	*  0.11: new version: fixed bugs in daemon, added manual pages,
-	         new utility scripts, users's program configurator (dialog),
-	         CGI script for client programs, new 'sign light' pictures
-	         for webpage.
+	*  0.1.1: new version: fixed bugs in daemon, added manual pages,
+	          new utility scripts, users's program configurator (dialog),
+	          CGI script for client programs, new 'sign light' pictures
+	          for webpage.
 	*  install: modified
 	*  prepare: modified
 	*  uninstall: modified
