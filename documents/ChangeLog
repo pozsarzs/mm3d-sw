@@ -1,8 +1,10 @@
-2020-01-18 Pozsár Zsolt <pozsar.zsolt@szerafingomba.hu>
-	*  0.4.1: new version: set restart at failure
+2020-05-03 Pozsár Zsolt <pozsar.zsolt@szerafingomba.hu>
+	*  0.4.1: fixed bugs
 	*  install: modified
 	*  uninstall: modified
 	*  documents/gpioports.txt: new file
+	*  programs/mm5d-hwtest.py: modified
+	*  programs/mm5d.py: modified
 	*  settings/*.ini: moved to mm3d subdirectory
 	*  settings/systemd/system/mm3d.service: new file
 

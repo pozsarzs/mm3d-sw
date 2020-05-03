@@ -17,7 +17,7 @@ use lib 'cgi-bin';
 use Switch;
 
 $contname = 'MM3D';
-$contversion = 'v0.4';
+$contversion = 'v0.4.1';
 
 # get data
 local ($buffer, @pairs, $pair, $name, $value, %FORM);

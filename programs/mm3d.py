@@ -460,18 +460,22 @@ with daemon.DaemonContext() as context:
     while True:
       # read input data from sensor
       writetodebuglog("i","Measuring T/RH.")
-      shum,stemp=Adafruit_DHT.read_retry(sensor,prt_sens)
-      # shum=75  # !!! Remove it !!!
-      # stemp=18 # !!! Remove it !!!
-      writetodebuglog("i","Measure is done.")
-      humidity=int(shum)
-      temperature=int(stemp)
-      blinkactled()
-      if humidity<100:
+      humidity,temperature=Adafruit_DHT.read_retry(sensor,prt_sens)
+      if humidity is not None and temperature is not None:
         wrongvalues=0
       else:
         wrongvalues=1
+        temperature=18
+        humidity=72
+      temperature=round(temperature)
+      humidity=round(humidity)
+      writetodebuglog("i","Measure is done.")
+      blinkactled()
+      if humidity>100:
+        wrongvalues=1
+      if wrongvalues==1:
         writetodebuglog("w","Measured values are bad!")
+        writecodetodisplay("W","02")
       # read input data from GPIO
       writetodebuglog("i","Reading input ports.")
       inputs=str(int(not GPIO.input(prt_in1)))

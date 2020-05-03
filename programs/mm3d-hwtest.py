@@ -190,15 +190,16 @@ try:
     while True:
         blink_act()
         hum,temp=Adafruit_DHT.read_retry(sensor,prt_sens)
-        hi=int(hum)
-        ti=int(temp)
-        print "   humidity: %02d%% - temperature: %02d C" % (hi,ti),
-        blink_act()
-        blink_act()
-        blink_act()
-        blink_act()
-        sys.stdout.flush()
-        sys.stdout.write("\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b")
+        if hum is not None and temp is not None:
+          hi=int(hum)
+          ti=int(temp)
+          print "   humidity: %02d%% - temperature: %02d C" % (hi,ti),
+          blink_act()
+          blink_act()
+          blink_act()
+          blink_act()
+          sys.stdout.flush()
+          sys.stdout.write("\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b")
 except KeyboardInterrupt:
     GPIO.cleanup()
     print"\n"

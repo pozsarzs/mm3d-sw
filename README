@@ -4,7 +4,7 @@ MM3D * Growing house controlling and remote monitoring equipment
 Copyright (C) 2018-2019 Pozsár Zsolt <pozsar.zsolt@.szerafingomba.hu>
 - OS: Linux (Raspbian)
 - UI: CUI
-- Software version: v0.4
+- Software version: v0.4.1
 - Software licence: EUPL v1.1
 - Software language: en
 - Web interface language: cs, de, en, fr, hr, hu, pl, ro, ru, sk, sl, sr, uk
