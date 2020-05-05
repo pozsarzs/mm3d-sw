@@ -1,6 +1,6 @@
 { +--------------------------------------------------------------------------+ }
-{ | MM3D v0.4 * Growing house controlling and remote monitoring system       | }
-{ | Copyright (C) 2018-2019 Pozsár Zsolt <pozsar.zsolt@.szerafingomba.hu>    | }
+{ | MM3D v0.5 * Growing house controlling and remote monitoring system       | }
+{ | Copyright (C) 2018-2020 Pozsár Zsolt <pozsar.zsolt@.szerafingomba.hu>    | }
 { | saveinifile.inc                                                          | }
 { | Save configuration to ini file                                           | }
 { +--------------------------------------------------------------------------+ }
@@ -17,8 +17,8 @@ var
   iif: text;
 const
   HEADER1='; +----------------------------------------------------------------------------+';
-  HEADER2='; | MM3D v0.4 * Growing house controlling and remote monitoring system         |';
-  HEADER3='; | Copyright (C) 2018-2019 Pozsár Zsolt <pozsar.zsolt@.szerafingomba.hu>      |';
+  HEADER2='; | MM3D v0.5 * Growing house controlling and remote monitoring system         |';
+  HEADER3='; | Copyright (C) 2018-2020 Pozsár Zsolt <pozsar.zsolt@.szerafingomba.hu>      |';
   HEADER4='; | envir.ini                                                                  |';
   HEADER5='; | growing environment characteristics                                        |';
 

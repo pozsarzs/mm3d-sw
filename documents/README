@@ -20,12 +20,10 @@ Requirements
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 a. Visit homepage (see later) to download latest installer packages:
 
-  Raspbian OS: mm3d-sw_0.4-1_all.deb
-               mm3d-eec_0.4-1_armhf.deb
-               mm3d-web_0.4-1_all.deb
-               (There are not v0.4.1 deb packages.)
-
-               mm3d-sw-0.4.1-armhf.tar.gz
+  Raspbian OS: mm3d-sw_0.5-1_all.deb
+               mm3d-eec_0.5-1_armhf.deb
+               mm3d-web_0.5-1_all.deb
+               mm3d-sw-0.5-armhf.tar.gz
 
 b. Download from Github
 
@@ -57,4 +55,4 @@ c. Download from Debian repository
                          Hungary
 
 ---------------------------------------------------------------------------------
- MM3D * Copyright (C) 2018-2019 Pozsar Zsolt <pozsar.zsolt@szerafingomba.hu>
+ MM3D * Copyright (C) 2018-2020 Pozsar Zsolt <pozsar.zsolt@szerafingomba.hu>

@@ -7,6 +7,8 @@ if [ "$1" = "configure" ]; then
   fi
 fi
 # End automatically added section
+sudo chown root:www-data /var/www/html/pics
+sudo chmod 775 /var/www/html/pics
 ln --force --symbolic /etc/apache2/mods-available/cgid.load /etc/apache2/mods-enabled/
 ln --force --symbolic /etc/apache2/mods-available/cgid.conf /etc/apache2/mods-enabled/
 ln --force --symbolic /etc/apache2/conf-available/serve-cgi-bin.conf /etc/apache2/conf-enabled/

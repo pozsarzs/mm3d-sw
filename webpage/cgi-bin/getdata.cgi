@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 # +----------------------------------------------------------------------------+
-# | MM3D v0.4 * Growing house controlling and remote monitoring system         |
-# | Copyright (C) 2018-2019 Pozsár Zsolt <pozsar.zsolt@.szerafingomba.hu>      |
+# | MM3D v0.5 * Growing house controlling and remote monitoring system         |
+# | Copyright (C) 2018-2020 Pozsár Zsolt <pozsar.zsolt@.szerafingomba.hu>      |
 # | getdata.cgi                                                                |
 # | CGI program                                                                |
 # +----------------------------------------------------------------------------+
@@ -17,7 +17,7 @@ use lib 'cgi-bin';
 use Switch;
 
 $contname = 'MM3D';
-$contversion = 'v0.4.1';
+$contversion = 'v0.5';
 
 # get data
 local ($buffer, @pairs, $pair, $name, $value, %FORM);
