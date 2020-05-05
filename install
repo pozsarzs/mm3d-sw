@@ -1,6 +1,6 @@
 #!/bin/bash
 # +----------------------------------------------------------------------------+
-# | MM3D v0.4 * Growing house controlling and remote monitoring system         |
+# | MM3D v0.5 * Growing house controlling and remote monitoring system         |
 # | Copyright (C) 2018-2019 Pozsár Zsolt <pozsar.zsolt@.szerafingomba.hu>      |
 # | install                                                                    |
 # | Installer script                                                           |
@@ -100,6 +100,8 @@ copy "settings/systemd/system/mm3d.service" "/etc/systemd/system/"
 copy "webpage/cgi-bin/*.cgi" "/usr/lib/cgi-bin/"
 copy "webpage/*.css" "/var/www/html/"
 copy "webpage/*.html" "/usr/$INSTDIR/share/$SWN2/"
+sudo chown root:www-data /var/www/html/pics
+sudo chmod 775 /var/www/html/pics
 copy "webpage/pics/*.ico" "/var/www/html/pics/"
 copy "webpage/pics/*.png" "/var/www/html/pics/"
 sudo cat /etc/motd | grep -qv MM3D && sudo mv /etc/motd /etc/motd.orig && sudo cp settings/motd /etc/

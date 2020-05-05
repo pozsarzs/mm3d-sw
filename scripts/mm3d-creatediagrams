@@ -1,0 +1,72 @@
+#!/bin/bash
+# +----------------------------------------------------------------------------+
+# | MM3D v0.4 * Growing house controlling and remote monitoring system         |
+# | Copyright (C) 2018-2019 Pozsár Zsolt <pozsar.zsolt@.szerafingomba.hu>      |
+# | mm3d-creatediagrams                                                        |
+# | Create diagrams for webpage                                                |
+# +----------------------------------------------------------------------------+
+#
+#   This program is free software: you can redistribute it and/or modify it
+# under the terms of the European Union Public License 1.1 version.
+#
+#   This program is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+# FOR A PARTICULAR PURPOSE.
+
+loadconfiguration()
+{
+  CFGFILE="/usr/local/etc/mm3d/mm3d.ini"
+  if [ ! -f $CFGFILE ]
+    then
+      echo "ERROR: Cannot open configuration file!"
+      exit 1
+  fi
+  DIR_HTM=`cat $CFGFILE | grep dir_htm= | sed 's/dir_htm=//'`
+  DIR_LOG=`cat $CFGFILE | grep dir_log= | sed 's/dir_log=//'`
+  DIR_TMP=`cat $CFGFILE | grep dir_tmp= | sed 's/dir_tmp=//'`
+}
+
+creatediagrams()
+{
+  TMPFILE=$DIR_HTM"pics/mm3d-creatediagrams.tmp"
+  LOGFILE=$DIR_LOG"mm3d.log"
+  head -n 20 $LOGFILE > $TMPFILE
+  gnuplot << EOF
+set lmargin at screen 0.10
+set rmargin at screen 0.90
+set bmargin at screen 0.20
+set tmargin at screen 0.90
+set datafile separator ","
+set title ""
+set ylabel ""
+set yrange [0:30]
+set xlabel ""
+set xtics rotate by 45 right
+set style fill solid 1.00 noborder
+set boxwidth 2 relative
+set terminal png
+set output "$DIR_HTM/pics/temperature.png"
+plot "$TMPFILE" using 3:xticlabels(stringcolumn(2)) with lines title "T [degree C]" linecolor rgb 'red'
+EOF
+  gnuplot << EOF
+set lmargin at screen 0.10
+set rmargin at screen 0.90
+set bmargin at screen 0.20
+set tmargin at screen 0.90
+set datafile separator ","
+set title ""
+set ylabel ""
+set yrange [0:110]
+set xlabel ""
+set xtics rotate by 45 right
+set style fill solid 1.00 noborder
+set boxwidth 2 relative
+set terminal png
+set output "$DIR_HTM/pics/humidity.png"
+plot "$TMPFILE" using 4:xticlabels(stringcolumn(2)) with lines title "RH [%]" linecolor rgb 'blue'
+EOF
+  rm --force $TMPFILE
+}
+
+loadconfiguration
+creatediagrams

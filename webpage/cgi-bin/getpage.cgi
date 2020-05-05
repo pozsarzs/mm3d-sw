@@ -21,6 +21,9 @@ $green="<img src=\"/pics/green.png\">";
 $red="<img src=\"/pics/red.png\">";
 $yellow="<img src=\"/pics/yellow.png\">";
 
+# create diagram pictures
+system("/usr/local/bin/mm3d-creatediagrams");
+
 # get data
 local ($buffer, @pairs, $pair, $name, $value, %FORM);
 $ENV{'REQUEST_METHOD'} =~ tr/a-z/A-Z/;
@@ -272,6 +275,15 @@ print "    <b class=\"title1\">$msg21</b><br>";
 print "    <br>";
 print "    $msg22:";
 print "    <br>";
+print "    <br>";
+print "    <table border=\"1\" cellpadding=\"3\" cellspacing=\"0\" width=\"100%\">";
+print "      <tbody>";
+print "        <tr>";
+print "          <td><img src=\"/pics/temperature.png\" width=\"100%\"></td>";
+print "          <td><img src=\"/pics/humidity.png\" width=\"100%\"></td>";
+print "        </tr>";
+print "      </tbody>";
+print "    </table>";
 print "    <br>";
 print "    <table border=\"1\" cellpadding=\"3\" cellspacing=\"0\" width=\"100%\">";
 print "      <tbody>";
