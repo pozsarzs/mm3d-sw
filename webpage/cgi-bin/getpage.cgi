@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 # +----------------------------------------------------------------------------+
-# | MM3D v0.5 * Growing house controlling and remote monitoring system         |
-# | Copyright (C) 2018-2020 Pozsár Zsolt <pozsar.zsolt@.szerafingomba.hu>      |
+# | MM3D v0.4 * Growing house controlling and remote monitoring system         |
+# | Copyright (C) 2018-2019 Pozsár Zsolt <pozsar.zsolt@.szerafingomba.hu>      |
 # | getpage.cgi                                                                |
 # | CGI program                                                                |
 # +----------------------------------------------------------------------------+
@@ -79,6 +79,7 @@ while (<CONF>)
     case "nam_out4" { $nam_out4 = $columns[1]; }
     case "usr_dt1" { $usr_dt1 = $columns[1]; }
     case "usr_dt3" { $usr_dt3 = $columns[1]; }
+    case "web_lines" { $web_lines = $columns[1]; }
   }
 }
 close CONF;
@@ -101,7 +102,7 @@ $msg18 = "Err";
 $msg19 = "Refresh";
 $msg20 = "Latest status";
 $msg21 = "Log";
-$msg22 = "Latest 20 record";
+$msg22 = "";
 $msg23 = "If you want to see full log, please login to unit via SSH, and use <i>mm3d-viewlog</i> command.";
 
 $msgfile = "$dir_msg/$lang/mm3d.msg";
@@ -273,8 +274,6 @@ print "    <hr>";
 print "    <br>";
 print "    <b class=\"title1\">$msg21</b><br>";
 print "    <br>";
-print "    $msg22:";
-print "    <br>";
 print "    <br>";
 print "    <table border=\"1\" cellpadding=\"3\" cellspacing=\"0\" width=\"100%\">";
 print "      <tbody>";
@@ -339,7 +338,7 @@ while (<DATA>)
   print "          <td>$columns[15]</td>";
   print "        </tr>";
   $line = $line + 1;
-  if ($line eq 20) { last };
+  if ($line eq $web_lines) { last };
 }
 close DATA;
 print "      </tbody>";

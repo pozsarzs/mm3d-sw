@@ -5,6 +5,7 @@
 	*  manuals/mm3d-creatediagrams.1.gz: new file
 	*  scripts/mm3d-creatediagrams: new file
 	*  settings/motd: modified
+	*  settings/mm3d/mm3d.ini: modified
 	*  webpage/header_*.html: modified
 	*  webpage/cgi-bin/getpage.cgi: modified
 
