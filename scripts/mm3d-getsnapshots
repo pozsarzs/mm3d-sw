@@ -1,0 +1,56 @@
+#!/bin/bash
+# +----------------------------------------------------------------------------+
+# | MM3D v0.4 * Growing house controlling and remote monitoring system         |
+# | Copyright (C) 2018-2019 Pozsár Zsolt <pozsar.zsolt@.szerafingomba.hu>      |
+# | mm3d-getsnapshots                                                          |
+# | Get snapshot from IP cameras                                               |
+# +----------------------------------------------------------------------------+
+#
+#   This program is free software: you can redistribute it and/or modify it
+# under the terms of the European Union Public License 1.1 version.
+#
+#   This program is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+# FOR A PARTICULAR PURPOSE.
+
+loadconfiguration()
+{
+  CFGFILE="/usr/local/etc/mm3d/mm3d.ini"
+  if [ ! -f $CFGFILE ]
+  then
+    echo "ERROR: Cannot open configuration file!"
+    exit 1
+  fi
+  CAM1_ENABLE=`cat $CFGFILE | grep cam1_enable= | sed 's/cam1_enable=//'`
+  CAM1_JPGLINK=`cat $CFGFILE | grep cam1_jpglink= | sed 's/cam1_jpglink=//'`
+  CAM2_ENABLE=`cat $CFGFILE | grep cam2_enable= | sed 's/cam2_enable=//'`
+  CAM2_JPGLINK=`cat $CFGFILE | grep cam2_jpglink= | sed 's/cam2_jpglink=//'`
+  DIR_HTM=`cat $CFGFILE | grep dir_htm= | sed 's/dir_htm=//'`
+}
+
+getsnapshots()
+{
+  if [ $CAM1_ENABLE -eq "1" ]
+  then
+    wget "$CAM1_JPGLINK" -O "$DIR_HTM/pics/camera1.jpg"
+    if [ ! $? -eq "0" ]
+    then
+      cp "$DIR_HTM/pics/ants.jpg" "$DIR_HTM/pics/camera1.jpg"
+    fi
+  else
+    cp "$DIR_HTM/pics/ants.jpg" "$DIR_HTM/pics/camera1.jpg"
+  fi
+  if [ $CAM2_ENABLE -eq "1" ]
+  then
+    wget "$CAM2_JPGLINK" -O "$DIR_HTM/pics/camera2.jpg"
+    if [ ! $? -eq "0" ]
+    then
+      cp "$DIR_HTM/pics/ants.jpg" "$DIR_HTM/pics/camera2.jpg"
+    fi
+  else
+    cp "$DIR_HTM/pics/ants.jpg" "$DIR_HTM/pics/camera1.jpg"
+  fi
+}
+
+loadconfiguration
+getsnapshots

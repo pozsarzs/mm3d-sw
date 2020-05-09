@@ -59,12 +59,15 @@ while (<CONF>)
   my($datarownum) = $#datarow;
   switch ($columns[0])
   {
-    case "lng" { $lang = $columns[1]; }
+    case "cam1_enable" { $cam1_enable = $columns[1]; }
+    case "cam2_enable" { $cam2_enable = $columns[1]; }
+    case "cam_show" { $cam_show = $columns[1]; }
     case "dir_htm" { $dir_htm = $columns[1]; }
     case "dir_lck" { $dir_lck = $columns[1]; }
     case "dir_log" { $dir_log = $columns[1]; }
     case "dir_msg" { $dir_msg = $columns[1]; }
     case "dir_shr" { $dir_shr = $columns[1]; }
+    case "lng" { $lang = $columns[1]; }
     case "nam_err1" { $nam_err1 = $columns[1]; }
     case "nam_err2" { $nam_err2 = $columns[1]; }
     case "nam_err3" { $nam_err3 = $columns[1]; }
@@ -102,7 +105,7 @@ $msg18 = "Err";
 $msg19 = "Refresh";
 $msg20 = "Latest status";
 $msg21 = "Log";
-$msg22 = "";
+$msg22 = "Cameras";
 $msg23 = "If you want to see full log, please login to unit via SSH, and use <i>mm3d-viewlog</i> command.";
 
 $msgfile = "$dir_msg/$lang/mm3d.msg";
@@ -178,6 +181,7 @@ print "        </tr>";
 print "      </tbody>";
 print "    </table>";
 print "    <br>";
+# section names
 print "    <b class=\"title1\">$msg06</b><br>";
 print "    <br>";
 print "    <table border=\"0\" cellpadding=\"3\" cellspacing=\"0\">";
@@ -205,6 +209,7 @@ print "        </tr>";
 print "      </tbody>";
 print "    </table>";
 print "    <br>";
+# section latest status
 print "    <b class=\"title1\">$msg20</b><br>";
 print "    <br>";
 print "    <table border=\"1\" cellpadding=\"3\" cellspacing=\"0\" width=\"100%\">";
@@ -265,6 +270,7 @@ close DATA;
 print "      </tbody>";
 print "    </table>";
 print "    <br>";
+# refresh button
 print "    <form action=\"getpage.cgi\" method=\"get\">";
 print "      <center>";
 print "        <input value=\"$msg19\" type=\"submit\" width=\"100\" style=\"width:100px\">";
@@ -272,6 +278,27 @@ print "      </center>";
 print "    </form>";
 print "    <hr>";
 print "    <br>";
+# section cameras
+if ($cam_show eq 1)
+{
+  # get snapshots
+  system("/usr/local/bin/mm3d-getsnapshots");
+  print "    <b class=\"title1\">$msg22</b><br>";
+  print "    <br>";
+  print "    <br>";
+  print "    <table border=\"1\" cellpadding=\"20\" cellspacing=\"0\" width=\"100%\">";
+  print "      <tbody>";
+  print "        <tr>";
+  print "          <td width=\"50%\"><img src=\"/pics/camera1.jpg\" width=\"100%\"></td>";
+  print "          <td width=\"50%\"><img src=\"/pics/camera2.jpg\" width=\"100%\"></td>";
+  print "        </tr>";
+  print "      </tbody>";
+  print "    </table>";
+  print "    <br>";
+  print "    <hr>";
+  print "    <br>";
+}
+# section log
 print "    <b class=\"title1\">$msg21</b><br>";
 print "    <br>";
 print "    <br>";

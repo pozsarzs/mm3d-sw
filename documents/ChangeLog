@@ -1,13 +1,17 @@
 2020-05-15 Pozsár Zsolt <pozsar.zsolt@szerafingomba.hu>
-	*  0.5: web interface: auto-refresh, diagrams from latest 20 record,
+	*  0.5: web interface: auto-refresh, diagrams from latest record,
+                snapshots from IP cameras, the number of log rows can be set.
 	*  install: modified
-	*  prepare: modified
 	*  manuals/mm3d-creatediagrams.1.gz: new file
+	*  manuals/mm3d-getsnapshots.1.gz: new file
+	*  prepare: modified
 	*  scripts/mm3d-creatediagrams: new file
-	*  settings/motd: modified
+	*  scripts/mm3d-getsnapshots: new file
 	*  settings/mm3d/mm3d.ini: modified
-	*  webpage/header_*.html: modified
+	*  settings/motd: modified
 	*  webpage/cgi-bin/getpage.cgi: modified
+	*  webpage/header_*.html: modified
+	*  webpage/pics/ants.jpg: new file
 
 2020-05-03 Pozsár Zsolt <pozsar.zsolt@szerafingomba.hu>
 	*  0.4.1: fixed bugs
