@@ -1,0 +1,40 @@
+#!/bin/bash
+# +----------------------------------------------------------------------------+
+# | MM3D v0.4 * Growing house controlling and remote monitoring system         |
+# | Copyright (C) 2018-2019 Pozsár Zsolt <pozsar.zsolt@.szerafingomba.hu>      |
+# | mm3d-prepare                                                               |
+# | Prepare OS for install MM3D                                                |
+# +----------------------------------------------------------------------------+
+#
+#   This program is free software: you can redistribute it and/or modify it
+# under the terms of the European Union Public License 1.1 version.
+#
+#   This program is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+# FOR A PARTICULAR PURPOSE.
+
+SWN1="MM3D"
+SWN2="mm3d"
+SWV="v0.4"
+
+clear
+echo "--------------------------------------------------------------------------------"
+echo "$SWN1 $SWV prepare OS"
+echo "Copyright (C) 2018-2019 Pozsar Zsolt <pozsar.zsolt@szerafingomba.hu>"
+echo "--------------------------------------------------------------------------------"
+echo -e "\nCreating a new user..."
+sudo adduser $SWN2
+sudo echo "$SWN2 ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/010_$SWN2-nopasswd
+echo "Installing required components..."
+sudo apt-get install build-essential \
+                     git \
+                     libswitch-perl \
+                     python-dev \
+                     python-openssl \
+                     python-rpi.gpio
+mkdir --parents $HOME/download
+cd $HOME/download
+git clone https://github.com/adafruit/Adafruit_Python_DHT.git
+cd Adafruit_Python_DHT
+sudo python setup.py install
+echo -e "\nDone."
