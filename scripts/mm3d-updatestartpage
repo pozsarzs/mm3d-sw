@@ -15,6 +15,7 @@
 
 loadconfiguration()
 {
+  #CFGFILE="/etc/mm3d/mm3d.ini"
   CFGFILE="/usr/local/etc/mm3d/mm3d.ini"
   if [ ! -f $CFGFILE ]
     then

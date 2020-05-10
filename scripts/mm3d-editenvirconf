@@ -13,6 +13,7 @@
 # ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
 # FOR A PARTICULAR PURPOSE.
 
+#CFGFILE="/etc/mm3d/envir.ini"
 CFGFILE="/usr/local/etc/mm3d/envir.ini"
 if [ ! -f $CFGFILE ]
 then

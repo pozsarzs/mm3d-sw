@@ -446,6 +446,8 @@ def control(temperature,humidity,inputs,exttemp,wrongvalues):
   return outputs
 
 # main program
+#loadconfiguration('/etc/mm3d/mm3d.ini')
+#loadenvirchars('/etc/mm3d/envir.ini')
 loadconfiguration('/usr/local/etc/mm3d/mm3d.ini')
 loadenvirchars('/usr/local/etc/mm3d/envir.ini')
 initports()
