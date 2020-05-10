@@ -8,7 +8,7 @@ monitoring equipment. It measures temperature and humidity, checks
 programmable inputs, outputs and error lights. You can view actual status
 with a browser application and administrate it with SSH client.
 
-Requirements
+Requirements:
 
   Hardware: Raspberry Pi 3 Model B
   Software: Raspbian Stretch Lite operation system,
@@ -20,10 +20,12 @@ Requirements
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 a. Visit homepage (see later) to download latest installer packages:
 
-  Raspbian OS: mm3d-sw_0.5-1_all.deb
+  Raspbian OS: mm3d-sw-0.5-armhf.tar.gz
+
                mm3d-eec_0.5-1_armhf.deb
+               mm3d-prepare_0.5-1_all.deb
+               mm3d-sw_0.5-1_all.deb
                mm3d-web_0.5-1_all.deb
-               mm3d-sw-0.5-armhf.tar.gz
 
 b. Download from Github
 
@@ -32,12 +34,15 @@ b. Download from Github
 c. Download from Debian repository
 
   set reporitory:
+  $ sudo su
   # echo "deb http://www.szerafingomba.hu/deb/ ./" >> /etc/apt/sources.list
   # wget -q -O - http://www.szerafingomba.hu/deb/KEY.gpg | apt-key add -
   # apt-get update
 
   install:
-  # apt-get install mm3d-sw mm3d-eec mm3d-web
+  $ sudo apt-get install mm3d-prepare
+  $ mm3d-prepare
+  $ sudo apt-get install mm3d-sw mm3d-eec mm3d-web
 
 3. Contact
 ~~~~~~~~~~

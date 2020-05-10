@@ -25,6 +25,8 @@ T/RH sensor data          GPIO11  23 |o x| 24  GPIO8
                           GPIO26  37 |x x| 38  GPIO20
                              GND  39 |o x| 40  GPIO21
                                      +---+
---------------------------------------------------------------------------------
 o: used ports or power/common pins
-x: not used ports
+x: unused ports
+
+---------------------------------------------------------------------------------
+ MM3D * Copyright (C) 2018-2020 Pozsar Zsolt <pozsar.zsolt@szerafingomba.hu>
