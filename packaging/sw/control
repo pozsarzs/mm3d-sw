@@ -3,7 +3,7 @@ Version: 0.5
 Section: misc
 Priority: extra
 Architecture: all
-Installed-Size: 0 kB
+Installed-Size: 304 kB
 Maintainer: Pozsar Zsolt <pozsar.zsolt@szerafingomba.hu>
 Depends: lsb-base, build-essential, python-daemon, python-dev, python-openssl, python-requests, python-rpi.gpio
 Description: MM3D growing house controlling and remote monitoring equipment.

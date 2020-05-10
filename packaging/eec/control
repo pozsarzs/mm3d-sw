@@ -3,7 +3,7 @@ Version: 0.5
 Section: misc
 Priority: extra
 Architecture: armhf
-Installed-Size: 0 kB
+Installed-Size: 964 kB
 Maintainer: Pozsar Zsolt <pozsar.zsolt@szerafingomba.hu>
 Depends: mm3d-sw
 Description: Environment characteristic editor

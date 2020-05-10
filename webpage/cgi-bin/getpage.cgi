@@ -22,6 +22,7 @@ $red="<img src=\"/pics/red.png\">";
 $yellow="<img src=\"/pics/yellow.png\">";
 
 # create diagram pictures
+#system("/usr/bin/mm3d-creatediagrams");
 system("/usr/local/bin/mm3d-creatediagrams");
 
 # get data
@@ -43,6 +44,7 @@ foreach $pair (@pairs)
 }
 
 # load configuration
+#$conffile = "/etc/mm3d/mm3d.ini";
 $conffile = "/usr/local/etc/mm3d/mm3d.ini";
 open CONF, "< $conffile" or die "ERROR: Cannot open configuration file!";
 while (<CONF>)
@@ -282,6 +284,7 @@ print "    <br>";
 if ($cam_show eq 1)
 {
   # get snapshots
+  #system("/usr/bin/mm3d-getsnapshots");
   system("/usr/local/bin/mm3d-getsnapshots");
   print "    <b class=\"title1\">$msg22</b><br>";
   print "    <br>";

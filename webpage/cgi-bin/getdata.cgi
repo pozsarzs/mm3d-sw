@@ -38,6 +38,7 @@ foreach $pair (@pairs)
 }
 
 # load configuration
+#$conffile = "/etc/mm3d/mm3d.ini";
 $conffile = "/usr/local/etc/mm3d/mm3d.ini";
 open CONF, "< $conffile" or die "ERROR: Cannot open configuration file!";
 while (<CONF>)
