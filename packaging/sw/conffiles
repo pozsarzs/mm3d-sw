@@ -3,3 +3,4 @@
 /etc/mm3d/envir.ini
 /etc/mm3d/mm3d.ini
 /etc/motd
+/etc/systemd/system/mm3d.service

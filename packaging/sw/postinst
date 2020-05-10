@@ -1,12 +1,10 @@
 #!/bin/sh
 set -e
-# Automatically added by dh_installdocs
 if [ "$1" = "configure" ]; then
   if [ -d /usr/doc -a ! -e /usr/doc/mm3d-sw -a -d /usr/share/doc/mm3d-sw ]; then
     ln -sf /usr/share/doc/mm3d-sw /usr/doc/mm3d-sw
   fi
 fi
-# End automatically added section
 mkdir --parents /var/lib/mm3d/
 invoke-rc.d mm3d.sh stop
 sudo ln --force -s /etc/init.d/mm3d.sh /etc/rc0.d/K01mm3d.sh

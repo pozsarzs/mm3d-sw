@@ -1,12 +1,10 @@
 #!/bin/sh
 set -e
-# Automatically added by dh_installdocs
 if [ "$1" = "configure" ]; then
   if [ -d /usr/doc -a ! -e /usr/doc/mm3d-web -a -d /usr/share/doc/mm3d-web ]; then
     ln -sf /usr/share/doc/mm3d-web /usr/doc/mm3d-web
   fi
 fi
-# End automatically added section
 sudo chown root:www-data /var/www/html/pics
 sudo chmod 775 /var/www/html/pics
 ln --force --symbolic /etc/apache2/mods-available/cgid.load /etc/apache2/mods-enabled/

@@ -7,10 +7,11 @@
 	*  document/INSTALL: modified
 	*  document/README: modified
 	*  document/VERSION: modified
-	*  manuals/*: modified
 	*  manuals/mm3d-creatediagrams.1.gz: new file
 	*  manuals/mm3d-getsnapshots.1.gz: new file
+	*  manuals/*: modified
 	*  messages/mm3d_??.msg: modified
+	*  packaging/*/*: modified
 	*  packaging/prepare/*/*: new files
 	*  scripts/mm3d-creatediagrams: new file
 	*  scripts/mm3d-getsnapshots: new file

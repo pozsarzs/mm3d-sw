@@ -1,9 +1,8 @@
 #!/bin/sh
 set -e
-# Automatically added by dh_installdocs
 if [ "$1" = "configure" ]; then
   if [ -d /usr/doc -a ! -e /usr/doc/mm3d-prepare -a -d /usr/share/doc/mm3d-prepare ]; then
     ln -sf /usr/share/doc/mm3d-prepare /usr/doc/mm3d-prepare
   fi
 fi
-# End automatically added section
+echo "Run mm3d-prepare script before install other MM3D packages."

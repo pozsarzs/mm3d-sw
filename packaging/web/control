@@ -3,9 +3,9 @@ Version: 0.5
 Section: misc
 Priority: extra
 Architecture: all
-Installed-Size: 204 kB
+Installed-Size: 0 kB
 Maintainer: Pozsar Zsolt <pozsar.zsolt@szerafingomba.hu>
-Depends: mm3d-sw, apache2, gnuplot, wget
+Depends: mm3d-sw, apache2, gnuplot, wget, libswitch-perl
 Description: Web interface for MM3D software
  This is a software part of MM3D growing house controlling
  and remote monitoring equipment.

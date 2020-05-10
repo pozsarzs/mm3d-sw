@@ -1,11 +1,11 @@
 Package: mm3d-prepare
-Version: 0.4
+Version: 0.5
 Section: misc
 Priority: extra
 Architecture: all
 Installed-Size: 44 kB
 Maintainer: Pozsar Zsolt <pozsar.zsolt@szerafingomba.hu>
 Depends: adduser, lsb-base, build-essential
-Description: Prepare OS for install MM3D
+Description: Prepare OS for install MM3D software
  This is a software part of MM3D growing house controlling
  and remote monitoring equipment.

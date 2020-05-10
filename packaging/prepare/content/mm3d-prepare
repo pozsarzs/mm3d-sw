@@ -1,9 +1,9 @@
 #!/bin/bash
 # +----------------------------------------------------------------------------+
-# | MM3D v0.4 * Growing house controlling and remote monitoring system         |
-# | Copyright (C) 2018-2019 Pozsár Zsolt <pozsar.zsolt@.szerafingomba.hu>      |
+# | MM3D v0.5 * Growing house controlling and remote monitoring system         |
+# | Copyright (C) 2018-2020 Pozsár Zsolt <pozsar.zsolt@.szerafingomba.hu>      |
 # | mm3d-prepare                                                               |
-# | Prepare OS for install MM3D                                                |
+# | Prepare OS for install MM3D software                                       |
 # +----------------------------------------------------------------------------+
 #
 #   This program is free software: you can redistribute it and/or modify it
@@ -15,26 +15,22 @@
 
 SWN1="MM3D"
 SWN2="mm3d"
-SWV="v0.4"
+SWV="v0.5"
 
 clear
 echo "--------------------------------------------------------------------------------"
 echo "$SWN1 $SWV prepare OS"
-echo "Copyright (C) 2018-2019 Pozsar Zsolt <pozsar.zsolt@szerafingomba.hu>"
+echo "Copyright (C) 2018-2020 Pozsar Zsolt <pozsar.zsolt@szerafingomba.hu>"
 echo "--------------------------------------------------------------------------------"
 echo -e "\nCreating a new user..."
 sudo adduser $SWN2
 sudo echo "$SWN2 ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/010_$SWN2-nopasswd
 echo "Installing required components..."
-sudo apt-get install build-essential \
-                     git \
-                     libswitch-perl \
-                     python-dev \
-                     python-openssl \
-                     python-rpi.gpio
+sudo apt-get install build-essential git python-dev
 mkdir --parents $HOME/download
 cd $HOME/download
 git clone https://github.com/adafruit/Adafruit_Python_DHT.git
 cd Adafruit_Python_DHT
 sudo python setup.py install
 echo -e "\nDone."
+exit 0
