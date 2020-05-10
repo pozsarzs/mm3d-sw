@@ -26,5 +26,5 @@ msg18=Greška
 msg19=Ažurirano
 msg20=Zadnje stanje
 msg21=Prijava
-msg22=Posljednjih dvadeset zapisa
+msg22=Kamere
 msg23=Ako želite vidjeti potpuni dnevnik, prijavite se na jedinicu sa SSH-om i koristite <i> mm3d-viewlog </i>!

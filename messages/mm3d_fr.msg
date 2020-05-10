@@ -26,6 +26,6 @@ msg18=Erreur
 msg19=Mise à jour
 msg20=Dernier état
 msg21=Journal
-msg22=Les vingt dernières entrées
+msg22=Caméras
 msg23=Si vous voulez voir le journal complet, connectez-vous à l'unité avec SSH et utilisez <i> mm3d-viewlog </ i>!
 

@@ -26,5 +26,5 @@ msg18=Chyba
 msg19=Aktualizováno
 msg20=Poslední stav
 msg21=Diář
-msg22=Posledních dvacet položek
+msg22=Kamery
 msg23=Pokud chcete zobrazit celý diář, přihlaste se k jednotce pomocí SSH a použijte <i> mm3d-viewlog </i>!

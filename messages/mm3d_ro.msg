@@ -26,6 +26,6 @@ msg18=Eroare
 msg19=Actualizat
 msg20=Ultima stare
 msg21=Jurnal
-msg22=Ultimele douăzeci de intrări
+msg22=Camere
 msg23=Dacă doriți să vedeți jurnalul complet, conectați-vă la unitate cu SSH și folosiți <i> mm3d-viewlog </ i>!
 

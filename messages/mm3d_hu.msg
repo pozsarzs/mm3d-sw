@@ -26,5 +26,5 @@ msg18=Hiba
 msg19=Frissít
 msg20=Utolsó állapot
 msg21=Napló
-msg22=Utolsó húsz bejegyzés
+msg22=Kamerák
 msg23=Ha szeretné látni a teljes naplót, jelentkezzen be az egységbe SSH-val és használja a <i>mm3d-viewlog</i> parancsot!
