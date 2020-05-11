@@ -102,8 +102,7 @@ copy "webpage/*.css" "/var/www/html/"
 copy "webpage/*.html" "/usr/$INSTDIR/share/$SWN2/"
 sudo chown root:www-data /var/www/html/pics
 sudo chmod 775 /var/www/html/pics
-copy "webpage/pics/*.ico" "/var/www/html/pics/"
-copy "webpage/pics/*.png" "/var/www/html/pics/"
+copy "webpage/pics/*" "/var/www/html/pics/"
 sudo cat /etc/motd | grep -qv MM3D && sudo mv /etc/motd /etc/motd.orig && sudo cp settings/motd /etc/
 sudo chown -R $SWN2:$SWN2 /home/$SWN2/
 echo "- set init.d:"
