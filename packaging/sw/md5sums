@@ -1,9 +1,9 @@
 2c3c05990391e0b141f539fefa9fd532  etc/cron.d/mm3d
-b81c3fcd016bf520c150930647477327  etc/init.d/mm3d.sh
+eb48f02cdfc5a729f0db819067d8613f  etc/init.d/mm3d.sh
 a2260fafd8dac65702fd719442889095  etc/mm3d/envir.ini
-bada5e292fee6ce7d5a4453de7ba5040  etc/mm3d/mm3d.ini
+6634381d8b07fd2daae177bd56f6d9bb  etc/mm3d/mm3d.ini
 2456fa4fc3592b3d263c5bb33686e8d1  etc/motd
-702447168947670115bae8293d87cc8e  etc/systemd/system/mm3d.service
+957b4eebc50d643402d0d04152b56aa1  etc/systemd/system/mm3d.service
 84bee2516117538839b5a808d59583bf  usr/bin/mm3d-editmainconf
 76cc1c0d789250369a205dbd38f67aaf  usr/bin/mm3d-hwtest.py
 6a7105e651246578c5713de1285ea593  usr/bin/mm3d-maintainlog

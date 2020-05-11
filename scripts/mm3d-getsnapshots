@@ -49,7 +49,7 @@ getsnapshots()
       cp "$DIR_HTM/pics/ants.jpg" "$DIR_HTM/pics/camera2.jpg"
     fi
   else
-    cp "$DIR_HTM/pics/ants.jpg" "$DIR_HTM/pics/camera1.jpg"
+    cp "$DIR_HTM/pics/ants.jpg" "$DIR_HTM/pics/camera2.jpg"
   fi
 }
 

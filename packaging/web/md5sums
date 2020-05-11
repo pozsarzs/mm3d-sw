@@ -1,8 +1,8 @@
 a8051ddf08d0aae100a79c2f90761242  usr/bin/mm3d-creatediagrams
 61079fba59c967c3fb38ec89e1cfe847  usr/bin/mm3d-getsnapshots
 db2817e5a3692e20c6d9a39c025a2781  usr/bin/mm3d-updatestartpage
-ccdcc696430e11db1549ac0fa481494f  usr/lib/cgi-bin/getdata.cgi
-77cbe2ba70020a933dc454c17f0bcfbb  usr/lib/cgi-bin/getpage.cgi
+c3c55ee16f41ceb13c9346cf7a7dba8e  usr/lib/cgi-bin/getdata.cgi
+8863126640141a18bf0648ceca75a3d3  usr/lib/cgi-bin/getpage.cgi
 90f83428ec203fcc838063f4479adff8  usr/share/doc/mm3d-web/changelog.Debian.gz
 12cbdc493037b243b6ae5fb37ba5c333  usr/share/doc/mm3d-web/copyright
 1c7b75479fbc0e4f44a205349b72b0c5  usr/share/man/man1/mm3d-creatediagrams.1.gz
