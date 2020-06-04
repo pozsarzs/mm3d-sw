@@ -115,7 +115,7 @@ sudo ln -s /etc/init.d/$SWN2.sh /etc/rc4.d/S01$SWN2.sh
 sudo ln -s /etc/init.d/$SWN2.sh /etc/rc5.d/S01$SWN2.sh
 sudo ln -s /etc/init.d/$SWN2.sh /etc/rc6.d/K01$SWN2.sh
 sudo systemctl daemon-reload
-sudo systemctk enable mm3d.service
+sudo systemctl enable mm3d.service
 sudo /etc/init.d/$SWN2.sh start
 echo "- set cron.d:"
 copy settings/cron.d/$SWN2 /etc/cron.d/
