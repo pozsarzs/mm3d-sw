@@ -14,5 +14,6 @@ sudo ln --force -s /etc/init.d/mm3d.sh /etc/rc4.d/S01mm3d.sh
 sudo ln --force -s /etc/init.d/mm3d.sh /etc/rc5.d/S01mm3d.sh
 sudo ln --force -s /etc/init.d/mm3d.sh /etc/rc6.d/K01mm3d.sh
 systemctl daemon-reload
+systemctl enable mm3d.service
 invoke-rc.d mm3d.sh start
 invoke-rc.d cron restart
