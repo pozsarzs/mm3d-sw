@@ -5,7 +5,7 @@ GitHub: <https://github.com/pozsarzs/mm3d-sw>
 
 **Software**
 
- - architecture:       arm
+ - architecture:       armhf
  - operation system:   Raspbian GNU/Linux
  - version:            v0.5
  - language:           en (cs, de, fr, hr, hu, pl, ro, ru, sk, sl, sr, uk)
