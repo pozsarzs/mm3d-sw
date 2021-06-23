@@ -31,7 +31,7 @@ writetofile()
   then
     if [ $2 = "neutral" ] || [ $2 = "on" ] || [ $2 = "off" ]
     then
-      sudo echo -n $2 > $DIR_VAR$1
+      echo $2 | sudo tee $DIR_VAR$1 > /dev/null
       echo "Port '"$1"' has set to $2."
       exit 0
     fi
@@ -44,8 +44,9 @@ getstatus()
 {
   if [ $1 = "out1" ] || [ $1 = "out2" ] || [ $1 = "out3" ] || [ $1 = "out4" ]
   then
-    echo "Port '"$1"'status is:"
+    echo "Port '"$1"' status is:"
     cat $DIR_VAR$1
+    echo ""
     exit 0
   fi
   usage
