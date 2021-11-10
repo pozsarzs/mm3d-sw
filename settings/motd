@@ -1,8 +1,16 @@
 
-MM3D v0.5 * Growing house controlling and remote monitoring system
-Copyright (C) 2018-2020 Pozsár Zsolt <pozsar.zsolt@.szerafingomba.hu>
+MM3D v0.6 * Growing house controlling and remote monitoring system
+Copyright (C) 2018-2021 Pozsár Zsolt <pozsar.zsolt@szerafingomba.hu>
 
-Use mm3d-editenvirconf program to set characteristics of growing
-environment and mm3d-override command to override status of outputs.
+Useful commands:
+
+mm3d-editenvirconf      set environment characteristics
+mm3d-editmainconf       edit main configuration
+mm3d-override           override status of outputs
+mm3d-startdaemon        start daemons of program
+mm3d-statusofdaemons    get status of daemons
+mm3d-stopdaemon         stop daemons of program
+mm3d-viewlog            view log file
+mm3d-webpage            open webpage with default browser
 
 See manual page of commands for more information.

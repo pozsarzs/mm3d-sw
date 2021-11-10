@@ -29,4 +29,4 @@ o: used ports or power/common pins
 x: unused ports
 
 ---------------------------------------------------------------------------------
- MM3D * Copyright (C) 2018-2020 Pozsar Zsolt <pozsar.zsolt@szerafingomba.hu>
+ MM3D * Copyright (C) 2018-2021 Pozsár Zsolt <pozsar.zsolt@szerafingomba.hu>

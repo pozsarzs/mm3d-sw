@@ -1,6 +1,6 @@
 # +----------------------------------------------------------------------------+
-# | MM3D v0.5 * Growing house controlling and remote monitoring system         |
-# | Copyright (C) 2018-2020 Pozsár Zsolt <pozsar.zsolt@.szerafingomba.hu>      |
+# | MM3D v0.6 * Growing house controlling and remote monitoring system         |
+# | Copyright (C) 2018-2021 Pozsár Zsolt <pozsar.zsolt@szerafingomba.hu>       |
 # | mm3d_sl.msg                                                                |
 # | message file                                                               |
 # +----------------------------------------------------------------------------+
@@ -10,22 +10,27 @@ msg02=Uporabniški podatki
 msg03=Uporabnik
 msg04=Ime mesta
 msg05=Hiša, ki raste
-Msg06=Imena
-Msg07=Vnosa
+msg06=Imena
+msg07=Vnosa
 msg08=Izhod
-Msg09=Napaka
+msg09=Napaka
 msg10=Pojdi na podatke
 msg11=Naslov mesta
-Msg12=Datum
+msg12=Datum
 msg13=čas
-Msg14=T
-Msg15=RH
-Msg16=Vklop
-Msg17=Izklop
+msg14=T
+msg15=RH
+msg16=Vklop
+msg17=Izklop
 msg18=Napaka
-Msg19=Posodobljeno
+msg19=Posodobljeno
 msg20=Zadnje stanje
-Msg21=Dnevnik
+msg21=Dnevnik
 msg22=Kamere
-msg23=Če želite videti celoten dnevnik, se prijavite v enoto s SSH in uporabite <i> mm3d-viewlog </i>!
-
+msg23=Če želite videti celoten dnevnik, se prijavite v enoto s SSH in uporabite <i>mm5d-viewlog</i>!
+msg24=Preglasite izhode
+msg25=nevtralen
+msg26=vklopljen
+msg27=izklopljen
+msg28=Če želite nastaviti preglasitev, se prijavite v enoto prek SSH in uporabite ukaz <i>mm5d-override</i>!
+msg29=Za nastavitev značilnosti okolja se prijavite v enoto prek SSH in uporabite ukaz <i>mm5d-editenvirconf</i>!

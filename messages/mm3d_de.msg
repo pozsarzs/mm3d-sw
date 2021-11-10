@@ -1,6 +1,6 @@
 # +----------------------------------------------------------------------------+
-# | MM3D v0.5 * Growing house controlling and remote monitoring system         |
-# | Copyright (C) 2018-2020 Pozsár Zsolt <pozsar.zsolt@.szerafingomba.hu>      |
+# | MM3D v0.6 * Growing house controlling and remote monitoring system         |
+# | Copyright (C) 2018-2021 Pozsár Zsolt <pozsar.zsolt@szerafingomba.hu>       |
 # | mm3d_de.msg                                                                |
 # | message file                                                               |
 # +----------------------------------------------------------------------------+
@@ -27,4 +27,10 @@ msg19=Aktualisiert
 msg20=Letzter Zustand
 msg21=Tagebuch
 msg22=Kameras
-msg23=Wenn Sie das vollständige Tagebuch anzeigen möchten, melden Sie sich mit SSH am Gerät an und verwenden Sie <i> mm3d-viewlog </ i>!
+msg23=Wenn Sie das vollständige Tagebuch anzeigen möchten, melden Sie sich mit SSH am Gerät an und verwenden Sie <i>mm5d-viewlog</i>!
+msg24=Ausgänge überschreiben
+msg25=neutral
+msg26=eingeschaltet
+msg27=ausgeschaltet
+msg28=Um Override zu setzen, loggen Sie sich bitte über SSH in das Gerät ein und verwenden Sie den Befehl <i>mm5d-override</i>!
+msg29=Um die Umgebungseigenschaften einzustellen, melden Sie sich bitte über SSH an der Unit an und verwenden Sie den Befehl <i>mm5d-editenvirconf</i>!

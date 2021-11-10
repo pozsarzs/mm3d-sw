@@ -20,12 +20,12 @@ Requirements:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 a. Visit homepage (see later) to download latest installer packages:
 
-  Raspbian OS: mm3d-sw-0.5-armhf.tar.gz
+  Raspbian OS: mm3d-sw-0.6-armhf.tar.gz
 
-               mm3d-eec_0.5-1_armhf.deb
-               mm3d-prepare_0.5-1_all.deb
-               mm3d-sw_0.5-1_all.deb
-               mm3d-web_0.5-1_all.deb
+               mm3d-eec_0.6-1_armhf.deb
+               mm3d-prepare_0.6-1_all.deb
+               mm3d-sw_0.6-1_all.deb
+               mm3d-web_0.6-1_all.deb
 
 b. Download from Github
 
@@ -47,17 +47,10 @@ c. Download from Debian repository
 3. Contact
 ~~~~~~~~~~
    Homepage:             <http://www.szerafingomba.hu/softwares/>
-   Author:               Pozsar Zsolt
-   Tax ID:               60407850-1-36
-   Registration num.:    20703695
-
+   Author:               Pozsár Zsolt
    E-mail:               <pozsar.zsolt@szerafingomba.hu>
    Phone:                +36 56/470-272
    Mobile:               +36 30/249-5030
-   Postal address:       Pozsar Zsolt
-                         Kurazsi Fo ut 1.
-                         HU-5430 Tiszafoldvar
-                         Hungary
 
 ---------------------------------------------------------------------------------
- MM3D * Copyright (C) 2018-2020 Pozsar Zsolt <pozsar.zsolt@szerafingomba.hu>
+ MM3D * Copyright (C) 2018-2021 Pozsár Zsolt <pozsar.zsolt@szerafingomba.hu>

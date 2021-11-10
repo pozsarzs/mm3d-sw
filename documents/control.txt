@@ -55,4 +55,4 @@ Output values
   err1-4		integer		error lights #1-4, 1: switch on LED
 
 ---------------------------------------------------------------------------------
- MM3D * Copyright (C) 2018-2020 Pozsar Zsolt <pozsar.zsolt@szerafingomba.hu>
+ MM3D * Copyright (C) 2018-2021 Pozsár Zsolt <pozsar.zsolt@szerafingomba.hu>

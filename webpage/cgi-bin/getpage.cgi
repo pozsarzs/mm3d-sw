@@ -1,11 +1,11 @@
 #!/usr/bin/perl
 # +----------------------------------------------------------------------------+
-# | MM3D v0.4 * Growing house controlling and remote monitoring system         |
-# | Copyright (C) 2018-2019 Pozsár Zsolt <pozsar.zsolt@.szerafingomba.hu>      |
+# | MM3D v0.6 * Growing house controlling and remote monitoring system         |
+# | Copyright (C) 2018-2021 Pozsár Zsolt <pozsar.zsolt@szerafingomba.hu>       |
 # | getpage.cgi                                                                |
 # | CGI program                                                                |
 # +----------------------------------------------------------------------------+
-#
+
 #   This program is free software: you can redistribute it and/or modify it
 # under the terms of the European Union Public License 1.1 version.
 #
@@ -15,37 +15,47 @@
 
 use lib 'cgi-bin';
 use Switch;
+use strict;
+use warnings;
 
-$dark="<img src=\"/pics/dark.png\">";
-$green="<img src=\"/pics/green.png\">";
-$red="<img src=\"/pics/red.png\">";
-$yellow="<img src=\"/pics/yellow.png\">";
+my $dark="<img src=\"/pics/dark.png\">";
+my $green="<img src=\"/pics/green.png\">";
+my $red="<img src=\"/pics/red.png\">";
+my $yellow="<img src=\"/pics/yellow.png\">";
 
 # create diagram pictures
 #system("/usr/bin/mm3d-creatediagrams");
 system("/usr/local/bin/mm3d-creatediagrams");
 
-# get data
-local ($buffer, @pairs, $pair, $name, $value, %FORM);
-$ENV{'REQUEST_METHOD'} =~ tr/a-z/A-Z/;
-if ($ENV{'REQUEST_METHOD'} eq "GET")
-{
-  $buffer = $ENV{'QUERY_STRING'};
-}
-
-# split input data
-@pairs = split(/&/, $buffer);
-foreach $pair (@pairs)
-{
-  ($name, $value) = split(/=/, $pair);
-  $value =~ tr/+/ /;
-  $value =~ s/%(..)/pack("C", hex($1))/eg;
-  $FORM{$name} = $value;
-}
-
 # load configuration
-#$conffile = "/etc/mm3d/mm3d.ini";
-$conffile = "/usr/local/etc/mm3d/mm3d.ini";
+#my $conffile = "/etc/mm3d/mm3d.ini";
+my $conffile = "/usr/local/etc/mm3d/mm3d.ini";
+my $row;
+my $cam1_enable;
+my $cam2_enable;
+my $cam_show;
+my $dir_htm;
+my $dir_lck;
+my $dir_log;
+my $dir_msg;
+my $dir_shr;
+my $dir_var;
+my $lang;
+my $nam_err1;
+my $nam_err2;
+my $nam_err3;
+my $nam_err4;
+my $nam_in1;
+my $nam_in2;
+my $nam_in3;
+my $nam_in4;
+my $nam_out1;
+my $nam_out2;
+my $nam_out3;
+my $nam_out4;
+my $usr_dt1;
+my $usr_dt3;
+my $web_lines;
 open CONF, "< $conffile" or die "ERROR: Cannot open configuration file!";
 while (<CONF>)
 {
@@ -69,6 +79,7 @@ while (<CONF>)
     case "dir_log" { $dir_log = $columns[1]; }
     case "dir_msg" { $dir_msg = $columns[1]; }
     case "dir_shr" { $dir_shr = $columns[1]; }
+    case "dir_var" { $dir_var = $columns[1]; }
     case "lng" { $lang = $columns[1]; }
     case "nam_err1" { $nam_err1 = $columns[1]; }
     case "nam_err2" { $nam_err2 = $columns[1]; }
@@ -90,27 +101,32 @@ while (<CONF>)
 close CONF;
 
 # load messages
-$msg01 = "MM3D - controlling and monitoring system";
-$msg04 = "Site";
-$msg05 = "House";
-$msg06 = "Names";
-$msg07 = "Input";
-$msg08 = "Output";
-$msg09 = "Error light";
-$msg12 = "Date";
-$msg13 = "Time";
-$msg14 = "T";
-$msg15 = "RH";
-$msg16 = "In";
-$msg17 = "Out";
-$msg18 = "Err";
-$msg19 = "Refresh";
-$msg20 = "Latest status";
-$msg21 = "Log";
-$msg22 = "Cameras";
-$msg23 = "If you want to see full log, please login to unit via SSH, and use <i>mm3d-viewlog</i> command.";
-
-$msgfile = "$dir_msg/$lang/mm3d.msg";
+my $msg01 = "MM3D - controlling and monitoring system";
+my $msg04 = "Site";
+my $msg05 = "House";
+my $msg06 = "Names";
+my $msg07 = "Input";
+my $msg08 = "Output";
+my $msg09 = "Error light";
+my $msg12 = "Date";
+my $msg13 = "Time";
+my $msg14 = "T";
+my $msg15 = "RH";
+my $msg16 = "In";
+my $msg17 = "Out";
+my $msg18 = "Err";
+my $msg19 = "Refresh";
+my $msg20 = "Latest status";
+my $msg21 = "Log";
+my $msg22 = "Cameras";
+my $msg23 = "If you want to see full log, please login into unit via SSH, and use <i>mm3d-viewlog</i> command.";
+my $msg24 = "Override outputs";
+my $msg25 = "neutral";
+my $msg26 = "switched on";
+my $msg27 = "switched off";
+my $msg28 = "To set override, please login into unit via SSH, and use <i>mm3d-override</i> command!";
+my $msg29 = "To set environment characteristic, please login into unit via SSH, and use <i>mm3d-editenvirconf</i> command!";
+my $msgfile = "$dir_msg/$lang/mm3d.msg";
 open MSG, "< $msgfile";
 while(<MSG>)
 {
@@ -145,18 +161,29 @@ while(<MSG>)
     case "msg21" { $msg21 = $columns[1]; }
     case "msg22" { $msg22 = $columns[1]; }
     case "msg23" { $msg23 = $columns[1]; }
+    case "msg24" { $msg24 = $columns[1]; }
+    case "msg25" { $msg25 = $columns[1]; }
+    case "msg26" { $msg26 = $columns[1]; }
+    case "msg27" { $msg27 = $columns[1]; }
+    case "msg28" { $msg28 = $columns[1]; }
+    case "msg29" { $msg29 = $columns[1]; }
   }
 }
 close MSG;
+$msg26 = "<font color=green>$msg26</font>";
+$msg27 = "<font color=red>$msg27</font>";
 
 # create output
-$datafile = "$dir_log/mm3d.log";
-$footerfile = "$dir_shr/footer_$lang.html";
-$headerfile = "$dir_shr/header_$lang.html";
-$lockfile = "$dir_lck/mm3d.lock";
+my $datafile = "$dir_log/mm3d.log";
+my $footerfile = "$dir_shr/footer_$lang.html";
+my $headerfile = "$dir_shr/header_$lang.html";
+my $lockfile = "$dir_lck/mm3d.lock";
+my $out1file = "$dir_var/out1";
+my $out2file = "$dir_var/out2";
+my $out3file = "$dir_var/out3";
+my $out4file = "$dir_var/out4";
 open DATA, "< $datafile" or die "ERROR: Cannot open log file!";
 close DATA;
-
 print "Content-type:text/html\r\n\r\n";
 open HEADER, $headerfile;
 while (<HEADER>)
@@ -165,14 +192,10 @@ while (<HEADER>)
   print "$_";
 }
 close HEADER;
-
-# check lockfile
 while (-e $lockfile)
 {
   sleep 1;
 }
-
-# write body
 print "    <table border=\"0\" cellspacing=\"0\" cellpadding=\"6\" width=\"100%\">";
 print "      <tbody>";
 print "        <tr>";
@@ -183,7 +206,7 @@ print "        </tr>";
 print "      </tbody>";
 print "    </table>";
 print "    <br>";
-# section names
+# names
 print "    <b class=\"title1\">$msg06</b><br>";
 print "    <br>";
 print "    <table border=\"0\" cellpadding=\"3\" cellspacing=\"0\">";
@@ -210,8 +233,9 @@ print "          <td><b>$msg09 #4:</b></td><td>$nam_err4</td>";
 print "        </tr>";
 print "      </tbody>";
 print "    </table>";
+print "    <hr>";
 print "    <br>";
-# section latest status
+# latest status
 print "    <b class=\"title1\">$msg20</b><br>";
 print "    <br>";
 print "    <table border=\"1\" cellpadding=\"3\" cellspacing=\"0\" width=\"100%\">";
@@ -222,7 +246,6 @@ print "          <th>$msg16 #1</th><th>$msg16 #2</th><th>$msg16 #3</th><th>$msg1
 print "          <th>$msg17 #1</th><th>$msg17 #2</th><th>$msg17 #3</th><th>$msg17 #4</th>";
 print "          <th>$msg18 #1</th><th>$msg18 #2</th><th>$msg18 #3</th><th>$msg18 #4</th>";
 print "        </tr>";
-
 open DATA, "< $datafile" or die "Cannot open log file!";
 while (<DATA>)
 {
@@ -272,18 +295,74 @@ close DATA;
 print "      </tbody>";
 print "    </table>";
 print "    <br>";
-# refresh button
 print "    <form action=\"getpage.cgi\" method=\"get\">";
 print "      <center>";
 print "        <input value=\"$msg19\" type=\"submit\" width=\"100\" style=\"width:100px\">";
 print "      </center>";
 print "    </form>";
+print "    <br>";
+print "    $msg29";
+print "    <hr>";
+print "    <br>";
+# override
+my $out1;
+my $out2;
+my $out3;
+my $out4;
+print "    <b class=\"title1\">$msg24</b><br>";
+print "    <br>";
+print "    <br>";
+print "    <table border=\"0\" cellpadding=\"3\" cellspacing=\"0\">";
+print "      <tbody>";
+print "        <tr>";
+print "          <td><b>$msg08 #1:</b></td>";
+open DATA, "< $out1file" or $out1 = $msg25;
+my $o1 = <DATA>;
+close DATA;
+if ($o1 eq "neutral") { $out1 = $msg25 };
+if ($o1 eq "on") { $out1 = $msg26 };
+if ($o1 eq "off") { $out1 = $msg27 };
+print "          <td>$out1</td>";
+print "        </tr>";
+print "        <tr>";
+print "          <td><b>$msg08 #2:</b></td>";
+open DATA, "< $out2file" or $out2 = $msg25;
+my $o2 = <DATA>;
+close DATA;
+if ($o2 eq "neutral") { $out2 = $msg25 };
+if ($o2 eq "on") { $out2 = $msg26 };
+if ($o2 eq "off") { $out2 = $msg27 };
+print "          <td>$out2</td>";
+print "        </tr>";
+print "        <tr>";
+print "          <td><b>$msg08 #3:</b></td>";
+open DATA, "< $out3file" or $out3 = $msg25;
+my $o3 = <DATA>;
+close DATA;
+if ($o3 eq "neutral") { $out3 = $msg25 };
+if ($o3 eq "on") { $out3 = $msg26 };
+if ($o3 eq "off") { $out3 = $msg27 };
+print "          <td>$out3</td>";
+print "        </tr>";
+print "        <tr>";
+print "          <td><b>$msg08 #4:</b></td>";
+open DATA, "< $out4file" or $out4 = $msg25;
+my $o4 = <DATA>;
+close DATA;
+if ($o4 eq "neutral") { $out4 = $msg25 };
+if ($o4 eq "on") { $out4 = $msg26 };
+if ($o4 eq "off") { $out4 = $msg27 };
+print "          <td>$out4</td>";
+print "        </tr>";
+print "      </tbody>";
+print "    </table>";
+print "    <br>";
+print "    $msg28";
 print "    <hr>";
 print "    <br>";
 # section cameras
 if ($cam_show eq 1)
 {
-  # get snapshots
   #system("/usr/bin/mm3d-getsnapshots");
   system("/usr/local/bin/mm3d-getsnapshots");
   print "    <b class=\"title1\">$msg22</b><br>";
@@ -322,8 +401,7 @@ print "          <th>$msg16 #1</th><th>$msg16 #2</th><th>$msg16 #3</th><th>$msg1
 print "          <th>$msg17 #1</th><th>$msg17 #2</th><th>$msg17 #3</th><th>$msg17 #4</th>";
 print "          <th>$msg18 #1</th><th>$msg18 #2</th><th>$msg18 #3</th><th>$msg18 #4</th>";
 print "        </tr>";
-
-$line = 0;
+my $line = 0;
 open DATA, "< $datafile" or die "Cannot open log file!";
 while (<DATA>)
 {

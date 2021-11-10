@@ -1,11 +1,11 @@
 Installation instruction for tar.gz package
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Before install this program please install Raspbian Lite OS to SD-CARD.
+Before install this program please install Raspbian OS to SD-CARD.
 Do not forget to set hostname and network.
 
 Installation
 ~~~~~~~~~~~~
-  pi@raspberry$ tar -xzf mm3d-sw-0.5-armhf.tar.gz
+  pi@raspberry$ tar -xzf mm3d-sw-0.6-armhf.tar.gz
   pi@raspberry$ cd mm3d-sw
   pi@raspberry$ ./prepare
   pi@raspberry$ ./install
@@ -22,3 +22,6 @@ Removing
 ~~~~~~~~
   pi@raspberry$ cd mm3d-sw
   pi@raspberry$ ./uninstall
+
+---------------------------------------------------------------------------------
+ MM3D * Copyright (C) 2018-2021 Pozsár Zsolt <pozsar.zsolt@szerafingomba.hu>

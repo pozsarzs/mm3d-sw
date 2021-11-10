@@ -1,3 +1,26 @@
+2021-11-10 Pozsár Zsolt <pozsar.zsolt@szerafingomba.hu>
+	*  0.6: Following files were modified (only important and operational changes).
+	*  install: modified
+	*  prepare: modified
+	*  uninstall: modified
+	*  README.md: modified
+	*  document/ChangeLog: modified
+	*  document/copyright: new file
+	*  document/INSTALL: modified
+	*  document/README: modified
+	*  document/VERSION: modified
+	*  manuals/getdata.cgi.7.gz: new file
+	*  manuals/mm3d-getpage.cgi.7.gz: new file
+	*  manuals/mm3d.py.1.gz: renamed to *.8.gz
+	*  manuals/mm3d-statusofdaemon.1.gz: new file
+	*  manuals/mm3d-webpage.1.gz: new file
+	*  manuals/*: modified
+	*  messages/*: modified
+	*  scripts/mm3d-statusofdaemon: new file
+	*  scripts/mm3d-webpage: new file
+	*  webpage/cgi-bin/getdata.cgi: modified
+	*  webpage/cgi-bin/getpage.cgi: modified
+
 2020-05-15 Pozsár Zsolt <pozsar.zsolt@szerafingomba.hu>
 	*  0.5: web interface: auto-refresh, diagrams from latest record,
                 snapshots from IP cameras, the number of log rows can be set.

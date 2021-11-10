@@ -1,6 +1,6 @@
 # +----------------------------------------------------------------------------+
-# | MM3D v0.5 * Growing house controlling and remote monitoring system         |
-# | Copyright (C) 2018-2020 Pozsár Zsolt <pozsar.zsolt@.szerafingomba.hu>      |
+# | MM3D v0.6 * Growing house controlling and remote monitoring system         |
+# | Copyright (C) 2018-2021 Pozsár Zsolt <pozsar.zsolt@szerafingomba.hu>       |
 # | mm3d_hu.msg                                                                |
 # | message file                                                               |
 # +----------------------------------------------------------------------------+
@@ -22,9 +22,15 @@ msg14=T
 msg15=RH
 msg16=Be
 msg17=Ki
-msg18=Hiba
+msg18=Hj
 msg19=Frissít
 msg20=Utolsó állapot
 msg21=Napló
 msg22=Kamerák
-msg23=Ha szeretné látni a teljes naplót, jelentkezzen be az egységbe SSH-val és használja a <i>mm3d-viewlog</i> parancsot!
+msg23=Ha szeretné látni a teljes naplót, jelentkezzen be az egységbe SSH-val és használja a <i>mm5d-viewlog</i> parancsot!
+msg24=Kimenetek felülbírálása
+msg25=semleges
+msg26=bekapcsolva
+msg27=kikapcsolva
+msg28=A felülbírálás módosításához jelentkezzen be az egységbe SSH-val és használja a <i>mm5d-override</i> parancsot!
+msg29=A környezeti jellemzők beállításához jelentkezzen be az egységbe SSH-val és használja a <i>mm5d-editenvirconf</i> parancsot!

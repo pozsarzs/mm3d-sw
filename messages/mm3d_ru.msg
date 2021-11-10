@@ -1,6 +1,6 @@
 # +----------------------------------------------------------------------------+
-# | MM3D v0.5 * Growing house controlling and remote monitoring system         |
-# | Copyright (C) 2018-2020 Pozsár Zsolt <pozsar.zsolt@.szerafingomba.hu>      |
+# | MM3D v0.6 * Growing house controlling and remote monitoring system         |
+# | Copyright (C) 2018-2021 Pozsár Zsolt <pozsar.zsolt@szerafingomba.hu>       |
 # | mm3d_ru.msg                                                                |
 # | message file                                                               |
 # +----------------------------------------------------------------------------+
@@ -27,4 +27,10 @@ msg19=Обновлено
 msg20=Последнее состояние
 msg21=Журнал
 msg22=Камеры
-msg23=Если вы хотите просмотреть полный журнал, войдите в систему с SSH и используйте <i> mm3d-viewlog </ i>!
+msg23=Если вы хотите просмотреть полный журнал, войдите в систему с SSH и используйте <i>mm5d-viewlog</i>!
+msg24=Выходы отмены
+msg25=нейтральный
+msg26=включен
+msg27=выключен
+msg28=Чтобы установить переопределение, войдите в систему через SSH и используйте команду <i>mm5d-override</i>!
+msg29=Чтобы установить характеристики среды, войдите в систему через SSH и используйте команду <i>mm5d-editenvirconf</i>!
