@@ -3,7 +3,7 @@ Version: 0.6
 Section: misc
 Priority: extra
 Architecture: all
-Installed-Size: 308 kB
+Installed-Size: 332 kB
 Maintainer: Pozsár Zsolt <pozsar.zsolt@szerafingomba.hu>
 Depends: mm3d-sw, apache2, gnuplot, wget, libswitch-perl
 Description: Web interface for MM3D software
