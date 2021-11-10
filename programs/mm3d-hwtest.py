@@ -75,7 +75,7 @@ def blink_act():
 
 #conffile='/etc/mm3d/mm3d.ini'
 conffile='/usr/local/etc/mm3d/mm3d.ini'
-print "\nMM3D hardware test utility * (C)2018-2020 Pozsar Zsolt"
+print "\nMM3D hardware test utility * (C)2018-2021 Pozsar Zsolt"
 print "======================================================"
 print " * load configuration: %s..." % conffile
 loadconfiguration(conffile)

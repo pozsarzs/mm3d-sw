@@ -1,7 +1,7 @@
 #!/bin/bash
 # +----------------------------------------------------------------------------+
-# | MM3D v0.5 * Growing house controlling and remote monitoring system         |
-# | Copyright (C) 2018-2020 Pozsár Zsolt <pozsar.zsolt@.szerafingomba.hu>      |
+# | MM3D v0.6 * Growing house controlling and remote monitoring system         |
+# | Copyright (C) 2018-2021 Pozsár Zsolt <pozsar.zsolt@szerafingomba.hu>       |
 # | install                                                                    |
 # | Installer script                                                           |
 # +----------------------------------------------------------------------------+
@@ -13,6 +13,15 @@
 # ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
 # FOR A PARTICULAR PURPOSE.
 
+line()
+{
+  for ((i=0; i<${#SWCR}; i++))
+  do
+    echo -n "-"
+  done
+  echo ""
+}
+
 copy()
 {
   sudo cp $1 $2
@@ -22,6 +31,7 @@ copy()
 # constans
 SWN1="MM3D"
 SWN2="mm3d"
+SWCR=`cat documents/copyright`
 SWV=`cat documents/VERSION`
 INSTDIR=local
 LANGUAGES="cs de fr hr hu pl ro ru sk sl sr uk"
@@ -44,18 +54,15 @@ SUBDIRS="/usr/$INSTDIR/bin \
 README=/usr/$INSTDIR/share/doc/$SWN2/README
 
 # installer
-clear
-echo "--------------------------------------------------------------------------------"
-echo "$SWN1 $SWV installer script"
-echo "Copyright (C) 2018-2020 Pozsár Zsolt <pozsar.zsolt@szerafingomba.hu>"
-echo "--------------------------------------------------------------------------------"
-echo "  This program is free software: you can redistribute it and/or modify it
+echo -e "\n$SWN1 v$SWV installer script"
+echo "$SWCR"
+line
+echo -e "\n  This program is free software: you can redistribute it and/or modify it
 under the terms of the European Union Public License 1.1 version.
 
   This program is distributed in the hope that it will be useful, but WITHOUT
 ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
-FOR A PARTICULAR PURPOSE."
-echo "--------------------------------------------------------------------------------"
+FOR A PARTICULAR PURPOSE.\n"
 sleep 3
 
 if ! [ -x "$(command -v apache2)" ]; then

@@ -1,7 +1,7 @@
 #!/bin/bash
 # +----------------------------------------------------------------------------+
-# | MM3D v0.5 * Growing house controlling and remote monitoring system         |
-# | Copyright (C) 2018-2020 Pozsár Zsolt <pozsar.zsolt@.szerafingomba.hu>      |
+# | MM3D v0.6 * Growing house controlling and remote monitoring system         |
+# | Copyright (C) 2018-2021 Pozsár Zsolt <pozsar.zsolt@szerafingomba.hu>       |
 # | mm3d-prepare                                                               |
 # | Prepare OS for install MM3D software                                       |
 # +----------------------------------------------------------------------------+
@@ -13,18 +13,23 @@
 # ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
 # FOR A PARTICULAR PURPOSE.
 
+line()
+{
+  for ((i=0; i<${#SWCR}; i++))
+  do
+    echo -n "-"
+  done
+  echo ""
+}
+
 SWN1="MM3D"
 SWN2="mm3d"
-SWV="v0.5"
+SWCR="Copyright (C) 2019-2021 Pozsár Zsolt <pozsar.zsolt@szerafingomba.hu>"
+SWV="v0.6"
 
-clear
-echo "--------------------------------------------------------------------------------"
-echo "$SWN1 $SWV prepare OS"
-echo "Copyright (C) 2018-2020 Pozsar Zsolt <pozsar.zsolt@szerafingomba.hu>"
-echo "--------------------------------------------------------------------------------"
-echo -e "\nCreating a new user..."
-sudo adduser $SWN2
-sudo echo "$SWN2 ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/010_$SWN2-nopasswd
+echo -e "\n$SWN1 v$SWV prepare OS"
+echo "$SWCR"
+line
 echo "Installing required components..."
 sudo apt-get install build-essential git python-dev
 mkdir --parents $HOME/download
