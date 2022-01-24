@@ -1,3 +1,19 @@
+2022-01-24 Pozsár Zsolt <pozsar.zsolt@szerafingomba.hu>
+	*  0.7: Following files were modified (only important and operational changes).
+	*  uninstall: modified
+	*  README.md: modified
+	*  document/ChangeLog: modified
+	*  document/copyright: new file
+	*  document/INSTALL: modified
+	*  document/README: modified
+	*  document/VERSION: modified
+	*  manuals/getenvirconf.cgi.7.gz: new file
+	*  manuals/*: modified
+	*  messages/*: modified
+	*  scripts/mm3d-updatestartpage: modified
+	*  scripts/mm3d-webpage: modified
+	*  webpage/cgi-bin/getenvirconf: new file
+
 2021-11-10 Pozsár Zsolt <pozsar.zsolt@szerafingomba.hu>
 	*  0.6: Following files were modified (only important and operational changes).
 	*  install: modified
@@ -10,7 +26,7 @@
 	*  document/README: modified
 	*  document/VERSION: modified
 	*  manuals/getdata.cgi.7.gz: new file
-	*  manuals/mm3d-getpage.cgi.7.gz: new file
+	*  manuals/getpage.cgi.7.gz: new file
 	*  manuals/mm3d.py.1.gz: renamed to *.8.gz
 	*  manuals/mm3d-statusofdaemon.1.gz: new file
 	*  manuals/mm3d-webpage.1.gz: new file

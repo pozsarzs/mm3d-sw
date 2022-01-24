@@ -1,6 +1,6 @@
 { +--------------------------------------------------------------------------+ }
-{ | MM3D v0.6 * Growing house controlling and remote monitoring system       | }
-{ | Copyright (C) 2018-2021 Pozsár Zsolt <pozsar.zsolt@szerafingomba.hu>     | }
+{ | MM3D v0.7 * Growing house controlling and remote monitoring system       | }
+{ | Copyright (C) 2018-2022 Pozsár Zsolt <pozsar.zsolt@szerafingomba.hu>     | }
 { | editenvirconf.pas                                                        | }
 { | Full-screen program for edit envir.ini file                              | }
 { +--------------------------------------------------------------------------+ }
@@ -48,7 +48,7 @@ var
   hventoff, mventoff:               byte;
   hventon, mventon:                 byte;
 const
-  VERSION: string='v0.6';
+  VERSION: string='v0.7';
   BLOCKS:  array[1..8] of byte=(3,3,1,6,3,3,1,6);
   MINPOSX: array[1..8,1..6] of byte=((46,17,35,0,0,0),
                                      (46,17,35,0,0,0),

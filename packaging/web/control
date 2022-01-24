@@ -1,11 +1,11 @@
 Package: mm3d-web
-Version: 0.6
+Version: 0.7
 Section: misc
 Priority: extra
 Architecture: all
 Installed-Size: 332 kB
 Maintainer: Pozsár Zsolt <pozsar.zsolt@szerafingomba.hu>
-Depends: mm3d-sw, apache2, gnuplot, wget, libswitch-perl
+Depends: mm3d-sw, apache2, gnuplot, wget, libswitch-perl, libconfig-tiny-perl
 Description: Web interface for MM3D software
  This is a software part of MM3D growing house controlling
  and remote monitoring equipment.
