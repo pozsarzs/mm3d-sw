@@ -13,4 +13,4 @@
 # ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
 # FOR A PARTICULAR PURPOSE.
 
-www-browser localhost
+www-browser http://localhost
