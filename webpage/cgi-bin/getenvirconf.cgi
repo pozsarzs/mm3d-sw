@@ -60,6 +60,16 @@ my $msg29 = "To set environment characteristic, please login into unit via SSH, 
 my $msg30 = "Environment characteristic";
 my $msg31 = "Growing hyphae";
 my $msg32 = "Growing mushroom";
+my $msg33 = "heater";
+my $msg34 = "humidifier";
+my $msg35 = "ventilator";
+my $msg36 = "lamp";
+my $msg37 = "on";
+my $msg38 = "off";
+my $msg39 = "minimum";
+my $msg40 = "maximum";
+my $msg41 = "disable power on";
+my $msg42 = "timed";
 my $msgfile = "$dir_msg/$lang/mm3d.msg";
 open MSG, "< $msgfile";
 while(<MSG>)
@@ -81,6 +91,16 @@ while(<MSG>)
     case "msg30" { $msg30 = $columns[1]; }
     case "msg31" { $msg31 = $columns[1]; }
     case "msg32" { $msg32 = $columns[1]; }
+    case "msg33" { $msg33 = $columns[1]; }
+    case "msg34" { $msg34 = $columns[1]; }
+    case "msg35" { $msg35 = $columns[1]; }
+    case "msg36" { $msg36 = $columns[1]; }
+    case "msg37" { $msg37 = $columns[1]; }
+    case "msg38" { $msg38 = $columns[1]; }
+    case "msg39" { $msg39 = $columns[1]; }
+    case "msg40" { $msg40 = $columns[1]; }
+    case "msg41" { $msg41 = $columns[1]; }
+    case "msg42" { $msg42 = $columns[1]; }
   }
 }
 close MSG;
@@ -123,13 +143,13 @@ print "      <colgroup width=\"115\"></colgroup>";
 print "      <colgroup span=\"10\" width=\"55\"></colgroup>";
 print "      <tr>";
 print "        <td align=\"center\"><b><br></b></td>";
-print "        <td colspan=2 align=\"center\"><b>fűtés</b></td>";
-print "        <td colspan=2 align=\"center\"><b>párásítás</b></td>";
-print "        <td colspan=4 align=\"center\"><b>szellőztetés</b></td>";
-print "        <td colspan=2 align=\"center\"><b>világítás</b></td>";
+print "        <td colspan=2 align=\"center\"><b>$msg33</b></td>";
+print "        <td colspan=2 align=\"center\"><b>$msg34</b></td>";
+print "        <td colspan=4 align=\"center\"><b>$msg35</b></td>";
+print "        <td colspan=2 align=\"center\"><b>$msg36</b></td>";
 print "      </tr>";
 print "      <tr>";
-print "        <td align=\"left\" valign=top><b>bekapcsol</b></td>";
+print "        <td align=\"left\" valign=top><b>$msg37</b></td>";
 print "        <td align=\"center\">$config->{$section}{heater_on}<br></td>";
 print "        <td align=\"center\">°C</td>";
 print "        <td align=\"center\">$config->{$section}{humidifier_on}<br></td>";
@@ -141,7 +161,7 @@ print "        <td align=\"center\">$config->{$section}{light_on1}<br></td>";
 print "        <td align=\"center\">h<br></td>";
 print "      </tr>";
 print "      <tr>";
-print "        <td align=\"left\"><b>kikapcsol</b></td>";
+print "        <td align=\"left\"><b>$msg38</b></td>";
 print "        <td align=\"center\">$config->{$section}{heater_off}<br></td>";
 print "        <td align=\"center\">°C</td>";
 print "        <td align=\"center\">$config->{$section}{humidifier_off}<br></td>";
@@ -152,19 +172,19 @@ print "        <td align=\"center\">$config->{$section}{light_off1}<br></td>";
 print "        <td align=\"center\">h<br></td>";
 print "      </tr>";
 print "      <tr>";
-print "        <td align=\"left\"><b>bekapcsol</b></td>";
+print "        <td align=\"left\"><b>$msg37</b></td>";
 print "        <td colspan=4 rowspan=2 align=\"center\"><br></td>";
 print "        <td colspan=2 rowspan=2 align=\"center\"><br></td>";
 print "        <td align=\"center\">$config->{$section}{light_on2}<br></td>";
 print "        <td align=\"center\">h<br></td>";
 print "      </tr>";
 print "      <tr>";
-print "        <td align=\"left\"><b>kikapcsol</b></td>";
+print "        <td align=\"left\"><b>$msg38</b></td>";
 print "        <td align=\"center\">$config->{$section}{light_off2}<br></td>";
 print "        <td align=\"center\">h<br></td>";
 print "      </tr>";
 print "      <tr>";
-print "        <td align=\"left\"><b>minimum</b></td>";
+print "        <td align=\"left\"><b>$msg39</b></td>";
 print "        <td align=\"center\">$config->{$section}{temperature_min}<br></td>";
 print "        <td align=\"center\">°C</td>";
 print "        <td align=\"center\">$config->{$section}{humidity_min}<br></td>";
@@ -173,18 +193,18 @@ print "        <td colspan=4 rowspan=2 align=\"center\"><br></td>";
 print "        <td colspan=2 rowspan=28 align=\"center\"><br></td>";
 print "      </tr>";
 print "      <tr>";
-print "        <td align=\"left\"><b>maximum</b></td>";
+print "        <td align=\"left\"><b>$msg40</b></td>";
 print "        <td align=\"center\">$config->{mushroom}{temperature_max}<br></td>";
 print "        <td align=\"center\">°C</td>";
 print "        <td align=\"center\">$config->{mushroom}{humidity_max}<br></td>";
 print "        <td align=\"center\">%</td>";
 print "      </tr>";
 print "      <tr>";
-print "        <td rowspan=26 align=\"center\"><b>bekapcsolás tiltása</b></td>";
-print "        <td colspan=2 align=\"center\"><i>időzített</i></td>";
-print "        <td colspan=2 align=\"center\"><i>időzített</i></td>";
-print "        <td colspan=2 align=\"center\"><i>időzített</i></td>";
-print "        <td colspan=2 align=\"center\"><i>$config->{$section}{vent_lowtemp} °C alatt </i></td>";
+print "        <td rowspan=26 align=\"center\"><b>$msg41</b></td>";
+print "        <td colspan=2 align=\"center\"><i>$msg42</i></td>";
+print "        <td colspan=2 align=\"center\"><i>$msg42</i></td>";
+print "        <td colspan=2 align=\"center\"><i>$msg42</i></td>";
+print "        <td colspan=2 align=\"center\"><i>< $config->{$section}{vent_lowtemp} °C</i></td>";
 print "      </tr>";
 my @i = (0..23);
 for (@i)
@@ -216,13 +236,13 @@ print "      <colgroup width=\"115\"></colgroup>";
 print "      <colgroup span=\"10\" width=\"55\"></colgroup>";
 print "      <tr>";
 print "        <td align=\"center\"><b><br></b></td>";
-print "        <td colspan=2 align=\"center\"><b>fűtés</b></td>";
-print "        <td colspan=2 align=\"center\"><b>párásítás</b></td>";
-print "        <td colspan=4 align=\"center\"><b>szellőztetés</b></td>";
-print "        <td colspan=2 align=\"center\"><b>világítás</b></td>";
+print "        <td colspan=2 align=\"center\"><b>$msg33</b></td>";
+print "        <td colspan=2 align=\"center\"><b>$msg34</b></td>";
+print "        <td colspan=4 align=\"center\"><b>$msg35</b></td>";
+print "        <td colspan=2 align=\"center\"><b>$msg36</b></td>";
 print "      </tr>";
 print "      <tr>";
-print "        <td align=\"left\" valign=top><b>bekapcsol</b></td>";
+print "        <td align=\"left\" valign=top><b>$msg37</b></td>";
 print "        <td align=\"center\">$config->{$section}{heater_on}<br></td>";
 print "        <td align=\"center\">°C</td>";
 print "        <td align=\"center\">$config->{$section}{humidifier_on}<br></td>";
@@ -234,7 +254,7 @@ print "        <td align=\"center\">$config->{$section}{light_on1}<br></td>";
 print "        <td align=\"center\">h<br></td>";
 print "      </tr>";
 print "      <tr>";
-print "        <td align=\"left\"><b>kikapcsol</b></td>";
+print "        <td align=\"left\"><b>$msg38</b></td>";
 print "        <td align=\"center\">$config->{$section}{heater_off}<br></td>";
 print "        <td align=\"center\">°C</td>";
 print "        <td align=\"center\">$config->{$section}{humidifier_off}<br></td>";
@@ -245,19 +265,19 @@ print "        <td align=\"center\">$config->{$section}{light_off1}<br></td>";
 print "        <td align=\"center\">h<br></td>";
 print "      </tr>";
 print "      <tr>";
-print "        <td align=\"left\"><b>bekapcsol</b></td>";
+print "        <td align=\"left\"><b>$msg37</b></td>";
 print "        <td colspan=4 rowspan=2 align=\"center\"><br></td>";
 print "        <td colspan=2 rowspan=2 align=\"center\"><br></td>";
 print "        <td align=\"center\">$config->{$section}{light_on2}<br></td>";
 print "        <td align=\"center\">h<br></td>";
 print "      </tr>";
 print "      <tr>";
-print "        <td align=\"left\"><b>kikapcsol</b></td>";
+print "        <td align=\"left\"><b>$msg38</b></td>";
 print "        <td align=\"center\">$config->{$section}{light_off2}<br></td>";
 print "        <td align=\"center\">h<br></td>";
 print "      </tr>";
 print "      <tr>";
-print "        <td align=\"left\"><b>minimum</b></td>";
+print "        <td align=\"left\"><b>$msg39</b></td>";
 print "        <td align=\"center\">$config->{$section}{temperature_min}<br></td>";
 print "        <td align=\"center\">°C</td>";
 print "        <td align=\"center\">$config->{$section}{humidity_min}<br></td>";
@@ -266,18 +286,18 @@ print "        <td colspan=4 rowspan=2 align=\"center\"><br></td>";
 print "        <td colspan=2 rowspan=28 align=\"center\"><br></td>";
 print "      </tr>";
 print "      <tr>";
-print "        <td align=\"left\"><b>maximum</b></td>";
+print "        <td align=\"left\"><b>$msg40</b></td>";
 print "        <td align=\"center\">$config->{mushroom}{temperature_max}<br></td>";
 print "        <td align=\"center\">°C</td>";
 print "        <td align=\"center\">$config->{mushroom}{humidity_max}<br></td>";
 print "        <td align=\"center\">%</td>";
 print "      </tr>";
 print "      <tr>";
-print "        <td rowspan=26 align=\"center\"><b>bekapcsolás tiltása</b></td>";
-print "        <td colspan=2 align=\"center\"><i>időzített</i></td>";
-print "        <td colspan=2 align=\"center\"><i>időzített</i></td>";
-print "        <td colspan=2 align=\"center\"><i>időzített</i></td>";
-print "        <td colspan=2 align=\"center\"><i>$config->{$section}{vent_lowtemp} °C alatt </i></td>";
+print "        <td rowspan=26 align=\"center\"><b>$msg41</b></td>";
+print "        <td colspan=2 align=\"center\"><i>$msg42</i></td>";
+print "        <td colspan=2 align=\"center\"><i>$msg42</i></td>";
+print "        <td colspan=2 align=\"center\"><i>$msg42</i></td>";
+print "        <td colspan=2 align=\"center\"><i>< $config->{$section}{vent_lowtemp} °C</i></td>";
 print "      </tr>";
 my @i = (0..23);
 for (@i)
