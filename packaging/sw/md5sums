@@ -5,10 +5,10 @@
 1d751cd5fd5b262ed0ea24f53694eeee  etc/motd
 957b4eebc50d643402d0d04152b56aa1  etc/systemd/system/mm3d.service
 7526ffcdff65d61356e0ac4179840f76  usr/bin/mm3d-editmainconf
-923413f90e9a1573f885fe3f93094e43  usr/bin/mm3d-hwtest.py
+c82136e62025374bf4c7a314287a355e  usr/bin/mm3d-hwtest.py
 991c706bd3f1eb411b26af4707911c20  usr/bin/mm3d-maintainlog
 3ac36836cf58f7c8c7465a16b3fda5bf  usr/bin/mm3d-override
-5b840e3f36322164a08a86f467895a27  usr/bin/mm3d.py
+d18016454e2b4e416327ca5a86d16e86  usr/bin/mm3d.py
 0fa1d3442bdfbe64fda1c107a35b3e17  usr/bin/mm3d-startdaemon
 b54fa57c2dcf4dcdc1ee5239d0a445c3  usr/bin/mm3d-statusofdaemon
 402c441c2827f207eb23dcc5e862618d  usr/bin/mm3d-stopdaemon
