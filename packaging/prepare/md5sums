@@ -1,4 +1,4 @@
-c278bd4e02f5ad10dfe1ae5ebc584657  usr/bin/mm3d-prepare
-90f83428ec203fcc838063f4479adff8  usr/share/doc/mm3d-prepare/changelog.Debian.gz
-acfef3ba7e256b044f929b0004c596ac  usr/share/doc/mm3d-prepare/copyright
-dec3f50f99f92b2b4d366c853788a8d7  usr/share/man/man1/mm3d-prepare.1.gz
+648a5fcb32096fb79dd8e6e3fb4bc05f  usr/bin/mm3d-prepare
+801ad6f15d0dff0881db8cf3973b5ac1  usr/share/doc/mm3d-prepare/changelog.Debian.gz
+08d69d383853753bcbf6ce6c5150f4bd  usr/share/doc/mm3d-prepare/copyright
+9316deee5c53c30e142030306d699406  usr/share/man/man1/mm3d-prepare.1.gz

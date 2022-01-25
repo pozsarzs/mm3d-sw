@@ -1,5 +1,5 @@
-3a804e6d6c27c15d7da33863a7d13d95  usr/bin/mm3d-editenvirconf
-1ecdbd61cb721ac95c043d628c0190c4  usr/bin/mm3d-editenvirconf.bin
-90f83428ec203fcc838063f4479adff8  usr/share/doc/mm3d-eec/changelog.Debian.gz
-acfef3ba7e256b044f929b0004c596ac  usr/share/doc/mm3d-eec/copyright
-bade2d4c8d9bfed0197e1199e58b74f3  usr/share/man/man1/mm3d-editenvirconf.1.gz
+a149dc766689d8d2f7e2586ef47c1a31  usr/bin/mm3d-editenvirconf
+0e1820f83d95eef9ca9f4609e137c47a  usr/bin/mm3d-editenvirconf.bin
+801ad6f15d0dff0881db8cf3973b5ac1  usr/share/doc/mm3d-eec/changelog.Debian.gz
+08d69d383853753bcbf6ce6c5150f4bd  usr/share/doc/mm3d-eec/copyright
+a7ce132121232578bfdea5e1d571671d  usr/share/man/man1/mm3d-editenvirconf.1.gz
