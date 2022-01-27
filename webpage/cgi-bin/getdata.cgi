@@ -19,7 +19,7 @@ use strict;
 use warnings;
 
 my $contname = 'MM3D';
-my $contversion = 'v0.6';
+my $contversion = 'v0.7';
 
 # get data
 my $buffer;
