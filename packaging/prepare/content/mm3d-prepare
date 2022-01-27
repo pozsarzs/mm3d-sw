@@ -24,8 +24,8 @@ line()
 
 SWN1="MM3D"
 SWN2="mm3d"
-SWCR="Copyright (C) 2019-2021 Pozsár Zsolt <pozsar.zsolt@szerafingomba.hu>"
-SWV="v0.6"
+SWCR="Copyright (C) 2019-2022 Pozsár Zsolt <pozsar.zsolt@szerafingomba.hu>"
+SWV="v0.7"
 
 echo -e "\n$SWN1 v$SWV prepare OS"
 echo "$SWCR"
