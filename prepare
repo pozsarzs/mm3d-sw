@@ -42,6 +42,7 @@ sudo apt-get install apache2 \
                      python-openssl \
                      python-requests \
                      python-rpi.gpio \
+                     libconfig-tiny-perl \
                      wget
 mkdir --parents $HOME/download
 cd $HOME/download
