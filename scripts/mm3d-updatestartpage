@@ -62,7 +62,7 @@ loadmessages()
   MSG09="Error light"
   MSG10="Go to data"
   MSG11="Address of site"
-  MSG31="Environment characteristic"
+  MSG30="Environment characteristic"
 
   MSGFILE="$DIR_MSG/$LNG/mm3d.msg"
   if [ -f "$MSGFILE" ]
