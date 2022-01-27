@@ -45,6 +45,8 @@ SUBDIRS="/usr/$INSTDIR/bin \
          /usr/$INSTDIR/share/$SWN2 \
          /usr/$INSTDIR/share/man \
          /usr/$INSTDIR/share/man/man1 \
+         /usr/$INSTDIR/share/man/man7 \
+         /usr/$INSTDIR/share/man/man8 \
          /var/$INSTDIR/lib/$SWN2 \
          /var/$INSTDIR/lock \
          /var/$INSTDIR/log \
