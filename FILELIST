@@ -1,0 +1,140 @@
+filename                                        status      note
+--------------------------------------------------------------------------------
+README.md                                       READY
+LICENCE                                         READY
+install
+prepare
+uninstall
+binary/mm3d-editenvirconf.bin
+documents/AUTHORS                               READY
+documents/ChangeLog
+documents/control.txt                           READY
+documents/copyright                             READY
+documents/gpioports.txt                         READY
+documents/INSTALL                               READY
+documents/README                                READY
+documents/VERSION                               READY
+manuals/getdata.cgi.7
+manuals/getenvirconf.cgi.7
+manuals/getpage.cgi.7
+manuals/mm3d-creatediagrams.1
+manuals/mm3d-editenvirconf.1
+manuals/mm3d-editmainconf.1
+manuals/mm3d-getsnapshots.1
+manuals/mm3d-hwtest.py.1
+manuals/mm3d-maintainlog.1
+manuals/mm3d-override.1
+manuals/mm3d.py.8
+manuals/mm3d-startdaemon.1
+manuals/mm3d-statusofdaemon.1
+manuals/mm3d-stopdaemon.1
+manuals/mm3d-updatestartpage.1
+manuals/mm3d-viewlog.1
+manuals/mm3d-webpage.1
+messages/mm3d_cs.msg
+messages/mm3d_de.msg
+messages/mm3d_fr.msg
+messages/mm3d_hr.msg
+messages/mm3d_hu.msg
+messages/mm3d_pl.msg
+messages/mm3d_ro.msg
+messages/mm3d_ru.msg
+messages/mm3d_sk.msg
+messages/mm3d_sl.msg
+messages/mm3d_sr.msg
+messages/mm3d_uk.msg
+packaging/changelog.Debian.gz
+packaging/eec/control
+packaging/eec/md5sums
+packaging/eec/postinst
+packaging/eec/prerm
+packaging/prepare/content/mm3d-prepare
+packaging/prepare/content/mm3d-prepare.1.gz
+packaging/prepare/control
+packaging/prepare/md5sums
+packaging/prepare/postinst
+packaging/prepare/prerm
+packaging/sw/conffiles
+packaging/sw/control
+packaging/sw/md5sums
+packaging/sw/postinst
+packaging/sw/prerm
+packaging/web/control
+packaging/web/md5sums
+packaging/web/postinst
+packaging/web/prerm
+programs/mm3d-hwtest.py
+programs/mm3d.py
+scripts/mm3d-creatediagrams
+scripts/mm3d-editenvirconf
+scripts/mm3d-editmainconf
+scripts/mm3d-getsnapshots
+scripts/mm3d-maintainlog
+scripts/mm3d-override
+scripts/mm3d-startdaemon
+scripts/mm3d-statusofdaemon
+scripts/mm3d-stopdaemon
+scripts/mm3d-updatestartpage
+scripts/mm3d-viewlog
+scripts/mm3d-webpage
+settings/cron.d/mm3d                            READY
+settings/init.d/mm3d.sh                         READY
+settings/mm3d/envir.ini                         READY
+settings/mm3d/mm3d.ini                          READY
+settings/motd                                   READY
+settings/systemd/system/mm3d.service            READY
+source/config/config.guess                      READY
+source/config/config.sub                        READY
+source/config/install-sh                        READY
+source/configure
+source/configure.in
+source/editenvirconf.pas
+source/loadinifile.inc
+source/Makefile
+source/Makefile.global.in
+source/page1screen.inc
+source/page2screen.inc
+source/page3screen.inc
+source/page4screen.inc
+source/page5screen.inc
+source/page6screen.inc
+source/page7screen.inc
+source/page8screen.inc
+source/saveinifile.inc
+source/untcommon.pas
+webpage/cgi-bin/getdata.cgi
+webpage/cgi-bin/getenvirconf.cgi
+webpage/cgi-bin/getpage.cgi
+webpage/footer_cs.html
+webpage/footer_de.html
+webpage/footer_en.html
+webpage/footer_fr.html
+webpage/footer_hr.html
+webpage/footer_hu.html
+webpage/footer_pl.html
+webpage/footer_ro.html
+webpage/footer_ru.html
+webpage/footer_sk.html
+webpage/footer_sl.html
+webpage/footer_sr.html
+webpage/footer_uk.html
+webpage/header_cs.html
+webpage/header_de.html
+webpage/header_en.html
+webpage/header_fr.html
+webpage/header_hr.html
+webpage/header_hu.html
+webpage/header_pl.html
+webpage/header_ro.html
+webpage/header_ru.html
+webpage/header_sk.html
+webpage/header_sl.html
+webpage/header_sr.html
+webpage/header_uk.html
+webpage/pics/ants.jpg                           READY
+webpage/pics/dark.png                           READY
+webpage/pics/green.png                          READY
+webpage/pics/red.png                            READY
+webpage/pics/szerafin.ico                       READY
+webpage/pics/yellow.png                         READY
+webpage/styles.css                              READY
