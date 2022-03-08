@@ -1,6 +1,6 @@
 #!/bin/bash
 # +----------------------------------------------------------------------------+
-# | MM3D v0.7 * Growing house controlling and remote monitoring system         |
+# | MM3D v0.8 * Growing house controlling and remote monitoring system         |
 # | Copyright (C) 2018-2022 Pozsár Zsolt <pozsar.zsolt@szerafingomba.hu>       |
 # | mm3d-prepare                                                               |
 # | Prepare OS for install MM3D software                                       |
@@ -25,7 +25,7 @@ line()
 SWN1="MM3D"
 SWN2="mm3d"
 SWCR="Copyright (C) 2019-2022 Pozsár Zsolt <pozsar.zsolt@szerafingomba.hu>"
-SWV="v0.7"
+SWV="v0.8"
 
 echo -e "\n$SWN1 v$SWV prepare OS"
 echo "$SWCR"

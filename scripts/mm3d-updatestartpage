@@ -1,6 +1,6 @@
 #!/bin/bash
 # +----------------------------------------------------------------------------+
-# | MM3D v0.7 * Growing house controlling and remote monitoring system         |
+# | MM3D v0.8 * Growing house controlling and remote monitoring system         |
 # | Copyright (C) 2018-2022 Pozsár Zsolt <pozsar.zsolt@szerafingomba.hu>       |
 # | mm3d-updatestartpage                                                       |
 # | Update startpage                                                           |
@@ -51,7 +51,7 @@ loadconfiguration()
 
 loadmessages()
 {
-  MSG01="MM5D controlling and monitoring system"
+  MSG01="MM3D controlling and monitoring system"
   MSG02="User's data"
   MSG03="User"
   MSG04="Name of site"

@@ -1,3 +1,16 @@
+2022-03-08 Pozsár Zsolt <pozsar.zsolt@szerafingomba.hu>
+	*  0.8: Following files were modified (only important and operational changes).
+	*  README.md: modified
+	*  document/ChangeLog: modified
+	*  document/copyright: new file
+	*  document/INSTALL: modified
+	*  document/README: modified
+	*  document/VERSION: modified
+	*  manuals/override.1.gz: new file
+	*  programs/mm3d.py: modified
+	*  scripts/mm3d-override: modified
+	*  webpage/cgi-bin/getenvirconf: modified
+
 2022-01-24 Pozsár Zsolt <pozsar.zsolt@szerafingomba.hu>
 	*  0.7: Following files were modified (only important and operational changes).
 	*  uninstall: modified
@@ -66,8 +79,8 @@
 	*  uninstall: modified
 	*  README: modified
 	*  documents/gpioports.txt: new file
-	*  programs/mm5d-hwtest.py: modified
-	*  programs/mm5d.py: modified
+	*  programs/mm3d-hwtest.py: modified
+	*  programs/mm3d.py: modified
 	*  settings/*.ini: moved to mm3d subdirectory
 	*  settings/systemd/system/mm3d.service: new file
 

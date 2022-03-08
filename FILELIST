@@ -14,69 +14,69 @@ documents/gpioports.txt                         READY
 documents/INSTALL                               READY
 documents/README                                READY
 documents/VERSION                               READY
-manuals/getdata.cgi.7
+manuals/getdata.cgi.7                           READY
 manuals/getenvirconf.cgi.7
-manuals/getpage.cgi.7
-manuals/mm3d-creatediagrams.1
-manuals/mm3d-editenvirconf.1
-manuals/mm3d-editmainconf.1
-manuals/mm3d-getsnapshots.1
-manuals/mm3d-hwtest.py.1
-manuals/mm3d-maintainlog.1
-manuals/mm3d-override.1
-manuals/mm3d.py.8
-manuals/mm3d-startdaemon.1
-manuals/mm3d-statusofdaemon.1
-manuals/mm3d-stopdaemon.1
-manuals/mm3d-updatestartpage.1
-manuals/mm3d-viewlog.1
-manuals/mm3d-webpage.1
-messages/mm3d_cs.msg
-messages/mm3d_de.msg
-messages/mm3d_fr.msg
-messages/mm3d_hr.msg
-messages/mm3d_hu.msg
-messages/mm3d_pl.msg
-messages/mm3d_ro.msg
-messages/mm3d_ru.msg
-messages/mm3d_sk.msg
-messages/mm3d_sl.msg
-messages/mm3d_sr.msg
-messages/mm3d_uk.msg
-packaging/changelog.Debian.gz
-packaging/eec/control
+manuals/getpage.cgi.7                           READY
+manuals/mm3d-creatediagrams.1                   READY
+manuals/mm3d-editenvirconf.1                    READY
+manuals/mm3d-editmainconf.1                     READY
+manuals/mm3d-getsnapshots.1                     READY
+manuals/mm3d-hwtest.py.1                        READY
+manuals/mm3d-maintainlog.1                      READY
+manuals/mm3d-override.1                         READY
+manuals/mm3d.py.8                               READY
+manuals/mm3d-startdaemon.1                      READY
+manuals/mm3d-statusofdaemon.1                   READY
+manuals/mm3d-stopdaemon.1                       READY
+manuals/mm3d-updatestartpage.1                  READY
+manuals/mm3d-viewlog.1                          READY
+manuals/mm3d-webpage.1                          READY
+messages/mm3d_cs.msg                            READY
+messages/mm3d_de.msg                            READY
+messages/mm3d_fr.msg                            READY
+messages/mm3d_hr.msg                            READY
+messages/mm3d_hu.msg                            READY
+messages/mm3d_pl.msg                            READY
+messages/mm3d_ro.msg                            READY
+messages/mm3d_ru.msg                            READY
+messages/mm3d_sk.msg                            READY
+messages/mm3d_sl.msg                            READY
+messages/mm3d_sr.msg                            READY
+messages/mm3d_uk.msg                            READY
+packaging/changelog.Debian.gz                   READY
+packaging/eec/control                           READY
 packaging/eec/md5sums
 packaging/eec/postinst
 packaging/eec/prerm
-packaging/prepare/content/mm3d-prepare
-packaging/prepare/content/mm3d-prepare.1.gz
-packaging/prepare/control
+packaging/prepare/content/mm3d-prepare          READY
+packaging/prepare/content/mm3d-prepare.1.gz     READY
+packaging/prepare/control                       READY
 packaging/prepare/md5sums
-packaging/prepare/postinst
-packaging/prepare/prerm
-packaging/sw/conffiles
-packaging/sw/control
+packaging/prepare/postinst                      READY
+packaging/prepare/prerm                         READY
+packaging/sw/conffiles                          READY
+packaging/sw/control                            READY
 packaging/sw/md5sums
-packaging/sw/postinst
-packaging/sw/prerm
-packaging/web/control
+packaging/sw/postinst                           READY
+packaging/sw/prerm                              READY
+packaging/web/control                           READY
 packaging/web/md5sums
-packaging/web/postinst
-packaging/web/prerm
+packaging/web/postinst                          READY
+packaging/web/prerm                             READY
 programs/mm3d-hwtest.py
 programs/mm3d.py
-scripts/mm3d-creatediagrams
-scripts/mm3d-editenvirconf
-scripts/mm3d-editmainconf
-scripts/mm3d-getsnapshots
-scripts/mm3d-maintainlog
-scripts/mm3d-override
-scripts/mm3d-startdaemon
-scripts/mm3d-statusofdaemon
-scripts/mm3d-stopdaemon
-scripts/mm3d-updatestartpage
-scripts/mm3d-viewlog
-scripts/mm3d-webpage
+scripts/mm3d-creatediagrams                     READY
+scripts/mm3d-editenvirconf                      READY
+scripts/mm3d-editmainconf                       READY
+scripts/mm3d-getsnapshots                       READY
+scripts/mm3d-maintainlog                        READY
+scripts/mm3d-override                           READY
+scripts/mm3d-startdaemon                        READY
+scripts/mm3d-statusofdaemon                     READY
+scripts/mm3d-stopdaemon                         READY
+scripts/mm3d-updatestartpage                    READY
+scripts/mm3d-viewlog                            READY
+scripts/mm3d-webpage                            READY
 settings/cron.d/mm3d                            READY
 settings/init.d/mm3d.sh                         READY
 settings/mm3d/envir.ini                         READY
@@ -102,35 +102,35 @@ source/page7screen.inc
 source/page8screen.inc
 source/saveinifile.inc
 source/untcommon.pas
-webpage/cgi-bin/getdata.cgi
+webpage/cgi-bin/getdata.cgi                     READY
 webpage/cgi-bin/getenvirconf.cgi
-webpage/cgi-bin/getpage.cgi
-webpage/footer_cs.html
-webpage/footer_de.html
-webpage/footer_en.html
-webpage/footer_fr.html
-webpage/footer_hr.html
-webpage/footer_hu.html
-webpage/footer_pl.html
-webpage/footer_ro.html
-webpage/footer_ru.html
-webpage/footer_sk.html
-webpage/footer_sl.html
-webpage/footer_sr.html
-webpage/footer_uk.html
-webpage/header_cs.html
-webpage/header_de.html
-webpage/header_en.html
-webpage/header_fr.html
-webpage/header_hr.html
-webpage/header_hu.html
-webpage/header_pl.html
-webpage/header_ro.html
-webpage/header_ru.html
-webpage/header_sk.html
-webpage/header_sl.html
-webpage/header_sr.html
-webpage/header_uk.html
+webpage/cgi-bin/getpage.cgi                     READY
+webpage/footer_cs.html                          READY
+webpage/footer_de.html                          READY
+webpage/footer_en.html                          READY
+webpage/footer_fr.html                          READY
+webpage/footer_hr.html                          READY
+webpage/footer_hu.html                          READY
+webpage/footer_pl.html                          READY
+webpage/footer_ro.html                          READY
+webpage/footer_ru.html                          READY
+webpage/footer_sk.html                          READY
+webpage/footer_sl.html                          READY
+webpage/footer_sr.html                          READY
+webpage/footer_uk.html                          READY
+webpage/header_cs.html                          READY
+webpage/header_de.html                          READY
+webpage/header_en.html                          READY
+webpage/header_fr.html                          READY
+webpage/header_hr.html                          READY
+webpage/header_hu.html                          READY
+webpage/header_pl.html                          READY
+webpage/header_ro.html                          READY
+webpage/header_ru.html                          READY
+webpage/header_sk.html                          READY
+webpage/header_sl.html                          READY
+webpage/header_sr.html                          READY
+webpage/header_uk.html                          READY
 webpage/pics/ants.jpg                           READY
 webpage/pics/dark.png                           READY
 webpage/pics/green.png                          READY
