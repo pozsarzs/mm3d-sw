@@ -1,6 +1,6 @@
 #!/bin/bash
 # +----------------------------------------------------------------------------+
-# | MM3D v0.7 * Growing house controlling and remote monitoring system         |
+# | MM3D v0.8 * Growing house controlling and remote monitoring system         |
 # | Copyright (C) 2018-2022 Pozsár Zsolt <pozsar.zsolt@szerafingomba.hu>       |
 # | uninstall                                                                  |
 # | Uninstaller script                                                         |
@@ -50,7 +50,7 @@ sleep 1
 echo "Uninstalling..."
 echo "- stopping daemon:"
 sudo /etc/init.d/$SWN2.sh stop
-sudo systemctl disable mm3d.service
+sudo systemctl disable $SWN2.service
 echo "- removing from cron:"
 erase "/etc/cron.d/$SWN2"
 sudo /etc/init.d/cron restart
@@ -62,7 +62,7 @@ erase "/etc/rc3.d/S01$SWN2.sh"
 erase "/etc/rc4.d/S01$SWN2.sh"
 erase "/etc/rc5.d/S01$SWN2.sh"
 erase "/etc/rc6.d/K01$SWN2.sh"
-erase "/etc/systemd/system/mm3d.service"
+erase "/etc/systemd/system/$SWN2.service"
 erase "/usr/$INSTDIR/bin/$SWN2*"
 erase "/usr/$INSTDIR/share/doc/$SWN2/*"
 erase "/usr/$INSTDIR/share/locale/*/$SWN2.msg"

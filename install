@@ -1,6 +1,6 @@
 #!/bin/bash
 # +----------------------------------------------------------------------------+
-# | MM3D v0.7 * Growing house controlling and remote monitoring system         |
+# | MM3D v0.8 * Growing house controlling and remote monitoring system         |
 # | Copyright (C) 2018-2022 Pozsár Zsolt <pozsar.zsolt@szerafingomba.hu>       |
 # | install                                                                    |
 # | Installer script                                                           |
@@ -67,10 +67,10 @@ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
 FOR A PARTICULAR PURPOSE.\n"
 sleep 3
 
-if ! [ -x "$(command -v apache2)" ]; then
-  echo 'ERROR: Run prepare script firstly!';
-  exit;
-fi
+#if ! [ -x "$(command -v apache2)" ]; then
+#  echo 'ERROR: Run prepare script firstly!';
+#  exit;
+#fi
 
 echo -e "\nInstalling..."
 echo "- creating directories:"
@@ -105,7 +105,7 @@ copy "settings/cron.d/*" "/etc/cron.d/"
 copy "settings/$SWN2/$SWN2.ini" "/usr/$INSTDIR/etc/$SWN2/"
 copy "settings/$SWN2/envir.ini" "/usr/$INSTDIR/etc/$SWN2/"
 copy "settings/init.d/*" "/etc/init.d/"
-copy "settings/systemd/system/mm3d.service" "/etc/systemd/system/"
+copy "settings/systemd/system/$SWN2.service" "/etc/systemd/system/"
 copy "webpage/cgi-bin/*.cgi" "/usr/lib/cgi-bin/"
 copy "webpage/*.css" "/var/www/html/"
 copy "webpage/*.html" "/usr/$INSTDIR/share/$SWN2/"
@@ -124,7 +124,7 @@ sudo ln -s /etc/init.d/$SWN2.sh /etc/rc4.d/S01$SWN2.sh
 sudo ln -s /etc/init.d/$SWN2.sh /etc/rc5.d/S01$SWN2.sh
 sudo ln -s /etc/init.d/$SWN2.sh /etc/rc6.d/K01$SWN2.sh
 sudo systemctl daemon-reload
-sudo systemctl enable mm3d.service
+sudo systemctl enable $SWN2.service
 sudo /etc/init.d/$SWN2.sh start
 echo "- set cron.d:"
 copy settings/cron.d/$SWN2 /etc/cron.d/
