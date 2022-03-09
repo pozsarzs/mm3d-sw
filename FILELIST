@@ -46,8 +46,8 @@ messages/mm3d_uk.msg                            READY
 packaging/changelog.Debian.gz                   READY
 packaging/eec/control                           READY
 packaging/eec/md5sums
-packaging/eec/postinst
-packaging/eec/prerm
+packaging/eec/postinst                          READY
+packaging/eec/prerm                             READY
 packaging/prepare/content/mm3d-prepare          READY
 packaging/prepare/content/mm3d-prepare.1.gz     READY
 packaging/prepare/control                       READY
@@ -83,25 +83,31 @@ settings/mm3d/envir.ini                         READY
 settings/mm3d/mm3d.ini                          READY
 settings/motd                                   READY
 settings/systemd/system/mm3d.service            READY
-source/config/config.guess                      READY
-source/config/config.sub                        READY
-source/config/install-sh                        READY
-source/configure
-source/configure.in
-source/editenvirconf.pas
-source/loadinifile.inc
-source/Makefile
-source/Makefile.global.in
-source/page1screen.inc
-source/page2screen.inc
-source/page3screen.inc
-source/page4screen.inc
-source/page5screen.inc
-source/page6screen.inc
-source/page7screen.inc
-source/page8screen.inc
-source/saveinifile.inc
-source/untcommon.pas
+source/editenvirconf/config.pas.in              READY
+source/editenvirconf/editenvirconf.pas          READY
+source/editenvirconf/incloadinifile.pas         READY
+source/editenvirconf/incpage10screen.pas        READY
+source/editenvirconf/incpage11screen.pas        READY
+source/editenvirconf/incpage1screen.pas         READY
+source/editenvirconf/incpage2screen.pas         READY
+source/editenvirconf/incpage3screen.pas         READY
+source/editenvirconf/incpage4screen.pas         READY
+source/editenvirconf/incpage5screen.pas         READY
+source/editenvirconf/incpage6screen.pas         READY
+source/editenvirconf/incpage7screen.pas         READY
+source/editenvirconf/incpage8screen.pas         READY
+source/editenvirconf/incpage9screen.pas         READY
+source/editenvirconf/incsaveinifile.pas         READY
+source/editenvirconf/Makefile                   READY
+source/_config/config.guess                     READY
+source/_config/config.sub                       READY
+source/_config/install-sh                       READY
+source/_lib/arm-linux/.gitignore                READY
+source/configure                                READY
+source/configure.in                             READY
+source/Makefile                                 READY
+source/Makefile.global.in                       READY
+source/untcommon.pas                            READY
 webpage/cgi-bin/getdata.cgi                     READY
 webpage/cgi-bin/getenvirconf.cgi                READY
 webpage/cgi-bin/getpage.cgi                     READY

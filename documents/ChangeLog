@@ -1,6 +1,7 @@
 2022-03-08 Pozsár Zsolt <pozsar.zsolt@szerafingomba.hu>
 	*  0.8: Following files were modified (only important and operational changes).
 	*  README.md: modified
+	*  binary/mm3d-editenvirconf.bin: modified
 	*  document/ChangeLog: modified
 	*  document/copyright: new file
 	*  document/INSTALL: modified
@@ -9,6 +10,7 @@
 	*  manuals/override.1.gz: new file
 	*  programs/mm3d.py: modified
 	*  scripts/mm3d-override: modified
+	*  source/*: modified
 	*  webpage/cgi-bin/getenvirconf: modified
 
 2022-01-24 Pozsár Zsolt <pozsar.zsolt@szerafingomba.hu>
