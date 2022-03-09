@@ -183,6 +183,20 @@ begin
           6: begin hhummax:=strtoint(s); write(hhummax); end;
         end;
       end;
+      // page #1 - block #2
+      if block=2 then
+      begin
+        gotoxy(MINPOSX[page,block],posy); textbackground(blue);
+        hhumdis[posy-10]:=strtoint(s);
+        write(hhumdis[posy-10]);
+      end;
+      // page #1 - block #3
+      if block=3 then
+      begin
+        gotoxy(MINPOSX[page,block],posy); textbackground(blue);
+        hhumdis[posy+2]:=strtoint(s);
+        write(hhumdis[posy+2]);
+      end;
     end;
     // -- page #2 --
     if page=2 then
@@ -326,6 +340,20 @@ begin
           5: begin mhumoff:=strtoint(s); write(mhumoff); end;
           6: begin mhummax:=strtoint(s); write(mhummax); end;
         end;
+      end;
+      // page #6 - block #2
+      if block=2 then
+      begin
+        gotoxy(MINPOSX[page,block],posy); textbackground(blue);
+        mhumdis[posy-10]:=strtoint(s);
+        write(mhumdis[posy-10]);
+      end;
+      // page #6 - block #3
+      if block=3 then
+      begin
+        gotoxy(MINPOSX[page,block],posy); textbackground(blue);
+        mhumdis[posy+2]:=strtoint(s);
+        write(mhumdis[posy+2]);
       end;
     end;
     // -- page #7 --

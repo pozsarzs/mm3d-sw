@@ -8,7 +8,7 @@
 include ../Makefile.global
 
 srcfiles = editenvirconf.pas
-binfiles = mm8d-editenvirconf.bin
+binfiles = mm3d-editenvirconf.bin
 
 all:
 	@echo "- Compiling source code..."
