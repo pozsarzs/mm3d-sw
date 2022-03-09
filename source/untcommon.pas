@@ -1,6 +1,6 @@
 { +--------------------------------------------------------------------------+ }
-{ | MM8D v0.3 * Growing house and irrigation controlling and monitoring sys. | }
-{ | Copyright (C) 2020-2022 Pozsár Zsolt <pozsar.zsolt@szerafingomba.hu>     | }
+{ | MM3D v0.8 * Growing house controlling and remote monitoring system       | }
+{ | Copyright (C) 2018-2022 Pozsár Zsolt <pozsar.zsolt@szerafingomba.hu>     | }
 { | untcommon.pas                                                            | }
 { | Common functions and procedures                                          | }
 { +--------------------------------------------------------------------------+ }

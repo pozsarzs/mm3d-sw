@@ -2066,7 +2066,7 @@ architecture=`fpc -iSP`
 
 
 
-ac_config_files="$ac_config_files Makefile.global editenvirconf/config.pas editirrconf/config.pas editmainconf/config.pas override/config.pas"
+ac_config_files="$ac_config_files Makefile.global editenvirconf/config.pas"
 
 cat >confcache <<\_ACEOF
 # This file is a shell script that caches the results of configure
@@ -2775,9 +2775,6 @@ do
   case $ac_config_target in
     "Makefile.global") CONFIG_FILES="$CONFIG_FILES Makefile.global" ;;
     "editenvirconf/config.pas") CONFIG_FILES="$CONFIG_FILES editenvirconf/config.pas" ;;
-    "editirrconf/config.pas") CONFIG_FILES="$CONFIG_FILES editirrconf/config.pas" ;;
-    "editmainconf/config.pas") CONFIG_FILES="$CONFIG_FILES editmainconf/config.pas" ;;
-    "override/config.pas") CONFIG_FILES="$CONFIG_FILES override/config.pas" ;;
 
   *) as_fn_error $? "invalid argument: \`$ac_config_target'" "$LINENO" 5;;
   esac

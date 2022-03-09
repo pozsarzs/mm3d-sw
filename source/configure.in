@@ -1,6 +1,6 @@
 dnl +--------------------------------------------------------------------------+
-dnl | MM8D v0.3 * Growing house and irrigation controlling and monitoring sys. |
-dnl | Copyright (C) 2020-2022 Pozsár Zsolt <pozsar.zsolt@szerafingomba.hu>     |
+dnl | MM3D v0.8 * Growing house controlling and remote monitoring system       |
+dnl | Copyright (C) 2018-2022 Pozsár Zsolt <pozsar.zsolt@szerafingomba.hu>     |
 dnl | configure.in                                                             |
 dnl | Autoconf input file for unix-like systems                                |
 dnl +--------------------------------------------------------------------------+
@@ -35,10 +35,7 @@ AC_SUBST(os)
 AC_SUBST(rm)
 AC_SUBST(version)
 AC_OUTPUT(Makefile.global\
-          editenvirconf/config.pas\
-          editirrconf/config.pas\
-          editmainconf/config.pas\
-          override/config.pas)
+          editenvirconf/config.pas)
 
 echo "
 Summary
