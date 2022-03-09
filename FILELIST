@@ -7,7 +7,7 @@ prepare                                         READY
 uninstall                                       READY
 binary/mm3d-editenvirconf.bin
 documents/AUTHORS                               READY
-documents/ChangeLog
+documents/ChangeLog                             READY
 documents/control.txt                           READY
 documents/copyright                             READY
 documents/gpioports.txt                         READY
@@ -64,7 +64,7 @@ packaging/web/md5sums
 packaging/web/postinst                          READY
 packaging/web/prerm                             READY
 programs/mm3d-hwtest.py                         READY
-programs/mm3d.py
+programs/mm3d.py                                READY
 scripts/mm3d-creatediagrams                     READY
 scripts/mm3d-editenvirconf                      READY
 scripts/mm3d-editmainconf                       READY

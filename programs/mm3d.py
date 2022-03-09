@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # +----------------------------------------------------------------------------+
-# | MM3D v0.7 * Growing house controlling and remote monitoring system         |
+# | MM3D v0.8 * Growing house controlling and remote monitoring system         |
 # | Copyright (C) 2018-2022 Pozsar Zsolt <pozsar.zsolt@szerafingomba.hu>       |
 # | mm3d.py                                                                    |
 # | Main program                                                               |
@@ -136,7 +136,9 @@ def loadenvirchars(conffile):
   global htemperature_max
   global htemperature_min
   global hvent_disable
+  global hvent_disablehightemp
   global hvent_disablelowtemp
+  global hvent_hightemp
   global hvent_lowtemp
   global hvent_off
   global hvent_on
@@ -155,17 +157,21 @@ def loadenvirchars(conffile):
   global mtemperature_max
   global mtemperature_min
   global mvent_disable
+  global mvent_disablehightemp
   global mvent_disablelowtemp
+  global mvent_hightemp
   global mvent_lowtemp
   global mvent_off
   global mvent_on
   hheater_disable=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,]
   hhumidifier_disable=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,]
   hvent_disable=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,]
+  hvent_disablehightemp=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,]
   hvent_disablelowtemp=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,]
   mheater_disable=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,]
   mhumidifier_disable=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,]
   mvent_disable=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,]
+  mvent_disablehightemp=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,]
   mvent_disablelowtemp=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,]
   try:
     with open(conffile) as f:
@@ -178,6 +184,8 @@ def loadenvirchars(conffile):
       hheater_disable[x]=int(config.get('hyphae','heater_disable_'+addzero(x)))
     for x in range(24):
       hvent_disable[x]=int(config.get('hyphae','vent_disable_'+addzero(x)))
+    for x in range(24):
+      hvent_disablehightemp[x]=int(config.get('hyphae','vent_disablehightemp_'+addzero(x)))
     for x in range(24):
       hvent_disablelowtemp[x]=int(config.get('hyphae','vent_disablelowtemp_'+addzero(x)))
     hheater_off=int(config.get('hyphae','heater_off'))
@@ -192,6 +200,7 @@ def loadenvirchars(conffile):
     hlight_on2=int(config.get('hyphae','light_on2'))
     htemperature_max=int(config.get('hyphae','temperature_max'))
     htemperature_min=int(config.get('hyphae','temperature_min'))
+    hvent_hightemp=int(config.get('hyphae','vent_hightemp'))
     hvent_lowtemp=int(config.get('hyphae','vent_lowtemp'))
     hvent_off=int(config.get('hyphae','vent_off'))
     hvent_on=int(config.get('hyphae','vent_on'))
@@ -201,6 +210,8 @@ def loadenvirchars(conffile):
       mheater_disable[x]=int(config.get('mushroom','heater_disable_'+addzero(x)))
     for x in range(24):
       mvent_disable[x]=int(config.get('mushroom','vent_disable_'+addzero(x)))
+    for x in range(24):
+      mvent_disablehightemp[x]=int(config.get('mushroom','vent_disablehightemp_'+addzero(x)))
     for x in range(24):
       mvent_disablelowtemp[x]=int(config.get('mushroom','vent_disablelowtemp_'+addzero(x)))
     mheater_off=int(config.get('mushroom','heater_off'))
@@ -215,6 +226,7 @@ def loadenvirchars(conffile):
     mlight_on2=int(config.get('mushroom','light_on2'))
     mtemperature_max=int(config.get('mushroom','temperature_max'))
     mtemperature_min=int(config.get('mushroom','temperature_min'))
+    mvent_hightemp=int(config.get('mushroom','vent_hightemp'))
     mvent_lowtemp=int(config.get('mushroom','vent_lowtemp'))
     mvent_off=int(config.get('mushroom','vent_off'))
     mvent_on=int(config.get('mushroom','vent_on'))
@@ -359,6 +371,8 @@ def control(temperature,humidity,inputs,exttemp,wrongvalues):
       out3=1
     if (wrongvalues==0) and (temperature>htemperature_max) and (exttemp<htemperature_max):
       out3=1
+    if (hvent_disablehightemp[h]==1) and (exttemp>hvent_hightemp):
+      out3=0
     if (hvent_disablelowtemp[h]==1) and (exttemp<hvent_lowtemp):
       out3=0
     # heaters
@@ -394,6 +408,8 @@ def control(temperature,humidity,inputs,exttemp,wrongvalues):
       out3=1
     if (wrongvalues==0) and (temperature>mtemperature_max) and (exttemp<mtemperature_max):
       out3=1
+    if (mvent_disablehightemp[h]==1) and (exttemp>mvent_hightemp):
+      out3=0
     if (mvent_disablelowtemp[h]==1) and (exttemp<mvent_lowtemp):
       out3=0
     # heaters
