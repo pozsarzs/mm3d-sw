@@ -1,11 +1,11 @@
 # +----------------------------------------------------------------------------+
-# | MM3D v0.7 * Growing house controlling and remote monitoring system         |
-# | Copyright (C) 2018-2022 Pozsár Zsolt <pozsar.zsolt@szerafingomba.hu>       |
-# | Makefile.global                                                            |
-# | Global makefile for Unix-like systems                                      |
+# | MM8D v0.3 * Growing house and irrigation controlling and monitoring system |
+# | Copyright (C) 2020-2022 Pozsár Zsolt <pozsar.zsolt@szerafingomba.hu>       |
+# | Makefile                                                                   |
+# | Make file for source code                                                  |
 # +----------------------------------------------------------------------------+
 
-name		= editenvirconf
+name		= mm8d
 version		= @version@
 architecture	= @architecture@
 os              = @os@
@@ -23,7 +23,8 @@ fpflag		= -T@os@ \
                   -O1 \
                   -v0 \
                   -ve \
-                  -FE./lib/@architecture@-@os@/ \
+                  -FE./../_lib/@architecture@-@os@/ \
                   -Fu. \
-                  -Fu./lib/@architecture@-@os@/
+                  -Fu./.. \
+                  -Fu./../_lib/@architecture@-@os@/
 

@@ -1,12 +1,12 @@
 dnl +--------------------------------------------------------------------------+
-dnl | MM3D v0.7 * Growing house controlling and remote monitoring system       |
-dnl | Copyright (C) 2018-2022 Pozsár Zsolt <pozsar.zsolt@szerafingomba.hu>     |
+dnl | MM8D v0.3 * Growing house and irrigation controlling and monitoring sys. |
+dnl | Copyright (C) 2020-2022 Pozsár Zsolt <pozsar.zsolt@szerafingomba.hu>     |
 dnl | configure.in                                                             |
 dnl | Autoconf input file for unix-like systems                                |
 dnl +--------------------------------------------------------------------------+
 
 AC_INIT
-AC_CONFIG_AUX_DIR(config)
+AC_CONFIG_AUX_DIR(_config)
 AC_CANONICAL_SYSTEM
 
 AC_PATH_PROG(rm, rm, no)
@@ -19,17 +19,26 @@ test x"$hfpc" = xno && AC_MSG_ERROR(FreePascal compiler not found!)
 
 AC_CHECK_FILE(../documents/VERSION,,AC_MSG_ERROR(VERSION file not found!))
 version=`cat ../documents/VERSION`
+
+AC_CHECK_FILE(../documents/copyright,,AC_MSG_ERROR(copyright file not found!))
+copyright=`cat ../documents/copyright`
+
 os=`fpc -iSO`
 architecture=`fpc -iSP`
 
 AC_SUBST(architecture)
+AC_SUBST(copyright)
 AC_SUBST(fpflag)
 AC_SUBST(install)
 AC_SUBST(make)
 AC_SUBST(os)
 AC_SUBST(rm)
 AC_SUBST(version)
-AC_OUTPUT(Makefile.global)
+AC_OUTPUT(Makefile.global\
+          editenvirconf/config.pas\
+          editirrconf/config.pas\
+          editmainconf/config.pas\
+          override/config.pas)
 
 echo "
 Summary

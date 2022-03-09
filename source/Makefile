@@ -1,32 +1,31 @@
 # +----------------------------------------------------------------------------+
-# | MM3D v0.7 * Growing house controlling and remote monitoring system         |
-# | Copyright (C) 2018-2022 Pozsár Zsolt <pozsar.zsolt@szerafingomba.hu>       |
+# | MM8D v0.3 * Growing house and irrigation controlling and monitoring system |
+# | Copyright (C) 2020-2022 Pozsár Zsolt <pozsar.zsolt@szerafingomba.hu>       |
 # | Makefile                                                                   |
 # | Make file for source code                                                  |
 # +----------------------------------------------------------------------------+
 
-include Makefile.global
+include ./Makefile.global
 
-srcfiles = editenvirconf.pas
-binfiles = mm3d-editenvirconf.bin
+dirs =  editenvirconf
 
 all:
-	@echo "- Compiling source code..."
-	@mkdir -p ./lib/$(architecture)-$(os)/
-	@for x in $(srcfiles); do \
-	  if [ -e $$x ]; then fpc $(fpflag) $$x; echo ""; fi; \
+	@echo Compiling source code:
+	@for dir in $(dirs); do \
+	  if [ -e Makefile ]; then make -s -C $$dir all; fi; \
 	done
-	@mv ./lib/$(architecture)-$(os)/editenvirconf ./lib/$(architecture)-$(os)/mm3d-editenvirconf.bin
-	@echo "...done."
+	@echo "Source code is compiled."
 
 clean:
-	@echo -n "- Cleaning source code..."
-	@$(rm) ./lib/$(architecture)-$(os)/*
-	@echo "...done."
+	@echo Cleaning source code:
+	@for dir in $(dirs); do \
+	  if [ -e Makefile ]; then make -s -C $$dir clean; fi; \
+	done
+	@echo "Source code is cleaned."
 
 install:
-	@echo -n "- Installing binary files..."
-	@for x in $(binfiles); do \
-	  if [ -e ./lib/$(architecture)-$(os)/$$x ]; then $(install) -m $(binmode) ./lib/$(architecture)-$(os)/$$x ../binary/; fi; \
+	@echo Installing binaries:
+	@for dir in $(dirs); do \
+	  if [ -e Makefile ]; then make -s -C $$dir install; fi; \
 	done
-	@echo "...done."
+	@echo "Programs are installed."

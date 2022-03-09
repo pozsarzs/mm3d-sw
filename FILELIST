@@ -2,9 +2,9 @@ filename                                        status      note
 --------------------------------------------------------------------------------
 README.md                                       READY
 LICENCE                                         READY
-install
-prepare
-uninstall
+install                                         READY
+prepare                                         READY
+uninstall                                       READY
 binary/mm3d-editenvirconf.bin
 documents/AUTHORS                               READY
 documents/ChangeLog
@@ -15,7 +15,7 @@ documents/INSTALL                               READY
 documents/README                                READY
 documents/VERSION                               READY
 manuals/getdata.cgi.7                           READY
-manuals/getenvirconf.cgi.7
+manuals/getenvirconf.cgi.7                      READY
 manuals/getpage.cgi.7                           READY
 manuals/mm3d-creatediagrams.1                   READY
 manuals/mm3d-editenvirconf.1                    READY
@@ -63,7 +63,7 @@ packaging/web/control                           READY
 packaging/web/md5sums
 packaging/web/postinst                          READY
 packaging/web/prerm                             READY
-programs/mm3d-hwtest.py
+programs/mm3d-hwtest.py                         READY
 programs/mm3d.py
 scripts/mm3d-creatediagrams                     READY
 scripts/mm3d-editenvirconf                      READY
@@ -103,7 +103,7 @@ source/page8screen.inc
 source/saveinifile.inc
 source/untcommon.pas
 webpage/cgi-bin/getdata.cgi                     READY
-webpage/cgi-bin/getenvirconf.cgi
+webpage/cgi-bin/getenvirconf.cgi                READY
 webpage/cgi-bin/getpage.cgi                     READY
 webpage/footer_cs.html                          READY
 webpage/footer_de.html                          READY
