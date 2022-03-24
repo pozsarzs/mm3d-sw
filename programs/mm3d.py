@@ -323,15 +323,19 @@ def autooffport1():
 # get external temperature from openweathermap.org
 def getexttemp():
   writetodebuglog("i","Get external temperature from internet.")
-  response = requests.get(base_url+"appid="+api_key+"&q="+city_name)
-  x=response.json()
-  if x["cod"]!="404":
-    y=x["main"] 
-    current_temperature=y["temp"]
-    current_temperature=round(current_temperature-273)
-    writetodebuglog("i","External temperature: "+str(current_temperature)+" degree Celsius")
-    return current_temperature
-  else:
+  try:
+    response = requests.get(base_url+"appid="+api_key+"&q="+city_name)
+    x=response.json()
+    if x["cod"]!="404":
+      y=x["main"] 
+      current_temperature=y["temp"]
+      current_temperature=round(current_temperature-273)
+      writetodebuglog("i","External temperature: "+str(current_temperature)+" degree Celsius")
+      return current_temperature
+    else:
+      writetodebuglog("w","Cannot get external temperature from internet.")
+      return 18
+  except:
     writetodebuglog("w","Cannot get external temperature from internet.")
     return 18
 
