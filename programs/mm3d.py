@@ -23,7 +23,7 @@ import sys
 import time
 import Adafruit_DHT
 import RPi.GPIO as GPIO
-from time import gmtime, strftime
+from time import localtime, strftime
 
 #global exttemp
 
@@ -37,7 +37,7 @@ def writetodebuglog(level,text):
     if level=="e":
       lv="ERROR  "
     debugfile=dir_log+time.strftime("debug-%Y%m%d.log")
-    dt=(strftime("%Y-%m-%d %H:%M:%S", gmtime()))
+    dt=(strftime("%Y-%m-%d %H:%M:%S", localtime()))
     try:
       with open(debugfile, "a") as d:
         d.write(dt+'  '+lv+' '+text+'\n')
@@ -249,7 +249,7 @@ def lckfile(mode):
 
 # write data to log with timestamp
 def writelog(temperature,humidity,inputs,outputs):
-  dt=(strftime("%Y-%m-%d,%H:%M",gmtime()))
+  dt=(strftime("%Y-%m-%d,%H:%M",localtime()))
   lckfile(1)
   writetodebuglog("i","Writing data to log.")
   if not os.path.isfile(logfile):
