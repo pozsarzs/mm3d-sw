@@ -10,4 +10,5 @@ GitHub: <https://github.com/pozsarzs/mm3d-sw>
  - version:            v0.8
  - language:           en (cs, de, fr, hr, hu, pl, ro, ru, sk, sl, sr, uk)
  - licence:            EUPL v1.1
- - user interface:     CUI via SSH and webpage
+ - user interface:     CLI, TUI, WUI
+ - remote access:      HTTP, SSH
