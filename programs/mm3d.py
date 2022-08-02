@@ -493,11 +493,14 @@ with daemon.DaemonContext() as context:
       humidity=round(humidity)
       writetodebuglog("i","Measure is done.")
       blinkactled()
+      if temperature>100:
+        wrongvalues=1
+        temperature=18
       if humidity>100:
         wrongvalues=1
+        humidity=72
       if wrongvalues==1:
         writetodebuglog("w","Measured values are bad!")
-        writecodetodisplay("W","02")
       # read input data from GPIO
       writetodebuglog("i","Reading input ports.")
       inputs=str(int(not GPIO.input(prt_in1)))
