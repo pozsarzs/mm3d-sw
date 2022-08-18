@@ -7,7 +7,7 @@ GitHub: <https://github.com/pozsarzs/mm3d-sw>
 
  - architecture:       armhf
  - operation system:   Raspberry Pi OS (formerly Raspbian GNU/Linux)
- - version:            v0.8
+ - version:            v0.8.1
  - language:           en (cs, de, fr, hr, hu, pl, ro, ru, sk, sl, sr, uk)
  - licence:            EUPL v1.1
  - user interface:     CLI, TUI, WUI

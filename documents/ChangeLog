@@ -1,12 +1,11 @@
 2022-03-08 Pozsár Zsolt <pozsar.zsolt@szerafingomba.hu>
-	*  0.8: Following files were modified (only important and operational changes).
-	*  README.md: modified
+	*  0.8.1: Following important files were modified (only important and operational changes).
+	*  programs/mm3d.py: modified
+	*  programs/mm3d-hwtest.py: modified
+
+2022-03-08 Pozsár Zsolt <pozsar.zsolt@szerafingomba.hu>
+	*  0.8: Following important files were modified (only important and operational changes).
 	*  binary/mm3d-editenvirconf.bin: modified
-	*  document/ChangeLog: modified
-	*  document/copyright: new file
-	*  document/INSTALL: modified
-	*  document/README: modified
-	*  document/VERSION: modified
 	*  manuals/override.1.gz: new file
 	*  programs/mm3d.py: modified
 	*  scripts/mm3d-override: modified
@@ -14,38 +13,24 @@
 	*  webpage/cgi-bin/getenvirconf: modified
 
 2022-01-24 Pozsár Zsolt <pozsar.zsolt@szerafingomba.hu>
-	*  0.7: Following files were modified (only important and operational changes).
+	*  0.7: Following important files were modified (only important and operational changes).
 	*  uninstall: modified
-	*  README.md: modified
-	*  document/ChangeLog: modified
-	*  document/copyright: new file
-	*  document/INSTALL: modified
-	*  document/README: modified
-	*  document/VERSION: modified
 	*  manuals/getenvirconf.cgi.7.gz: new file
-	*  manuals/*: modified
 	*  messages/*: modified
 	*  scripts/mm3d-updatestartpage: modified
 	*  scripts/mm3d-webpage: modified
 	*  webpage/cgi-bin/getenvirconf: new file
 
 2021-11-10 Pozsár Zsolt <pozsar.zsolt@szerafingomba.hu>
-	*  0.6: Following files were modified (only important and operational changes).
+	*  0.6: Following important files were modified (only important and operational changes).
 	*  install: modified
 	*  prepare: modified
 	*  uninstall: modified
-	*  README.md: modified
-	*  document/ChangeLog: modified
-	*  document/copyright: new file
-	*  document/INSTALL: modified
-	*  document/README: modified
-	*  document/VERSION: modified
 	*  manuals/getdata.cgi.7.gz: new file
 	*  manuals/getpage.cgi.7.gz: new file
 	*  manuals/mm3d.py.1.gz: renamed to *.8.gz
 	*  manuals/mm3d-statusofdaemon.1.gz: new file
 	*  manuals/mm3d-webpage.1.gz: new file
-	*  manuals/*: modified
 	*  messages/*: modified
 	*  scripts/mm3d-statusofdaemon: new file
 	*  scripts/mm3d-webpage: new file
@@ -57,29 +42,19 @@
                 snapshots from IP cameras, the number of log rows can be set.
 	*  install: modified
 	*  prepare: modified
-	*  README: modified
-	*  document/INSTALL: modified
-	*  document/README: modified
-	*  document/VERSION: modified
 	*  manuals/mm3d-creatediagrams.1.gz: new file
 	*  manuals/mm3d-getsnapshots.1.gz: new file
-	*  manuals/*: modified
 	*  messages/mm3d_??.msg: modified
-	*  packaging/*/*: modified
-	*  packaging/prepare/*/*: new files
 	*  scripts/mm3d-creatediagrams: new file
 	*  scripts/mm3d-getsnapshots: new file
 	*  settings/mm3d/mm3d.ini: modified
-	*  settings/motd: modified
 	*  webpage/cgi-bin/getpage.cgi: modified
-	*  webpage/header_*.html: modified
 	*  webpage/pics/ants.jpg: new file
 
 2020-05-03 Pozsár Zsolt <pozsar.zsolt@szerafingomba.hu>
 	*  0.4.1: fixed bugs
 	*  install: modified
 	*  uninstall: modified
-	*  README: modified
 	*  documents/gpioports.txt: new file
 	*  programs/mm3d-hwtest.py: modified
 	*  programs/mm3d.py: modified
@@ -91,11 +66,7 @@
 	*  install: modified
 	*  prepare: modified
 	*  uninstall: modified
-	*  README: modified
 	*  binary/mm3d-editenvirconf.bin: new file
-	*  document/INSTALL: modified
-	*  document/README: modified
-	*  document/VERSION: modified
 	*  documents/control.txt: new file
 	*  manuals/mm3d-editconf.1.gz: removed
 	*  manuals/mm3d-editcurrentprog.1.gz: removed
@@ -110,7 +81,6 @@
 	*  manuals/mm3d-updatestartpage.1.gz: modified
 	*  manuals/mm3d-viewlog.1.gz: modified
 	*  messages/*.msg: modified
-	*  packaging/*/*: new files
 	*  programs/mm3d.py: modified
 	*  programs/prg_empty/prg_empty.py: removed
 	*  programs/prg_example/cfg_example.ini: removed
@@ -162,10 +132,6 @@
 	        configuration file.
 	*  install: modified
 	*  uninstall: modified
-	*  README: modified
-	*  document/INSTALL: modified
-	*  document/README: modified
-	*  document/VERSION: modified
 	*  messages/mm3d_cs.msg: new file
 	*  messages/mm3d_de.msg: new file
 	*  messages/mm3d_fr.msg: new file
@@ -216,10 +182,6 @@
 	*  install: modified
 	*  prepare: modified
 	*  uninstall: modified
-	*  README: modified
-	*  document/INSTALL: modified
-	*  document/README: modified
-	*  document/VERSION: modified
 	*  manuals/mm3d-editconf.1.gz: new file
 	*  manuals/mm3d-editcurrentprog.1.gz: new file
 	*  manuals/mm3d-hwtest.py.1.gz: new file
@@ -236,3 +198,6 @@
 	*  scripts/mm3d-stopdaemon: new file
 	*  webpage/cgi-bin/getdata.cgi: new file
 	*  webpage/pics/*.png: modified
+
+2018-12-24 Pozsár Zsolt <pozsar.zsolt@szerafingomba.hu>
+	* 0.1: Initial release.

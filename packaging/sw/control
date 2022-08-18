@@ -1,9 +1,9 @@
 Package: mm3d-sw
-Version: 0.8
+Version: 0.8.1
 Section: misc
 Priority: extra
 Architecture: all
 Installed-Size: 316 kB
 Maintainer: Pozsár Zsolt <pozsar.zsolt@szerafingomba.hu>
-Depends: lsb-base, build-essential, python-daemon, python-dev, python-openssl, python-requests, python-rpi.gpio
+Depends: lsb-base, build-essential, python-configparser, python-daemon, python-dev, python-openssl, python-requests, python-rpi.gpio
 Description: MM3D growing house controlling and remote monitoring equipment.
