@@ -436,7 +436,12 @@ def control(temperature,humidity,inputs,exttemp,wrongvalues):
     # bad water pressure error light
     err2=0 if in2==1 else 1
     # one or more measured values are bad
-    err3=wrongvalues
+    err3=0
+    if wrongvalues==1:
+      err3=1
+    # MMxA devices are in internal control or manual mode
+    if (in1==0) or (in4==0):
+      err3=1
     # bad temperature
     err4=0
     if (wrongvalues==0) and (temperature<htemperature_min):
@@ -453,7 +458,12 @@ def control(temperature,humidity,inputs,exttemp,wrongvalues):
     # bad water pressure error light
     err2=0 if in2==1 else 1
     # one or more measured values are bad
-    err3=wrongvalues
+    err3=0
+    if wrongvalues==1:
+      err3=1
+    # MMxA devices are in internal control or manual mode
+    if (in1==0) or (in4==0):
+      err3=1
     # bad temperature
     err4=0
     if (wrongvalues==0) and (temperature<mtemperature_min):
