@@ -1,3 +1,11 @@
+2023-08-13 Pozsár Zsolt <pozsar.zsolt@szerafingomba.hu>
+	*  0.9: Conversions to Python3. Following important files were modified (only important and operational changes).
+	*  install: modified
+	*  prepare: modified
+	*  uninstall: modified
+	*  programs/mm3d.py: modified
+	*  programs/mm3d-hwtest.py: modified
+
 2022-03-08 Pozsár Zsolt <pozsar.zsolt@szerafingomba.hu>
 	*  0.8.1: Following important files were modified (only important and operational changes).
 	*  programs/mm3d.py: modified

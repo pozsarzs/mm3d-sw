@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 # +----------------------------------------------------------------------------+
-# | MM3D v0.8 * Growing house controlling and remote monitoring system         |
-# | Copyright (C) 2018-2022 Pozsár Zsolt <pozsar.zsolt@szerafingomba.hu>       |
+# | MM3D v0.9 * Growing house controlling and remote monitoring system         |
+# | Copyright (C) 2018-2023 Pozsár Zsolt <pozsar.zsolt@szerafingomba.hu>       |
 # | getpage.cgi                                                                |
 # | CGI program                                                                |
 # +----------------------------------------------------------------------------+

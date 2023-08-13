@@ -5,7 +5,7 @@ Do not forget to set hostname and network.
 
 Installation
 ~~~~~~~~~~~~
-  pi@raspberry$ tar -xzf mm3d-sw-0.8.1-armhf.tar.gz
+  pi@raspberry$ tar -xzf mm3d-sw-0.9-armhf.tar.gz
   pi@raspberry$ cd mm3d-sw
   pi@raspberry$ ./prepare
   pi@raspberry$ ./install
@@ -24,4 +24,4 @@ Removing
   pi@raspberry$ ./uninstall
 
 ---------------------------------------------------------------------------------
- MM3D * Copyright (C) 2018-2022 Pozsár Zsolt <pozsar.zsolt@szerafingomba.hu>
+ MM3D * Copyright (C) 2018-2023 Pozsár Zsolt <pozsar.zsolt@szerafingomba.hu>

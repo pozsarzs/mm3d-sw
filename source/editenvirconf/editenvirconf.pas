@@ -1,6 +1,6 @@
 { +--------------------------------------------------------------------------+ }
-{ | MM3D v0.8 * Growing house controlling and remote monitoring system       | }
-{ | Copyright (C) 2018-2022 Pozsár Zsolt <pozsar.zsolt@szerafingomba.hu>     | }
+{ | MM3D v0.9 * Growing house controlling and remote monitoring system       | }
+{ | Copyright (C) 2018-2023 Pozsár Zsolt <pozsar.zsolt@szerafingomba.hu>     | }
 { | editenvirconf.pas                                                        | }
 { | Full-screen program for edit envir-ch?.ini file                          | }
 { +--------------------------------------------------------------------------+ }
@@ -26,7 +26,7 @@ var
   bottom:                             byte;
   gasconmax:                          byte;
   hheaterdis, mheaterdis:             array[0..23] of byte;
-  hhumdis, mhumdis:                 array[0..23] of byte;
+  hhumdis, mhumdis:                   array[0..23] of byte;
   hhummax, mhummax:                   byte;
   hhummin, mhummin:                   byte;
   hhumoff, mhumoff:                   byte;

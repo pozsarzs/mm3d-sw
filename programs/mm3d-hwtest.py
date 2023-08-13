@@ -1,7 +1,7 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # +----------------------------------------------------------------------------+
-# | MM3D v0.8 * Growing house controlling and remote monitoring system         |
-# | Copyright (C) 2018-2022 Pozsar Zsolt <pozsar.zsolt@szerafingomba.hu>       |
+# | MM3D v0.9 * Growing house controlling and remote monitoring system         |
+# | Copyright (C) 2018-2023 Pozsar Zsolt <pozsar.zsolt@szerafingomba.hu>       |
 # | mm3d-hwtest.py                                                             |
 # | Hardware test program                                                      |
 # +----------------------------------------------------------------------------+
@@ -13,7 +13,7 @@
 # ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
 # FOR A PARTICULAR PURPOSE.
 
-import ConfigParser
+import configparser
 import RPi.GPIO as GPIO
 import Adafruit_DHT
 import time
@@ -39,9 +39,9 @@ def loadconfiguration(conffile):
   global sensor
   try:
     with open(conffile) as f:
-      sample_config = f.read()
-    config = ConfigParser.RawConfigParser(allow_no_value=True)
-    config.readfp(io.BytesIO(sample_config))
+      mm3d_config=f.read()
+    config=configparser.RawConfigParser(allow_no_value=True)
+    config.read_file(io.StringIO(mm3d_config))
     prt_act=int(config.get('ports','prt_act'))
     prt_err1=int(config.get('ports','prt_err1'))
     prt_err2=int(config.get('ports','prt_err2'))
@@ -75,11 +75,11 @@ def blink_act():
 
 #conffile='/etc/mm3d/mm3d.ini'
 conffile='/usr/local/etc/mm3d/mm3d.ini'
-print "\nMM3D hardware test utility * (C)2018-2021 Pozsar Zsolt"
-print "======================================================"
-print " * load configuration: %s..." % conffile
+print("\nMM3D hardware test utility * (C)2018-2023 Pozsar Zsolt")
+print("======================================================")
+print(" * load configuration: %s..." % conffile)
 loadconfiguration(conffile)
-print " * setting ports..."
+print(" * setting ports...")
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(prt_act,GPIO.OUT,initial=0)
@@ -97,76 +97,76 @@ GPIO.setup(prt_out3,GPIO.OUT,initial=1)
 GPIO.setup(prt_out4,GPIO.OUT,initial=1)
 GPIO.setup(prt_sens,GPIO.IN,pull_up_down=GPIO.PUD_OFF)
 
-print " * input test (Press ^C to next!)"
-print "   used ports:"
-print "     In #1:", prt_in1
-print "     In #2:", prt_in2
-print "     In #3:", prt_in3
-print "     In #4:", prt_in4, "\n"
+print(" * input test (Press ^C to next!)")
+print("   used ports:")
+print("     In #1:", prt_in1)
+print("     In #2:", prt_in2)
+print("     In #3:", prt_in3)
+print("     In #4:", prt_in4, "\n")
 try:
     while True:
-        print "   status: ",GPIO.input(prt_in1),GPIO.input(prt_in2),GPIO.input(prt_in3),GPIO.input(prt_in4),
+        print("   status: ",GPIO.input(prt_in1),GPIO.input(prt_in2),GPIO.input(prt_in3),GPIO.input(prt_in4),)
         blink_act()
         sys.stdout.flush()
         sys.stdout.write("\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b")
 except KeyboardInterrupt:
-    print "\n"
+    print("\n")
 
-print " * output test (Press ^C to next!)"
-print "   used ports:"
-print "     Err #1:", prt_err1
-print "     Err #2:", prt_err2
-print "     Err #3:", prt_err3
-print "     Err #4:", prt_err4
-print "     Out #1:", prt_out1
-print "     Out #2:", prt_out2
-print "     Out #3:", prt_out3
-print "     Out #4:", prt_out4, "\n"
+print(" * output test (Press ^C to next!)")
+print("   used ports:")
+print("     Err #1:", prt_err1)
+print("     Err #2:", prt_err2)
+print("     Err #3:", prt_err3)
+print("     Err #4:", prt_err4)
+print("     Out #1:", prt_out1)
+print("     Out #2:", prt_out2)
+print("     Out #3:", prt_out3)
+print("     Out #4:", prt_out4, "\n")
 try:
     while True:
-        print "   active port: %02d" % prt_err1,
+        print("   active port: %02d" % prt_err1,)
         GPIO.output(prt_err1,0)
         blink_act()
         GPIO.output(prt_err1,1)
         sys.stdout.flush()
         sys.stdout.write("\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b")
-        print "   active port: %02d" % prt_err2,
+        print("   active port: %02d" % prt_err2,)
         GPIO.output(prt_err2,0)
         blink_act()
         GPIO.output(prt_err2,1)
         sys.stdout.flush()
         sys.stdout.write("\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b")
-        print "   active port: %02d" % prt_err3,
+        print("   active port: %02d" % prt_err3,)
         GPIO.output(prt_err3,0)
         blink_act()
         GPIO.output(prt_err3,1)
         sys.stdout.flush()
         sys.stdout.write("\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b")
-        print "   active port: %02d" % prt_err4,
+        print("   active port: %02d" % prt_err4,)
         GPIO.output(prt_err4,0)
         blink_act()
         GPIO.output(prt_err4,1)
         sys.stdout.flush()
         sys.stdout.write("\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b")
-        print "   active port: %02d" % prt_out1,
+        print("   active port: %02d" % prt_out1,)
         GPIO.output(prt_out1,0)
         blink_act()
         GPIO.output(prt_out1,1)
         sys.stdout.flush()
         sys.stdout.write("\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b")
-        print "   active port: %02d" % prt_out2,
+        print("   active port: %02d" % prt_out2,)
         GPIO.output(prt_out2,0)
         blink_act()
         GPIO.output(prt_out2,1)
         sys.stdout.flush()
         sys.stdout.write("\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b")
-        print "   active port: %02d" % prt_out3,
+        print("   active port: %02d" % prt_out3,)
         GPIO.output(prt_out3,0)
         blink_act()
         GPIO.output(prt_out3,1)
         sys.stdout.flush()
         sys.stdout.write("\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b")
-        print "   active port: %02d" % prt_out4,
+        print("   active port: %02d" % prt_out4,)
         GPIO.output(prt_out4,0)
         blink_act()
         GPIO.output(prt_out4,1)
@@ -182,19 +182,19 @@ except KeyboardInterrupt:
     GPIO.output(prt_out2,1)
     GPIO.output(prt_out3,1)
     GPIO.output(prt_out4,1)
-    print"\n"
+    print("\n")
 
-print " * T/RH sensor test (Press ^C to exit!)"
-print "   used port:", prt_sens
-print""
+print(" * T/RH sensor test (Press ^C to exit!)")
+print("   used port:", prt_sens)
+print("")
 try:
     while True:
         blink_act()
         hum,temp=Adafruit_DHT.read_retry(sensor,prt_sens)
         if hum is not None and temp is not None:
-          hi=int(hum)
-          ti=int(temp)
-          print "   humidity: %02d%% - temperature: %02d C" % (hi,ti),
+          hi=round(hum)
+          ti=round(temp)
+          print("   humidity: %02d%% - temperature: %02d C" % (hi,ti),)
           blink_act()
           blink_act()
           blink_act()
@@ -203,4 +203,4 @@ try:
           sys.stdout.write("\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b")
 except KeyboardInterrupt:
     GPIO.cleanup()
-    print"\n"
+    print("\n")

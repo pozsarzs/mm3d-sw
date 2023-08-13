@@ -1,7 +1,7 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # +----------------------------------------------------------------------------+
-# | MM3D v0.8 * Growing house controlling and remote monitoring system         |
-# | Copyright (C) 2018-2022 Pozsar Zsolt <pozsar.zsolt@szerafingomba.hu>       |
+# | MM3D v0.9 * Growing house controlling and remote monitoring system         |
+# | Copyright (C) 2018-2023 Pozsar Zsolt <pozsar.zsolt@szerafingomba.hu>       |
 # | mm3d.py                                                                    |
 # | Main program                                                               |
 # +----------------------------------------------------------------------------+
@@ -13,7 +13,7 @@
 # ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
 # FOR A PARTICULAR PURPOSE.
 
-import ConfigParser
+import configparser
 import daemon
 import io
 import json
@@ -43,7 +43,7 @@ def writetodebuglog(level,text):
         d.write(dt+'  '+lv+' '+text+'\n')
         d.close()
     except:
-      print ""
+      print()
 
 # load configuration
 def loadconfiguration(conffile):
@@ -72,9 +72,9 @@ def loadconfiguration(conffile):
   global sensor
   try:
     with open(conffile) as f:
-      sample_config=f.read()
-    config=ConfigParser.RawConfigParser(allow_no_value=True)
-    config.readfp(io.BytesIO(sample_config))
+      mm3d_config=f.read()
+    config=configparser.RawConfigParser(allow_no_value=True)
+    config.read_file(io.StringIO(mm3d_config))
     dbg_log='0'
     dbg_log=config.get('others','dbg_log')
     dir_log=config.get('directories','dir_log')
@@ -175,9 +175,9 @@ def loadenvirchars(conffile):
   mvent_disablelowtemp=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,]
   try:
     with open(conffile) as f:
-      sample_config=f.read()
-    config=ConfigParser.RawConfigParser(allow_no_value=True)
-    config.readfp(io.BytesIO(sample_config))
+      mm3d_config=f.read()
+    config=configparser.RawConfigParser(allow_no_value=True)
+    config.read_file(io.StringIO(mm3d_config))
     for x in range(24):
       hhumidifier_disable[x]=int(config.get('hyphae','humidifier_disable_'+addzero(x)))
     for x in range(24):
