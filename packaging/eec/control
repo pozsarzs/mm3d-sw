@@ -1,10 +1,10 @@
 Package: mm3d-eec
 Version: 0.9
 Section: misc
-Priority: extra
+Priority: optional
 Architecture: armhf
 Installed-Size: 964 kB
-Maintainer: Pozsár Zsolt <pozsar.zsolt@szerafingomba.hu>
+Maintainer: Pozsár Zsolt <pozsarzs@gmail.com>
 Depends: mm3d-sw
 Description: Environment characteristic editor
  This is a software part of MM3D growing house controlling
