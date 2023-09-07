@@ -1,6 +1,6 @@
 dnl +--------------------------------------------------------------------------+
 dnl | MM3D v0.3 * Growing house controlling and remote monitoring system       |
-dnl | Copyright (C) 2018-2023 Pozsár Zsolt <pozsar.zsolt@szerafingomba.hu>     |
+dnl | Copyright (C) 2018-2023 Pozsár Zsolt <pozsarzs@gmail.com>                |
 dnl | configure.in                                                             |
 dnl | Autoconf input file for unix-like systems                                |
 dnl +--------------------------------------------------------------------------+

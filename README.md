@@ -1,6 +1,6 @@
 **MM3D * Growing house controlling and remote monitoring device**  
-Copyright (C) 2018-2023 Pozsár Zsolt <pozsar.zsolt@szerafingomba.hu>  
-Homepage: <http://www.szerafingomba.hu/softwares/>  
+Copyright (C) 2018-2023 Pozsár Zsolt <pozsarzs@gmail.com>  
+Homepage: <http://www.pozsarzs.hu>  
 GitHub: <https://github.com/pozsarzs/mm3d-sw>
 
 **Software**

@@ -1,6 +1,6 @@
 { +--------------------------------------------------------------------------+ }
 { | MM3D v0.8 * Growing house controlling and remote monitoring system       | }
-{ | Copyright (C) 2018-2022 Pozsár Zsolt <pozsar.zsolt@szerafingomba.hu>     | }
+{ | Copyright (C) 2018-2022 Pozsár Zsolt <pozsarzs@gmail.com>                | }
 { | incpage10screen.pas                                                      | }
 { | Show screen content of page #10                                          | }
 { +--------------------------------------------------------------------------+ }

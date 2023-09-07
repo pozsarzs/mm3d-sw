@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 # +----------------------------------------------------------------------------+
 # | MM3D v0.9 * Growing house controlling and remote monitoring system         |
-# | Copyright (C) 2018-2023 Pozsár Zsolt <pozsar.zsolt@szerafingomba.hu>       |
+# | Copyright (C) 2018-2023 Pozsár Zsolt <pozsarzs@gmail.com>                  |
 # | getenvirconf.cgi                                                           |
 # | CGI program                                                                |
 # +----------------------------------------------------------------------------+
